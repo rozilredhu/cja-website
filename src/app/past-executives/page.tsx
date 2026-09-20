@@ -12,7 +12,7 @@ import {
 export const metadata: Metadata = {
   title: "Past Executives",
   description:
-    "Archived CJA leadership tenures grouped by term (sample data).",
+    "Past executives are not listed on cjacanada.com or draft.cjacanada.ca. Archive will appear here when CJA publishes prior terms.",
   openGraph: {
     title: "Past Executives",
     description: "Archived CJA leadership tenures.",

@@ -24,7 +24,7 @@ export default async function NewsListPage() {
       <PageHero
         eyebrow="Updates"
         title="News & Announcements"
-        description="Published articles from the admin CMS (falls back to sample file content if the database is empty)."
+        description="Announcements from CJA. Diwali 2026 details prefer draft.cjacanada.ca over the outdated 2024 listing on cjacanada.com."
       />
       <div className="card-grid">
         {articles.map((a) => (

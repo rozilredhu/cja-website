@@ -5,7 +5,7 @@ import { publicDocuments } from "@/content/documents";
 export const metadata: Metadata = {
   title: "Document Centre",
   description:
-    "Public CJA documents — bylaws, agendas, and program overviews (sample).",
+    "Public Document Centre. Bylaws and related PDFs are Coming Soon — not published on cjacanada.com or draft.cjacanada.ca.",
   openGraph: {
     title: "Document Centre",
     description: "Public CJA documents.",
@@ -52,7 +52,7 @@ export default function DocumentsPage() {
       ))}
 
       <p className="stub-note">
-        Links are sample placeholders (#) until PDFs are uploaded to R2 or Drive.
+        No public PDFs found on either CJA site; entries are honest Coming Soon placeholders pending CJA.
       </p>
     </>
   );
