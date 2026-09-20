@@ -41,6 +41,9 @@ export default async function AdminDashboardPage() {
             <Link href="/admin/directory">Community Directory moderation</Link>
           </li>
           <li>
+            <Link href="/admin/promotions">Promotion orders</Link>
+          </li>
+          <li>
             <Link href="/members">Member area</Link>
           </li>
           <li>

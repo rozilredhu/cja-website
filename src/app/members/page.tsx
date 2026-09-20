@@ -45,6 +45,9 @@ export default async function MembersDashboardPage() {
             <Link href="/members/directory">Community Directory</Link>
           </li>
           <li>
+            <Link href="/members/promotions">Paid promotions (CAD stub)</Link>
+          </li>
+          <li>
             <span className="stub-note">
               Matrimonial profiles — coming in a later Phase 1 module
             </span>

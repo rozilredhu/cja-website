@@ -38,6 +38,17 @@ export default async function MemberProfileDetailPage({ params }: Props) {
           <Link href="/members/directory/browse">← Back to browse</Link>
         </p>
 
+        {profile.promoted ? (
+          <p>
+            <span className="promo-badge" title={profile.promotedUntil ?? undefined}>
+              Promoted
+            </span>
+            {profile.promotedUntil ? (
+              <span className="muted"> until {profile.promotedUntil}</span>
+            ) : null}
+          </p>
+        ) : null}
+
         {profile.photoUrl ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img

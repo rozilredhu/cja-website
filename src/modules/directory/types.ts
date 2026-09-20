@@ -57,6 +57,9 @@ export type DirectoryProfilePublic = {
   phone: string | null;
   addressLine: string | null;
   canViewSensitive: boolean;
+  /** True while a paid promotion has ends_at in the future */
+  promoted: boolean;
+  promotedUntil: string | null;
 };
 
 export type BusinessListingPublic = {
@@ -72,6 +75,8 @@ export type BusinessListingPublic = {
   phone: string | null;
   addressLine: string | null;
   canViewSensitive: boolean;
+  promoted: boolean;
+  promotedUntil: string | null;
 };
 
 export type DirectorySearchFilters = {

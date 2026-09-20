@@ -43,6 +43,7 @@ export function resolvePhotoUrl(
 export function toPublicProfile(
   row: DirectoryProfileRow,
   canViewSensitive: boolean,
+  promo?: { endsAt: string } | null,
 ): DirectoryProfilePublic {
   const showPhone = Boolean(row.show_phone);
   const showAddress = Boolean(row.show_address);
@@ -67,12 +68,15 @@ export function toPublicProfile(
         ? row.address_line
         : null,
     canViewSensitive,
+    promoted: Boolean(promo?.endsAt),
+    promotedUntil: promo?.endsAt ?? null,
   };
 }
 
 export function toPublicBusiness(
   row: BusinessListingRow,
   canViewSensitive: boolean,
+  promo?: { endsAt: string } | null,
 ): BusinessListingPublic {
   return {
     id: row.id,
@@ -88,5 +92,7 @@ export function toPublicBusiness(
     addressLine:
       canViewSensitive && row.address_line ? row.address_line : null,
     canViewSensitive,
+    promoted: Boolean(promo?.endsAt),
+    promotedUntil: promo?.endsAt ?? null,
   };
 }

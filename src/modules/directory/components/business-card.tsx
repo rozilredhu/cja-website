@@ -8,7 +8,14 @@ export function BusinessCard({
 }) {
   const loc = [business.city, business.province].filter(Boolean).join(", ");
   return (
-    <article className="directory-card content-card">
+    <article
+      className={`directory-card content-card${business.promoted ? " directory-card-promoted" : ""}`}
+    >
+      {business.promoted ? (
+        <span className="promo-badge" title={business.promotedUntil ?? undefined}>
+          Promoted
+        </span>
+      ) : null}
       <h3>
         <Link href={`/members/directory/businesses/${business.id}`}>
           {business.name}

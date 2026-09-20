@@ -1,3 +1,8 @@
 TURNSTILE_SITE_KEY=
 TURNSTILE_SECRET_KEY=
 TURNSTILE_BYPASS=true
+
+# Stripe — optional, NOT required for StripeStubAdapter. Never commit real keys.
+# STRIPE_SECRET_KEY=
+# STRIPE_WEBHOOK_SECRET=
+# STRIPE_PUBLISHABLE_KEY=

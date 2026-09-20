@@ -57,6 +57,9 @@ export default async function DirectoryHomePage() {
             <Link href="/members/directory/businesses">Browse businesses</Link>
           </li>
           <li>
+            <Link href="/members/promotions">Promote profile / business (CAD)</Link>
+          </li>
+          <li>
             <Link href="/members">Back to member area</Link>
           </li>
         </ul>

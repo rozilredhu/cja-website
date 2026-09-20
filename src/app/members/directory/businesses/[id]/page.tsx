@@ -38,6 +38,17 @@ export default async function BusinessDetailPage({ params }: Props) {
           <Link href="/members/directory/businesses">← Back to businesses</Link>
         </p>
 
+        {biz.promoted ? (
+          <p>
+            <span className="promo-badge" title={biz.promotedUntil ?? undefined}>
+              Promoted
+            </span>
+            {biz.promotedUntil ? (
+              <span className="muted"> until {biz.promotedUntil}</span>
+            ) : null}
+          </p>
+        ) : null}
+
         {biz.photoUrl ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img

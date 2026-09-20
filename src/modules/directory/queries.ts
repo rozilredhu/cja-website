@@ -1,5 +1,6 @@
 import { getDb } from "@/lib/db";
 import type { AuthUser } from "@/modules/auth/roles";
+import { getActivePromotionMap } from "@/modules/payments/queries";
 import {
   toPublicBusiness,
   toPublicProfile,
@@ -104,13 +105,29 @@ export async function searchDirectoryProfiles(
     LIMIT 200`;
 
   const stmt = db.prepare(sql);
-  const res = binds.length
-    ? await stmt.bind(...binds).all<DirectoryProfileRow>()
-    : await stmt.all<DirectoryProfileRow>();
+  const [res, promoMap] = await Promise.all([
+    binds.length
+      ? stmt.bind(...binds).all<DirectoryProfileRow>()
+      : stmt.all<DirectoryProfileRow>(),
+    getActivePromotionMap("directory_profile"),
+  ]);
 
-  return (res.results ?? []).map((row) =>
-    toPublicProfile(row, canSensitive),
-  );
+  const mapped = (res.results ?? []).map((row) => {
+    const endsAt = promoMap.get(row.id);
+    return toPublicProfile(
+      row,
+      canSensitive,
+      endsAt ? { endsAt } : null,
+    );
+  });
+  // Promoted first (query-time; expired promotions omitted from map)
+  mapped.sort((a, b) => {
+    if (a.promoted !== b.promoted) return a.promoted ? -1 : 1;
+    return a.displayName.localeCompare(b.displayName, undefined, {
+      sensitivity: "base",
+    });
+  });
+  return mapped;
 }
 
 export async function getDirectoryProfileById(
@@ -127,7 +144,9 @@ export async function getDirectoryProfileById(
     .bind(id)
     .first<DirectoryProfileRow>();
   if (!row) return null;
-  return toPublicProfile(row, canSensitive);
+  const promoMap = await getActivePromotionMap("directory_profile");
+  const endsAt = promoMap.get(row.id);
+  return toPublicProfile(row, canSensitive, endsAt ? { endsAt } : null);
 }
 
 export async function searchBusinessListings(
@@ -171,13 +190,26 @@ export async function searchBusinessListings(
     LIMIT 200`;
 
   const stmt = db.prepare(sql);
-  const res = binds.length
-    ? await stmt.bind(...binds).all<BusinessListingRow>()
-    : await stmt.all<BusinessListingRow>();
+  const [res, promoMap] = await Promise.all([
+    binds.length
+      ? stmt.bind(...binds).all<BusinessListingRow>()
+      : stmt.all<BusinessListingRow>(),
+    getActivePromotionMap("business_listing"),
+  ]);
 
-  return (res.results ?? []).map((row) =>
-    toPublicBusiness(row, canSensitive),
-  );
+  const mapped = (res.results ?? []).map((row) => {
+    const endsAt = promoMap.get(row.id);
+    return toPublicBusiness(
+      row,
+      canSensitive,
+      endsAt ? { endsAt } : null,
+    );
+  });
+  mapped.sort((a, b) => {
+    if (a.promoted !== b.promoted) return a.promoted ? -1 : 1;
+    return a.name.localeCompare(b.name, undefined, { sensitivity: "base" });
+  });
+  return mapped;
 }
 
 export async function getBusinessById(
@@ -194,7 +226,9 @@ export async function getBusinessById(
     .bind(id)
     .first<BusinessListingRow>();
   if (!row) return null;
-  return toPublicBusiness(row, canSensitive);
+  const promoMap = await getActivePromotionMap("business_listing");
+  const endsAt = promoMap.get(row.id);
+  return toPublicBusiness(row, canSensitive, endsAt ? { endsAt } : null);
 }
 
 export async function getBusinessRowForOwner(

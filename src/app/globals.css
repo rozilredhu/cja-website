@@ -1034,3 +1034,80 @@ img {
 .stack-form fieldset {
   margin: 0;
 }
+
+
+/* ----- Paid promotions (§3E) ----- */
+.promo-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #5c3d00;
+  background: #ffe8a3;
+  border: 1px solid #f0c14b;
+  border-radius: 999px;
+  padding: 0.15rem 0.55rem;
+  margin-bottom: 0.35rem;
+}
+
+.directory-card-promoted {
+  border-color: #f0c14b;
+  box-shadow: 0 0 0 1px rgba(240, 193, 75, 0.35);
+}
+
+.promo-package-list {
+  list-style: disc;
+  padding-left: 1.25rem;
+  margin: 0.75rem 0 1.25rem;
+}
+
+.promo-package-list li {
+  margin-bottom: 0.65rem;
+}
+
+.promo-package-form {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--cja-border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 28rem;
+}
+
+.promo-order-dl {
+  display: grid;
+  gap: 0.65rem;
+  margin: 1rem 0;
+}
+
+.promo-order-dl div {
+  display: grid;
+  grid-template-columns: 8rem 1fr;
+  gap: 0.5rem;
+}
+
+.promo-order-dl dt {
+  font-weight: 600;
+  color: var(--cja-navy);
+}
+
+.form-success {
+  margin: 0.75rem 0;
+  padding: 0.75rem 0.9rem;
+  background: #e8f5e9;
+  border-left: 3px solid #2e7d32;
+  border-radius: 0.35rem;
+}
+
+.admin-action-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.admin-code {
+  font-size: 0.75rem;
+  word-break: break-all;
+}
