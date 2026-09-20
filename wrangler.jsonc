@@ -1,0 +1,71 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "cja-website",
+  "main": ".open-next/worker.js",
+  // Compatibility date for Workers runtime (keep recent)
+  "compatibility_date": "2026-09-20",
+  "compatibility_flags": [
+    "nodejs_compat",
+    "global_fetch_strictly_public"
+  ],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "observability": {
+    "enabled": true
+  },
+  // Placeholder D1 binding — create a real D1 database and set database_id before deploy.
+  // See README: wrangler d1 create cja-website-db
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "cja-website-db",
+      // Empty / placeholder — replace with real ID from `wrangler d1 create`
+      "database_id": "00000000-0000-0000-0000-000000000000"
+    }
+  ],
+  // Placeholder R2 binding for media (photos, documents)
+  "r2_buckets": [
+    {
+      "binding": "MEDIA",
+      "bucket_name": "cja-website-media"
+      // Create with: wrangler r2 bucket create cja-website-media
+    }
+  ],
+  // Staging / production env stubs (override name + bindings per env as needed)
+  "env": {
+    "staging": {
+      "name": "cja-website-staging",
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "cja-website-db-staging",
+          "database_id": "00000000-0000-0000-0000-000000000000"
+        }
+      ],
+      "r2_buckets": [
+        {
+          "binding": "MEDIA",
+          "bucket_name": "cja-website-media-staging"
+        }
+      ]
+    },
+    "production": {
+      "name": "cja-website-production",
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "cja-website-db-production",
+          "database_id": "00000000-0000-0000-0000-000000000000"
+        }
+      ],
+      "r2_buckets": [
+        {
+          "binding": "MEDIA",
+          "bucket_name": "cja-website-media-production"
+        }
+      ]
+    }
+  }
+}
