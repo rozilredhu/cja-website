@@ -38,7 +38,13 @@ export default async function AdminDashboardPage() {
             </Link>
           </li>
           <li>
+            <Link href="/admin/directory">Community Directory moderation</Link>
+          </li>
+          <li>
             <Link href="/members">Member area</Link>
+          </li>
+          <li>
+            <Link href="/members/directory">Member directory (browse)</Link>
           </li>
         </ul>
         <form action={adminLogoutAction} style={{ marginTop: "1rem" }}>

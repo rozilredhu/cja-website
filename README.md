@@ -1,6 +1,6 @@
 # Canadian Jats Association (CJA) Website
 
-**Phase 1 — Member accounts (§3C)** on top of Foundation (§3A) + Public pages (§3B).
+**Phase 1 — Community Directory (§3D)** on top of Foundation (§3A) + Public pages (§3B) + Member accounts (§3C).
 
 Repo: https://github.com/rozilredhu/cja-website
 
@@ -8,35 +8,36 @@ Repo: https://github.com/rozilredhu/cja-website
 
 - Next.js App Router + TypeScript
 - Cloudflare Workers via [`@opennextjs/cloudflare`](https://opennext.js.org/cloudflare)
-- **D1** (`DB`) — users, sessions, verification/reset tokens, notification outbox
-- **R2** (`MEDIA`) — placeholder (enable R2 before using)
-- **Turnstile** — Contact, Volunteer, **Register**, **Forgot password**
+- **D1** (`DB`) — users, sessions, verification/reset tokens, notification outbox, **directory profiles & businesses**
+- **R2** (`MEDIA`) — optional photo upload; URL placeholder when R2 not configured
+- **Turnstile** — Contact, Volunteer, Register, Forgot password
 - **File-based content** in `src/content/` until Admin CMS (§3G)
 
-## What’s in this module (Member accounts §3C)
+## What’s in this module (Community Directory §3D)
 
-- **Register** — `/members/register` (name, email, password + Turnstile); creates `member` role user
-- **Login / Logout** — `/members/login` + session cookies (same `cja_session` as Foundation); admins stay on `/admin/login`
-- **Email verification** — token table + `/members/verify?token=…`; staging/dev stubs email (console + `notification_outbox` + sample link on success). Does **not** require real SMTP
-- **Password reset** — `/members/forgot-password` → token → `/members/reset-password?token=…` (same email stub)
-- **One central `users` table** — roles `member` / `admin`; `email_verified_at` from Foundation
-- **Member area shell** — `/members` dashboard after login (placeholder links for directory / matrimonial)
-- **Server-side guards** — `/members` requires logged-in member (admins may also enter)
-- **Admin MFA** — minimal TOTP (Web Crypto, no extra deps): enable/confirm/disable at `/admin/mfa`; login challenge at `/admin/mfa/challenge` when enabled
+- **Member directory opt-in** — `/members/directory` manage display name, phone, address, photo, education, city, province, bio; opt-out supported
+- **Members-only browse** — `/members/directory/browse` (+ detail); login wall via `requireMemberUser`
+- **Text search + filters** — query params `q`, `city`, `province` (SQL `LIKE` / equality on D1); searches name/city/province/education (members) and name/city/province/description (businesses)
+- **Privacy (server-side every request)**:
+  - Phone + address visible **only** when the viewer has themselves opted into the directory
+  - Directory pages use `robots: { index: false }`; `/members/` already disallowed in `robots.ts`; not in sitemap
+  - Logged-out users redirected to `/members/login` (no private fields in public HTML)
+- **Business list** — member-submitted Jat-owned businesses; same members-only browse + peer opt-in for sensitive contact fields
+- **Opted-in counts** — shown on directory home
+- **Photo** — `photo_key` (R2 `MEDIA` when bound) + `photo_url` placeholder when R2 not ready
+- **Admin (light)** — `/admin/directory` list + disable flag for profiles/businesses
+- Link from `/members` dashboard
 
 ## Schema changes
 
-New migration: `migrations/0002_member_accounts.sql`
+New migration: `migrations/0003_community_directory.sql`
 
 | Object | Purpose |
 |--------|---------|
-| `email_verification_tokens` | One-time email verify tokens |
-| `password_reset_tokens` | One-time password reset tokens |
-| `notification_outbox` | Stub email outbox (`status=stubbed`); later drain via Resend / Mailchannels |
-| `users.totp_secret` | Admin TOTP secret (enabled) |
-| `users.totp_pending_secret` | Admin TOTP secret while enrolling |
-| `users.totp_enabled_at` | When admin MFA was confirmed |
-| Seed `member@example.com` | Sample member (see below) |
+| `directory_profiles` | One row per user; opt-in, fields, photo_key/url, visibility flags, disabled |
+| `business_listings` | Member business listings; opt-in, status, disabled, contact fields |
+| Seed members `member2–4@example.com` | Extra sample accounts for directory demos |
+| Seed profiles + 2 businesses | Fake Canadian cities (Toronto, Surrey, Calgary, Brampton) |
 
 ### Apply migrations
 
@@ -57,25 +58,25 @@ npx wrangler d1 migrations apply cja-website-db-staging --remote --env staging
 
 ## Sample accounts (sample only — rotate before real use)
 
-| Role | Email | Password |
-|------|-------|----------|
-| Admin | `admin@example.com` | `SampleAdmin123!` |
-| Member | `member@example.com` | `SampleMember123!` |
+| Role | Email | Password | Notes |
+|------|-------|----------|-------|
+| Admin | `admin@example.com` | `SampleAdmin123!` | MFA optional |
+| Member | `member@example.com` | `SampleMember123!` | Opted into directory (Toronto, ON) |
+| Member | `member2@example.com` | `SampleMember123!` | Surrey, BC + Surrey Spice Kitchen |
+| Member | `member3@example.com` | `SampleMember123!` | Calgary, AB |
+| Member | `member4@example.com` | `SampleMember123!` | Brampton, ON + Dhillon Family Farms |
 
-## Email stub (no SMTP yet)
+All sample phone/address data is fake.
 
-Outbound mail goes through `src/modules/auth/email.ts`:
+## Privacy enforcement summary
 
-1. `console.info("[cja-email-stub]", …)` on the server
-2. Row inserted into `notification_outbox` with `status='stubbed'`
-3. Sample absolute URL returned to the UI after register / forgot-password / resend
-
-**Later hook (documented, not wired):**
-
-- **Resend** — `POST https://api.resend.com/emails` with `RESEND_API_KEY`; set outbox rows to `pending` then mark `sent`
-- **Mailchannels** (Workers) — `https://api.mailchannels.net/tx/v1/send`
-
-Do not block Phase 1 on a real provider.
+| Rule | How |
+|------|-----|
+| Members-only browse | `requireMemberUser()` on every directory page/action |
+| Phone/address peer gate | `viewerCanSeeSensitive()` checks viewer’s own `directory_profiles.opted_in`; `toPublicProfile` / `toPublicBusiness` strip fields otherwise |
+| Noindex | `metadata.robots = { index: false }` on directory routes; `robots.ts` disallows `/members/` |
+| Not in sitemap | Directory paths under `/members/` — never added to `sitemap.ts` |
+| Admin disable | `disabled` flag hides listing from browse queries |
 
 ## Prerequisites
 
@@ -96,18 +97,18 @@ Do **not** commit real Turnstile keys or PATs. Turnstile bypasses when keys are 
 ## Local development
 
 ```bash
-npm run db:migrate:local   # Foundation + Member accounts
+npm run db:migrate:local   # Foundation + Member accounts + Community Directory
 npm run dev
 ```
 
 ### Quick test checklist
 
-1. **Register** — `/members/register` → account created → sample verify link shown → land in `/members`
-2. **Login / Logout** — `/members/login` with sample member → dashboard → Sign out
-3. **Verify stub** — open sample link → `/members/verify?token=…` → verified banner clears after resend/verify
-4. **Reset stub** — `/members/forgot-password` → sample reset link → set new password → login
-5. **Guards** — hit `/members` logged out → redirect to login; admin can open `/members` after admin login
-6. **Admin MFA (optional)** — `/admin/mfa` → Enable → confirm code → next `/admin/login` asks for TOTP
+1. Login as `member@example.com` → `/members` → **Community Directory**
+2. Confirm opted-in count ≥ 4; browse members; search `q=Toronto` / filter province `ON`
+3. Login as a non-opted-in new member → browse → phone/address hidden; opt in → sensitive fields appear for peers who shared them
+4. Businesses browse + search `q=Spice`
+5. Admin → `/admin/directory` → Disable a listing → confirm it disappears from browse
+6. Logged out → `/members/directory/browse` → redirect to login
 
 ## Build
 
@@ -121,8 +122,6 @@ npm run build:worker
 Staging Worker name: `cja-website-staging`  
 Intended host (later): `draft.cjacanada.ca`
 
-**Current blocker:** Cloudflare account may still need a **workers.dev subdomain** (or custom staging route). Deploy build can succeed while publish fails until that is fixed.
-
 ```bash
 npm run db:migrate:staging
 npm run deploy:staging
@@ -135,22 +134,23 @@ npm run deploy:staging
 ```
 src/
   app/
-    members/                # register, login, dashboard, verify, reset
-    admin/mfa/              # TOTP setup + login challenge
+    members/directory/          # manage profile + businesses
+    members/directory/browse/   # member list + detail (?q,&city,&province)
+    members/directory/businesses/
+    admin/directory/            # light moderation
   modules/
-    auth/                   # sessions, passwords, member+admin actions, email stub, totp
-    members/components/     # member forms
-    public/                 # Public pages content helpers
+    directory/                  # queries, privacy, actions, components
 migrations/
   0001_foundation.sql
   0002_member_accounts.sql
+  0003_community_directory.sql
 ```
 
 ## Out of scope (do not build here)
 
-- Directory opt-in, matrimonial, Stripe, CMS editors
-- Real email sending (stub/outbox only)
-- Production deploy / real member data
+- Matrimonial, Stripe promotions, public yellow pages without login
+- Full CMS / production deploy
+- Real email sending (stub/outbox only from §3C)
 
 ## License / ownership
 

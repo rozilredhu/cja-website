@@ -42,9 +42,7 @@ export default async function MembersDashboardPage() {
         </p>
         <ul className="member-dash-links">
           <li>
-            <span className="stub-note">
-              Community Directory — coming in a later Phase 1 module
-            </span>
+            <Link href="/members/directory">Community Directory</Link>
           </li>
           <li>
             <span className="stub-note">
