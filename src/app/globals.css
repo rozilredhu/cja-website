@@ -1286,3 +1286,206 @@ img {
 .inline-admin-form {
   margin-top: 1rem;
 }
+
+/* ----- Motion / hover (inspired by draft.rozilredhu.ca) ----- */
+:root {
+  --cja-shadow-hover: 0 14px 28px rgba(66, 133, 244, 0.16),
+    0 6px 14px rgba(13, 71, 161, 0.1);
+  --cja-ease-ui: 180ms ease;
+}
+
+.card,
+.official-card,
+.gallery-item,
+.preview-card,
+.admin-hub-card,
+.directory-card,
+.content-card {
+  transition:
+    transform var(--cja-ease-ui),
+    box-shadow var(--cja-ease-ui),
+    border-color var(--cja-ease-ui),
+    color var(--cja-ease-ui);
+}
+
+.card:hover,
+.official-card:hover,
+.gallery-item:hover,
+.preview-card:hover,
+.admin-hub-card:hover,
+.directory-card:hover,
+.content-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--cja-shadow-hover);
+}
+
+.card-grid > .card:hover,
+.officials-grid > .official-card:hover,
+.home-preview-grid > .card:hover {
+  transform: translateY(-6px);
+}
+
+.btn-primary,
+.btn-secondary,
+.btn-saffron,
+.btn-on-dark,
+.btn-small {
+  transition:
+    transform var(--cja-ease-ui),
+    box-shadow var(--cja-ease-ui),
+    background-color var(--cja-ease-ui),
+    color var(--cja-ease-ui),
+    border-color var(--cja-ease-ui);
+}
+
+.btn-primary:hover:not(:disabled),
+.btn-secondary:hover:not(:disabled),
+.btn-saffron:hover,
+.btn-on-dark:hover {
+  transform: translateY(-2px);
+}
+
+.primary-nav a,
+.site-footer a,
+.text-link,
+.social-strip-links a,
+.section-head a {
+  transition:
+    color var(--cja-ease-ui),
+    background-color var(--cja-ease-ui),
+    transform var(--cja-ease-ui);
+}
+
+.home-grid a.card {
+  transition:
+    transform var(--cja-ease-ui),
+    box-shadow var(--cja-ease-ui),
+    color var(--cja-ease-ui);
+}
+
+.home-grid a.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--cja-shadow-hover);
+}
+
+/* Gentle section appear (CSS only) */
+@keyframes cja-section-appear {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.section-block,
+.event-banner,
+.home-hero,
+.social-strip {
+  animation: cja-section-appear 0.45s ease both;
+}
+
+.section-block:nth-of-type(2),
+.event-banner {
+  animation-delay: 40ms;
+}
+
+.section-block:nth-of-type(3) {
+  animation-delay: 80ms;
+}
+
+.section-block:nth-of-type(4) {
+  animation-delay: 120ms;
+}
+
+.section-block:nth-of-type(5) {
+  animation-delay: 160ms;
+}
+
+.section-block:nth-of-type(6) {
+  animation-delay: 200ms;
+}
+
+.home-preview-grid {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 720px) {
+  .home-preview-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (hover: none) {
+  .card:hover,
+  .official-card:hover,
+  .gallery-item:hover,
+  .preview-card:hover,
+  .admin-hub-card:hover,
+  .directory-card:hover,
+  .content-card:hover,
+  .card-grid > .card:hover,
+  .officials-grid > .official-card:hover,
+  .home-preview-grid > .card:hover,
+  .home-grid a.card:hover,
+  .btn-primary:hover:not(:disabled),
+  .btn-secondary:hover:not(:disabled),
+  .btn-saffron:hover,
+  .btn-on-dark:hover {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .card,
+  .official-card,
+  .gallery-item,
+  .preview-card,
+  .admin-hub-card,
+  .directory-card,
+  .content-card,
+  .btn-primary,
+  .btn-secondary,
+  .btn-saffron,
+  .btn-on-dark,
+  .btn-small,
+  .primary-nav a,
+  .site-footer a,
+  .text-link,
+  .social-strip-links a,
+  .section-head a,
+  .home-grid a.card {
+    transition: none;
+  }
+
+  .card:hover,
+  .official-card:hover,
+  .gallery-item:hover,
+  .preview-card:hover,
+  .admin-hub-card:hover,
+  .directory-card:hover,
+  .content-card:hover,
+  .card-grid > .card:hover,
+  .officials-grid > .official-card:hover,
+  .home-preview-grid > .card:hover,
+  .home-grid a.card:hover,
+  .btn-primary:hover:not(:disabled),
+  .btn-secondary:hover:not(:disabled),
+  .btn-saffron:hover,
+  .btn-on-dark:hover {
+    transform: none;
+  }
+
+  .section-block,
+  .event-banner,
+  .home-hero,
+  .social-strip {
+    animation: none;
+  }
+}
