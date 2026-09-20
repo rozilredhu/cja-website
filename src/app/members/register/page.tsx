@@ -1,24 +1,38 @@
+export const dynamic = "force-dynamic";
+
 import type { Metadata } from "next";
-import Link from "next/link";
+import { redirect } from "next/navigation";
 import { PageHero } from "@/components/page-hero";
+import { getTurnstilePublicConfig } from "@/lib/env";
+import { getCurrentUser } from "@/modules/auth/session";
+import { MemberRegisterForm } from "@/modules/members/components/member-register-form";
 
 export const metadata: Metadata = {
-  title: "Member register",
-  description: "Create a CJA member account (coming soon).",
+  title: "Create member account",
+  description: "Register for a Canadian Jats Association member account.",
   robots: { index: false, follow: false },
 };
 
-export default function MemberRegisterPage() {
+export default async function MemberRegisterPage() {
+  const user = await getCurrentUser();
+  if (user?.role === "member") {
+    redirect("/members");
+  }
+
+  const turnstile = await getTurnstilePublicConfig();
+
   return (
     <>
       <PageHero
         title="Create member account"
-        description="Registration will open in a later Phase 1 module."
+        description="One central account for members, directory, and future paid features."
+        eyebrow="Members"
       />
-      <section className="card">
-        <p className="stub-note">
-          Stub only — see <Link href="/members/login">member login</Link> hook.
-        </p>
+      <section className="card admin-login-card">
+        <MemberRegisterForm
+          siteKey={turnstile.turnstileSiteKey}
+          bypass={turnstile.turnstileBypass}
+        />
       </section>
     </>
   );

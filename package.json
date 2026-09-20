@@ -31,5 +31,5 @@
     "typescript": "^5",
     "wrangler": "^4.135.0"
   },
-  "description": "Canadian Jats Association website — Phase 1 Public pages (Next.js on Cloudflare Workers)"
+  "description": "Canadian Jats Association website \u2014 Phase 1 Member accounts (Next.js on Cloudflare Workers)"
 }

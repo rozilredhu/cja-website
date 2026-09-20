@@ -1,6 +1,6 @@
 # Canadian Jats Association (CJA) Website
 
-**Phase 1 — Public pages (§3B)** on top of Foundation (§3A).
+**Phase 1 — Member accounts (§3C)** on top of Foundation (§3A) + Public pages (§3B).
 
 Repo: https://github.com/rozilredhu/cja-website
 
@@ -8,41 +8,74 @@ Repo: https://github.com/rozilredhu/cja-website
 
 - Next.js App Router + TypeScript
 - Cloudflare Workers via [`@opennextjs/cloudflare`](https://opennext.js.org/cloudflare)
-- **D1** (`DB`) — users + sessions (Foundation only; no new tables in Public pages)
+- **D1** (`DB`) — users, sessions, verification/reset tokens, notification outbox
 - **R2** (`MEDIA`) — placeholder (enable R2 before using)
-- **Turnstile** — Contact + Volunteer forms
-- **File-based content** in `src/content/` (typed TS) until Admin CMS (§3G)
+- **Turnstile** — Contact, Volunteer, **Register**, **Forgot password**
+- **File-based content** in `src/content/` until Admin CMS (§3G)
 
-## What’s in this module (Public pages)
+## What’s in this module (Member accounts §3C)
 
-- **Home** — hero, upcoming event banner, featured officials, latest news, social strip
-- **About CJA** — mission, vision, values, what we do
-- **Contact** — Turnstile form (Foundation) + contact aside
-- **Officials / Leadership** — data-driven responsive grid by category (sample Executives / Directors / Corporate Secretary; counts not hard-coded)
-- **Past Executives** — archived tenures grouped (e.g. 2022–2025, 2019–2022)
-- **Past Functions / Events** — list + `/events/[slug]` detail; optional Google Drive link field
-- **News & Announcements** — list + `/news/[slug]` articles (sample MD-style content in TS)
-- **Photo & Video Gallery** — sample photo grid + YouTube embed placeholders
-- **Jats Heritage** — landing, articles, timeline, gallery stubs
-- **Document Centre** — public documents only (sample links)
-- **Social** — X / Facebook placeholders + YouTube embed (**no Instagram**)
-- **Privacy Policy** & **Terms of Use** — readable drafts clearly marked for CJA counsel
-- **Volunteer** — Turnstile interest form retained
+- **Register** — `/members/register` (name, email, password + Turnstile); creates `member` role user
+- **Login / Logout** — `/members/login` + session cookies (same `cja_session` as Foundation); admins stay on `/admin/login`
+- **Email verification** — token table + `/members/verify?token=…`; staging/dev stubs email (console + `notification_outbox` + sample link on success). Does **not** require real SMTP
+- **Password reset** — `/members/forgot-password` → token → `/members/reset-password?token=…` (same email stub)
+- **One central `users` table** — roles `member` / `admin`; `email_verified_at` from Foundation
+- **Member area shell** — `/members` dashboard after login (placeholder links for directory / matrimonial)
+- **Server-side guards** — `/members` requires logged-in member (admins may also enter)
+- **Admin MFA** — minimal TOTP (Web Crypto, no extra deps): enable/confirm/disable at `/admin/mfa`; login challenge at `/admin/mfa/challenge` when enabled
 
 ## Schema changes
 
-**None — file-based content.** No new D1 migrations in this module. Foundation migration `0001_foundation.sql` unchanged.
+New migration: `migrations/0002_member_accounts.sql`
 
-Content lives under `src/content/` and is read via `src/modules/public/`. A later Admin CMS can replace these modules with D1-backed editors without changing page routes.
+| Object | Purpose |
+|--------|---------|
+| `email_verification_tokens` | One-time email verify tokens |
+| `password_reset_tokens` | One-time password reset tokens |
+| `notification_outbox` | Stub email outbox (`status=stubbed`); later drain via Resend / Mailchannels |
+| `users.totp_secret` | Admin TOTP secret (enabled) |
+| `users.totp_pending_secret` | Admin TOTP secret while enrolling |
+| `users.totp_enabled_at` | When admin MFA was confirmed |
+| Seed `member@example.com` | Sample member (see below) |
 
-## Sample admin (from Foundation)
+### Apply migrations
 
-| Field | Value |
-|-------|--------|
-| Email | `admin@example.com` |
-| Password | `SampleAdmin123!` |
+```bash
+# Local D1 (Miniflare)
+npm run db:migrate:local
 
-Sample officials / news / events use fictional names only. Never use real private member data until CJA provides it.
+# Staging remote D1
+npm run db:migrate:staging
+```
+
+Equivalent Wrangler:
+
+```bash
+npx wrangler d1 migrations apply cja-db --local
+npx wrangler d1 migrations apply cja-website-db-staging --remote --env staging
+```
+
+## Sample accounts (sample only — rotate before real use)
+
+| Role | Email | Password |
+|------|-------|----------|
+| Admin | `admin@example.com` | `SampleAdmin123!` |
+| Member | `member@example.com` | `SampleMember123!` |
+
+## Email stub (no SMTP yet)
+
+Outbound mail goes through `src/modules/auth/email.ts`:
+
+1. `console.info("[cja-email-stub]", …)` on the server
+2. Row inserted into `notification_outbox` with `status='stubbed'`
+3. Sample absolute URL returned to the UI after register / forgot-password / resend
+
+**Later hook (documented, not wired):**
+
+- **Resend** — `POST https://api.resend.com/emails` with `RESEND_API_KEY`; set outbox rows to `pending` then mark `sent`
+- **Mailchannels** (Workers) — `https://api.mailchannels.net/tx/v1/send`
+
+Do not block Phase 1 on a real provider.
 
 ## Prerequisites
 
@@ -58,14 +91,23 @@ cp .env.example .env.local
 cp .dev.vars.example .dev.vars
 ```
 
-Do **not** commit real Turnstile keys or PATs.
+Do **not** commit real Turnstile keys or PATs. Turnstile bypasses when keys are unset or `TURNSTILE_BYPASS=true` (existing pattern).
 
 ## Local development
 
 ```bash
-npm run db:migrate:local   # Foundation tables for admin login
+npm run db:migrate:local   # Foundation + Member accounts
 npm run dev
 ```
+
+### Quick test checklist
+
+1. **Register** — `/members/register` → account created → sample verify link shown → land in `/members`
+2. **Login / Logout** — `/members/login` with sample member → dashboard → Sign out
+3. **Verify stub** — open sample link → `/members/verify?token=…` → verified banner clears after resend/verify
+4. **Reset stub** — `/members/forgot-password` → sample reset link → set new password → login
+5. **Guards** — hit `/members` logged out → redirect to login; admin can open `/members` after admin login
+6. **Admin MFA (optional)** — `/admin/mfa` → Enable → confirm code → next `/admin/login` asks for TOTP
 
 ## Build
 
@@ -79,7 +121,7 @@ npm run build:worker
 Staging Worker name: `cja-website-staging`  
 Intended host (later): `draft.cjacanada.ca`
 
-**Current blocker:** Cloudflare account still needs a **workers.dev subdomain** registered (or a custom staging route). Deploy build succeeds; publish fails until that is fixed. See Foundation README notes.
+**Current blocker:** Cloudflare account may still need a **workers.dev subdomain** (or custom staging route). Deploy build can succeed while publish fails until that is fixed.
 
 ```bash
 npm run db:migrate:staging
@@ -92,24 +134,22 @@ npm run deploy:staging
 
 ```
 src/
-  app/                      # routes (public pages + admin + member stubs)
-  content/                  # typed sample content (officials, news, events, …)
-  components/               # shell, forms, Turnstile, PWA
-  lib/                      # db, env, site-config
+  app/
+    members/                # register, login, dashboard, verify, reset
+    admin/mfa/              # TOTP setup + login challenge
   modules/
-    auth/                   # Foundation admin sessions
-    admin/                  # contact/volunteer actions
-    turnstile/              # server verify
-    public/                 # content helpers + public UI cards
-migrations/                 # D1 SQL (Foundation only so far)
+    auth/                   # sessions, passwords, member+admin actions, email stub, totp
+    members/components/     # member forms
+    public/                 # Public pages content helpers
+migrations/
+  0001_foundation.sql
+  0002_member_accounts.sql
 ```
 
 ## Out of scope (do not build here)
 
-- Member directory, matrimonial, Stripe
-- Full admin CMS editors / officials CRUD UI
-- Member auth beyond existing stubs
-- Instagram
+- Directory opt-in, matrimonial, Stripe, CMS editors
+- Real email sending (stub/outbox only)
 - Production deploy / real member data
 
 ## License / ownership

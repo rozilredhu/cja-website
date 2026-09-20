@@ -36,6 +36,7 @@ export const footerLinks = [
   { href: "/privacy", label: "Privacy Policy" },
   { href: "/terms", label: "Terms of Use" },
   { href: "/past-executives", label: "Past Executives" },
+  { href: "/members/register", label: "Join / Register" },
   { href: "/members/login", label: "Member login" },
   { href: "/admin/login", label: "Admin" },
 ] as const;

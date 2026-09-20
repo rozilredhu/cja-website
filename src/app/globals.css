@@ -874,3 +874,23 @@ img {
   font-size: 1.05rem;
   margin-bottom: 0.4rem;
 }
+
+/* Member accounts (§3C) */
+.members-shell {
+  min-height: 40vh;
+}
+
+.member-dash-links {
+  margin: 1rem 0 0;
+  padding-left: 1.25rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.member-dash-links a {
+  font-weight: 600;
+}
+
+.form-hint code {
+  font-size: 0.85em;
+}

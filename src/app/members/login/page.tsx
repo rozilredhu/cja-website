@@ -1,25 +1,32 @@
+export const dynamic = "force-dynamic";
+
 import type { Metadata } from "next";
-import Link from "next/link";
+import { redirect } from "next/navigation";
 import { PageHero } from "@/components/page-hero";
+import { getCurrentUser } from "@/modules/auth/session";
+import { MemberLoginForm } from "@/modules/members/components/member-login-form";
 
 export const metadata: Metadata = {
   title: "Member login",
-  description: "Member sign-in (coming soon).",
+  description: "Sign in to your Canadian Jats Association member account.",
   robots: { index: false, follow: false },
 };
 
-export default function MemberLoginPage() {
+export default async function MemberLoginPage() {
+  const user = await getCurrentUser();
+  if (user?.role === "member" || user?.role === "admin") {
+    redirect("/members");
+  }
+
   return (
     <>
       <PageHero
         title="Member login"
-        description="Member accounts ship in Phase 1C. This page is a placeholder hook."
+        description="Separate from admin sign-in. Sample credentials are in the README."
+        eyebrow="Members"
       />
-      <section className="card">
-        <p className="stub-note">
-          Register / login / email verification / password reset are not built
-          yet. Admins use <Link href="/admin/login">/admin/login</Link>.
-        </p>
+      <section className="card admin-login-card">
+        <MemberLoginForm />
       </section>
     </>
   );

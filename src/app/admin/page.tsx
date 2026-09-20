@@ -1,6 +1,7 @@
 export const dynamic = "force-dynamic";
 
 import type { Metadata } from "next";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { PageHero } from "@/components/page-hero";
 import { adminLogoutAction } from "@/modules/auth/actions";
@@ -25,11 +26,21 @@ export default async function AdminDashboardPage() {
         eyebrow="Administration"
       />
       <section className="card">
-        <h2>Foundation ready</h2>
+        <h2>Administration</h2>
         <p className="muted">
           Officials manager, members, directory approvals, news CMS, and
           matrimonial review will attach here in later modules.
         </p>
+        <ul className="member-dash-links">
+          <li>
+            <Link href="/admin/mfa">
+              Admin MFA {user.totpEnabled ? "(enabled)" : "(not enabled)"}
+            </Link>
+          </li>
+          <li>
+            <Link href="/members">Member area</Link>
+          </li>
+        </ul>
         <form action={adminLogoutAction} style={{ marginTop: "1rem" }}>
           <button type="submit" className="btn-secondary">
             Sign out
