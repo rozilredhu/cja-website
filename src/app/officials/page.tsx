@@ -28,7 +28,7 @@ export default async function OfficialsPage() {
       <PageHero
         eyebrow="Leadership"
         title="Officials / Leadership"
-        description="Current CJA team. Categories and counts come from the database — admins can add, edit, reorder, or archive without code changes."
+        description="Executive Committee as published on draft.cjacanada.ca. Categories and counts come from the database."
       />
 
       {groups.map((group) => (
@@ -57,8 +57,10 @@ export default async function OfficialsPage() {
           <Link href="/past-executives">View Past Executives</Link>
         </p>
         <p className="stub-note">
-          Sample names only — no real private contact details. Photos accept a
-          URL or R2 key stub until media uploads are enabled.
+          Named executives and public phone/city details match draft.cjacanada.ca.
+          Additional seats shown as TBA on that draft are omitted here until CJA
+          publishes names. Officer titles (e.g. President) are not listed on the
+          public sites.
         </p>
       </section>
     </>

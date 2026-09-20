@@ -4,17 +4,19 @@ export const siteConfig = {
   name: "Canadian Jats Association",
   shortName: "CJA",
   description:
-    "Official community website of the Canadian Jats Association (CJA) — connecting Jat families across Canada.",
+    "Official community website of the Canadian Jats Association (CJA) — connecting Jat families across Canada. Non-for-profit founded in 2006.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://draft.cjacanada.ca",
   locale: "en_CA",
-  email: "info@cjacanada.ca",
+  /** Public contact email from cjacanada.com */
+  email: "info@cjacanada.com",
+  /** Mailing address from cjacanada.com contact panel */
+  address: "230-2980 Drew Rd, Mississauga ON L4T0A7, Canada",
   themeColor: "#4285f4",
   backgroundColor: "#ffffff",
   social: {
-    // Placeholders until CJA confirms handles
-    x: "",
-    facebook: "",
-    youtube: "",
+    x: "https://twitter.com/cjacanada",
+    facebook: "https://www.facebook.com/groups/1761711964079236/",
+    youtube: "https://youtu.be/snPEyAif9xc",
   },
 } as const;
 

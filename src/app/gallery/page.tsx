@@ -20,7 +20,7 @@ export default function GalleryPage() {
       <PageHero
         eyebrow="Media"
         title="Photo & Video Gallery"
-        description="Sample grid with photo placeholders and external video embeds. Real media will move to R2 in a later module."
+        description="Albums linked from public CJA sites (Diwali Drive, Holi & Picnic Facebook albums) plus the public YouTube link."
       />
       <GalleryGrid items={galleryItems} />
     </>

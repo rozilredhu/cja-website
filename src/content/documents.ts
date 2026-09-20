@@ -1,38 +1,22 @@
 import type { PublicDocument } from "./types";
 
-/** Public Document Centre — sample only. No private member lists. */
+/** No public bylaws/PDFs found on cjacanada.com or draft.cjacanada.ca — honest placeholders only. */
 export const publicDocuments: PublicDocument[] = [
   {
-    id: "doc-bylaws",
-    title: "Association bylaws (sample PDF)",
+    id: "doc-pending-bylaws",
+    title: "Association bylaws — Coming Soon",
     description:
-      "Placeholder link for public bylaws. Replace with real PDF in R2 or Drive.",
+      "Public bylaws PDF not published on cjacanada.com or draft.cjacanada.ca. Content pending from CJA.",
     category: "Governance",
-    href: "#sample-bylaws-pdf",
-    publishedAt: "2025-01-15",
+    href: "#coming-soon",
+    publishedAt: "2026-09-20",
   },
   {
-    id: "doc-code",
-    title: "Code of conduct (sample)",
-    description: "Expected conduct at CJA events and online spaces.",
+    id: "doc-pending-conduct",
+    title: "Code of conduct — Coming Soon",
+    description: "Not found on public CJA sites. Content pending from CJA.",
     category: "Governance",
-    href: "#sample-code-of-conduct",
-    publishedAt: "2025-03-01",
-  },
-  {
-    id: "doc-agm-agenda",
-    title: "AGM 2025 agenda (sample)",
-    description: "Sample public agenda from a past annual meeting.",
-    category: "Meetings",
-    href: "#sample-agm-agenda",
-    publishedAt: "2025-11-01",
-  },
-  {
-    id: "doc-volunteer",
-    title: "Volunteer handbook overview (sample)",
-    description: "High-level overview of volunteer roles at CJA events.",
-    category: "Programs",
-    href: "#sample-volunteer-handbook",
-    publishedAt: "2026-02-10",
+    href: "#coming-soon",
+    publishedAt: "2026-09-20",
   },
 ];

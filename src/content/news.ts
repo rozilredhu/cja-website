@@ -1,44 +1,37 @@
 import type { NewsArticle } from "./types";
 
+/** News derived from draft.cjacanada.ca public copy (Diwali 2026 preferred over outdated 2024 on cjacanada.com). */
 export const newsArticles: NewsArticle[] = [
   {
-    slug: "welcome-to-cja-website",
-    title: "Welcome to the new CJA community website",
+    slug: "diwali-mahotasav-2026",
+    title: "CJA Annual Diwali Mahotsav 2026",
     excerpt:
-      "We are building a modern home for Canadian Jat families — news, events, leadership, and more.",
+      "You're invited to a Spectacular Diwali Celebration presented by Canadian Jats Association — Saturday, 24 October 2026, 6 PM onwards. Venue details TBA.",
     publishedAt: "2026-09-01",
-    author: "CJA Communications",
+    author: "CJA Executive Team",
     featured: true,
     body: [
-      "The Canadian Jats Association is launching a refreshed community website to keep members informed and connected across Canada.",
-      "Phase 1 focuses on public pages, member accounts, a community directory, and admin tools. Content on this page is sample data only until CJA publishes live announcements.",
-      "Bookmark this site and follow our social channels for upcoming festival dates, AGM notices, and volunteer opportunities.",
+      "You're Invited to a Spectacular Diwali Celebration! presented by Canadian Jats Association !!",
+      "✨ Join Us for an Evening of Light, Joy, and Togetherness! ✨",
+      "Date: Saturday, 24 October 2026. Time: 6 PM onwards. Location: Venue details TBA.",
+      "Celebrate the Festival of Lights with us! Enjoy a night filled with delicious food, vibrant music, cultural performances, and the joy of togetherness. This event is a wonderful opportunity to come together, celebrate and enjoy the festive spirit of Diwali with other Jat families. It will be a fun-filled day for all ages and will be a great chance for newcomers in Canada to meet and greet other Jat families.",
+      "Highlights of the Evening: Delicious Indian Snacks and Dinner; Live music and dance performances; Fun games and activities for all ages.",
+      "Ticket Price: Adult — $70; Early bird — $10 off (expires 10 October 2026); CJA member — $5 off (early bird and member discounts can be combined); Child (6 to 12) — $60; Child (Under 6) — free.",
+      "Please send your request email to info@cjacanada.com with the number of tickets or contact CJA Executives. Warm wishes, CJA Executive Team.",
     ],
   },
   {
-    slug: "diwali-celebration-announcement",
-    title: "Diwali celebration — save the date (sample)",
+    slug: "about-cja-community",
+    title: "About the Canadian Jats Association",
     excerpt:
-      "Join CJA for a community Diwali evening with cultural performances, dinner, and family activities.",
+      "CJA is a non-for-profit for the Jat community in Canada — networking, newcomer support, and cultural celebrations since 2006.",
     publishedAt: "2026-08-15",
-    author: "Events Team",
+    author: "CJA",
     featured: true,
     body: [
-      "CJA invites families to a sample Diwali celebration. Venue and ticket details will be confirmed closer to the date.",
-      "Volunteers are welcome for registration, décor, and youth activities — use the Volunteer form to express interest.",
-      "This article is sample content for development; replace with real event details before production.",
-    ],
-  },
-  {
-    slug: "membership-renewal-reminder",
-    title: "Membership renewal reminder (sample)",
-    excerpt:
-      "A friendly reminder that annual membership renewals help fund community programs.",
-    publishedAt: "2026-07-20",
-    author: "Membership Secretary",
-    body: [
-      "Thank you to everyone who supports CJA through membership. Renewals help sponsor cultural events, youth programs, and community outreach.",
-      "Online membership tools arrive in a later Phase 1 module. For now, contact us via the Contact form with membership questions.",
+      "The Canadian Jats Association (CJA) is a non-for-profit organization for the Jat community residing in Canada, located in Toronto, Ontario, with the primary objective of providing networking and support to new immigrants.",
+      "CJA was formed in 2006 as a common forum where members could meet, exchange views, and participate in social celebrations including Holi and Diwali. With currently over 400 members, CJA continues to enroll new members regularly.",
+      "For tickets and questions, email info@cjacanada.com.",
     ],
   },
 ];

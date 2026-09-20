@@ -1,25 +1,23 @@
 /**
- * Social embed placeholders. Replace handles/URLs when CJA confirms accounts.
- * Instagram: DO NOT build (handoff §3B).
+ * Social links from public cjacanada.com.
+ * Instagram: not linked on the source site; do not invent.
  */
 export const socialEmbeds = {
   x: {
     label: "X (Twitter)",
-    handlePlaceholder: "@CJACanada (sample)",
-    /** Timeline embed script src placeholder — empty until handle confirmed */
-    profileUrl: "",
-    note: "X timeline embed will appear here once CJA confirms the official handle.",
+    handlePlaceholder: "@cjacanada",
+    profileUrl: "https://twitter.com/cjacanada",
+    note: "Official X/Twitter account linked from cjacanada.com.",
   },
   facebook: {
-    label: "Facebook Page",
-    pageUrl: "",
-    note: "Facebook Page Plugin placeholder. Paste the official Page URL to enable the embed.",
+    label: "Facebook Group",
+    pageUrl: "https://www.facebook.com/groups/1761711964079236/",
+    note: "CJA Facebook group linked from cjacanada.com (group, not a Page plugin URL).",
   },
   youtube: {
     label: "YouTube",
-    channelUrl: "",
-    /** Sample embed for layout; replace with CJA channel video */
-    sampleEmbedUrl: "https://www.youtube.com/embed/aqz-KE-bpKQ",
-    note: "YouTube channel embed / featured video placeholder.",
+    channelUrl: "https://youtu.be/snPEyAif9xc",
+    sampleEmbedUrl: "https://www.youtube.com/embed/snPEyAif9xc",
+    note: "YouTube link from cjacanada.com navigation.",
   },
 };

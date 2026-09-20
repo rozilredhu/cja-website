@@ -6,11 +6,11 @@ import { aboutContent } from "@/content/about";
 export const metadata: Metadata = {
   title: "About CJA",
   description:
-    "Mission, vision, and values of the Canadian Jats Association — connecting Jat families across Canada.",
+    "About, mission, and vision of the Canadian Jats Association — connecting Jat families across Canada.",
   openGraph: {
     title: "About CJA",
     description:
-      "Mission, vision, and values of the Canadian Jats Association.",
+      "About, mission, and vision of the Canadian Jats Association.",
     url: "/about",
   },
 };
@@ -25,13 +25,23 @@ export default function AboutPage() {
       />
 
       <section className="card">
+        <h2>About CJA</h2>
+        <p>{aboutContent.intro}</p>
+      </section>
+
+      <section className="card">
         <h2>Our vision</h2>
         <p>{aboutContent.vision}</p>
       </section>
 
+      <section className="card">
+        <h2>Our mission</h2>
+        <p>{aboutContent.mission}</p>
+      </section>
+
       <section className="section-block" aria-labelledby="values">
         <h2 id="values" className="section-title">
-          Values
+          What we stand for
         </h2>
         <div className="card-grid">
           {aboutContent.values.map((v) => (

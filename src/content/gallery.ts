@@ -1,49 +1,35 @@
 import type { GalleryItem } from "./types";
 
+/** Gallery albums linked from draft.cjacanada.ca / cjacanada.com (same album URLs). */
 export const galleryItems: GalleryItem[] = [
   {
     id: "g-01",
-    title: "Diwali stage (sample)",
+    title: "Diwali Album",
     kind: "photo",
-    caption: "Sample photo placeholder — replace with R2 media later.",
+    caption:
+      "Pictures from past CJA Diwali events (Google Drive album linked from public sites).",
     album: "Diwali",
   },
   {
     id: "g-02",
-    title: "Family picnic games (sample)",
+    title: "Holi Album",
     kind: "photo",
-    caption: "Outdoor sports and kids’ games at the summer picnic.",
-    album: "Picnic",
+    caption: "Holi album on Facebook (linked from public CJA sites).",
+    album: "Holi",
   },
   {
     id: "g-03",
-    title: "AGM group photo (sample)",
+    title: "Picnic Picture",
     kind: "photo",
-    caption: "Members at the annual general meeting.",
-    album: "AGM",
+    caption: "Picnic album on Facebook (linked from public CJA sites).",
+    album: "Picnic",
   },
   {
     id: "g-04",
-    title: "Cultural dance highlight (sample)",
-    kind: "photo",
-    caption: "Youth cultural performance highlight.",
-    album: "Culture",
-  },
-  {
-    id: "g-05",
-    title: "Event recap video (sample embed)",
+    title: "CJA on YouTube",
     kind: "video",
-    caption: "YouTube embed placeholder — replace with CJA channel video.",
+    caption: "YouTube link from public CJA navigation.",
     album: "Videos",
-    // Public sample video; CJA will replace with own channel content
-    embedUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-  },
-  {
-    id: "g-06",
-    title: "Community welcome message (sample embed)",
-    kind: "video",
-    caption: "Second video embed placeholder for layout testing.",
-    album: "Videos",
-    embedUrl: "https://www.youtube.com/embed/aqz-KE-bpKQ",
+    embedUrl: "https://www.youtube.com/embed/snPEyAif9xc",
   },
 ];

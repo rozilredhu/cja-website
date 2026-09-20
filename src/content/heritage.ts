@@ -3,28 +3,30 @@ import type { HeritageArticle, HeritageTimelineEntry, GalleryItem } from "./type
 export const heritageIntro = {
   title: "Jats Heritage",
   lede:
-    "Explore the history, values, and cultural traditions of Jat communities — with a Canadian lens. Content here starts thin and will grow with contributions from members and historians.",
+    "Explore Jat community history and traditions with a Canadian lens. Founding facts below come from public CJA About copy; richer heritage articles are Coming Soon pending CJA contributions.",
 };
 
 export const heritageArticles: HeritageArticle[] = [
   {
-    slug: "roots-and-identity",
-    title: "Roots and identity (sample)",
+    slug: "cja-founding",
+    title: "Canadian Jats Association — founding",
     excerpt:
-      "A brief introduction to Jat heritage, agricultural roots, and community values.",
+      "CJA was formed in 2006 as a common forum for Jat community members in Canada.",
     body: [
-      "Jat communities have deep agricultural and cultural roots across northern India, with diaspora families now thriving across Canada.",
-      "This sample article is a placeholder. CJA will expand heritage content with verified sources and community stories.",
+      "According to public About copy on draft.cjacanada.ca and cjacanada.com, CJA was formed in 2006 with the idea of having a common forum where members could meet, exchange views, and interact personally with other community members.",
+      "The association provides opportunities to participate in social celebrations including Holi and Diwali, and to share cultural experiences among Indo-Canadians with roots in India.",
+      "Additional heritage essays are Coming Soon — content pending from CJA.",
     ],
   },
   {
-    slug: "festivals-and-traditions",
-    title: "Festivals and traditions (sample)",
+    slug: "festivals-and-community",
+    title: "Festivals and community life",
     excerpt:
-      "How festivals like Diwali, Holi, and Teej bring families together in Canada.",
+      "Holi, Diwali, and social gatherings help connect families and newcomers.",
     body: [
-      "Cultural festivals help pass language, food traditions, and values to the next generation.",
-      "CJA events celebrate these traditions while welcoming friends and neighbours from all backgrounds.",
+      "Public CJA materials highlight Holi and Diwali festivals, social gatherings, and annual Gala events as ways members and families participate in community life.",
+      "Vision copy emphasizes helping newcomers adapt to life in Canada and engage with the existing Jat community.",
+      "Expanded festival history: Coming Soon (content pending from CJA).",
     ],
   },
 ];
@@ -32,40 +34,40 @@ export const heritageArticles: HeritageArticle[] = [
 export const heritageTimeline: HeritageTimelineEntry[] = [
   {
     id: "t-1",
-    year: "Early diaspora",
-    title: "First Canadian Jat families (sample)",
+    year: "2006",
+    title: "Canadian Jats Association formed",
     summary:
-      "Placeholder timeline entry — early settlement stories to be researched and published.",
+      "CJA founded as a non-for-profit forum for the Jat community in Canada (public About copy).",
   },
   {
     id: "t-2",
-    year: "Association founding",
-    title: "Canadian Jats Association formed (sample)",
+    year: "Today",
+    title: "400+ members and growing",
     summary:
-      "CJA was established to connect families, preserve culture, and support community programs.",
+      "Public About copy states CJA currently has over 400 members and continues to enroll new members regularly.",
   },
   {
     id: "t-3",
-    year: "Today",
-    title: "Growing chapters across Canada (sample)",
+    year: "Coming Soon",
+    title: "Expanded heritage timeline",
     summary:
-      "Regional activities, youth programs, and digital community tools continue to expand.",
+      "Additional verified historical milestones are pending from CJA — not invented here.",
   },
 ];
 
 export const heritageGallery: GalleryItem[] = [
   {
     id: "hg-1",
-    title: "Heritage artefact photo (sample)",
+    title: "Diwali community photos",
     kind: "photo",
-    caption: "Placeholder for cultural artefacts or historical photos.",
+    caption: "See public Diwali Drive album linked from Gallery.",
     album: "Heritage",
   },
   {
     id: "hg-2",
-    title: "Traditional attire (sample)",
+    title: "Holi community photos",
     kind: "photo",
-    caption: "Sample gallery tile for heritage clothing and dress.",
+    caption: "See public Holi Facebook album linked from Gallery.",
     album: "Heritage",
   },
 ];

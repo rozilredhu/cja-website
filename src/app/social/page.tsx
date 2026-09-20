@@ -21,15 +21,22 @@ export default function SocialPage() {
       <PageHero
         eyebrow="Connect"
         title="Social"
-        description="Embed placeholders for X timeline, Facebook Page Plugin, and YouTube. Instagram is intentionally not built."
+        description="Official public links from draft.cjacanada.ca / cjacanada.com. Instagram is intentionally not built."
       />
 
       <section className="card embed-card">
         <h2>{x.label}</h2>
         <p className="muted">{x.note}</p>
+        {x.profileUrl ? (
+          <p>
+            <a href={x.profileUrl} rel="noopener noreferrer" target="_blank">
+              {x.handlePlaceholder}
+            </a>
+          </p>
+        ) : null}
         <div className="embed-placeholder">
           <p>
-            Timeline placeholder
+            Timeline embed Coming Soon
             <br />
             <span className="muted">{x.handlePlaceholder}</span>
           </p>
@@ -39,18 +46,32 @@ export default function SocialPage() {
       <section className="card embed-card">
         <h2>{facebook.label}</h2>
         <p className="muted">{facebook.note}</p>
+        {facebook.pageUrl ? (
+          <p>
+            <a href={facebook.pageUrl} rel="noopener noreferrer" target="_blank">
+              Open Facebook group
+            </a>
+          </p>
+        ) : null}
         <div className="embed-placeholder">
-          <p>Facebook Page Plugin placeholder</p>
+          <p>Facebook group link above (Page Plugin not used — source is a group URL).</p>
         </div>
       </section>
 
       <section className="card embed-card">
         <h2>{youtube.label}</h2>
         <p className="muted">{youtube.note}</p>
+        {youtube.channelUrl ? (
+          <p>
+            <a href={youtube.channelUrl} rel="noopener noreferrer" target="_blank">
+              Open on YouTube
+            </a>
+          </p>
+        ) : null}
         <div className="video-embed">
           <iframe
             src={youtube.sampleEmbedUrl}
-            title="CJA YouTube sample"
+            title="CJA YouTube"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
             loading="lazy"
@@ -59,8 +80,8 @@ export default function SocialPage() {
       </section>
 
       <p className="stub-note">
-        No Instagram embed or link per handoff §3B. Replace sample YouTube
-        embed and empty X/Facebook URLs when CJA confirms official accounts.
+        No Instagram embed or link (not present on public CJA sites; handoff
+        also excludes Instagram).
       </p>
     </>
   );

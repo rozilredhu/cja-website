@@ -24,8 +24,8 @@ export default async function ContactPage() {
   return (
     <>
       <PageHero
-        title="Contact"
-        description="Send a message to CJA. Bot protection via Cloudflare Turnstile when keys are set."
+        title="Contact us"
+        description="Do you have any questions? Please do not hesitate to contact us directly. Our team will come back to you at the earliest to help you."
       />
       <div className="split-layout">
         <section className="card">
@@ -35,14 +35,15 @@ export default async function ContactPage() {
             bypass={turnstile.turnstileBypass}
           />
           <p className="stub-note">
-            Turnstile is verified when configured. Messages are accepted in
-            this module but not yet emailed or stored in D1 — that wires up with
-            Admin tools later.
+            You can also email{" "}
+            <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>{" "}
+            directly (same address listed on draft.cjacanada.ca).
           </p>
         </section>
         <aside className="card">
-          <h2>Other ways</h2>
-          <p className="muted">
+          <h2>Canadian Jats Association</h2>
+          <p className="muted">{siteConfig.address}</p>
+          <p className="muted" style={{ marginTop: "0.75rem" }}>
             Email:{" "}
             <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
           </p>
