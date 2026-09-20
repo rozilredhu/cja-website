@@ -1,45 +1,78 @@
 # Canadian Jats Association (CJA) Website
 
-**Phase 1 skeleton only** — Next.js (App Router) + TypeScript, targeted at Cloudflare Workers via [`@opennextjs/cloudflare`](https://opennext.js.org/cloudflare).
+**Phase 1 — Foundation (§3A)** on top of the Next.js + Cloudflare Workers skeleton.
 
 Repo: https://github.com/rozilredhu/cja-website
 
 ## Stack
 
 - Next.js App Router + TypeScript
-- Cloudflare Workers (OpenNext adapter)
-- Planned bindings: **D1** (`DB`), **R2** (`MEDIA`)
-- Planned bot protection: Cloudflare **Turnstile** (env placeholders only)
+- Cloudflare Workers via [`@opennextjs/cloudflare`](https://opennext.js.org/cloudflare)
+- **D1** (`DB`) — users + sessions
+- **R2** (`MEDIA`) — placeholder (enable R2 in the Cloudflare dashboard before using)
+- **Turnstile** — env placeholders; bypass when keys are missing
+
+## What’s in Foundation
+
+- Public site shell (header / nav / footer), mobile-first, navy + saffron branding
+- Thin stub pages for About, Contact, Officials, News, Events, Gallery, Heritage, Documents, Social, Privacy, Terms, Volunteer, Past Executives
+- PWA basics: web manifest, icons, minimal service worker (`public/sw.js`)
+- SEO: per-page metadata, `sitemap.xml`, `robots.txt`, Open Graph, Organization JSON-LD on home
+- Turnstile client widget + server verify; wired to Contact + Volunteer stubs
+- Admin login separate from members (`/admin/login`), D1 sessions, server checks on `/admin`
+- Modular folders: `src/modules/auth`, `src/modules/admin`, `src/modules/turnstile`, `src/lib`
+- SQL migration: `migrations/0001_foundation.sql`
+
+## Sample admin (sample data only)
+
+| Field | Value |
+|-------|--------|
+| Email | `admin@example.com` |
+| Password | `SampleAdmin123!` |
+
+Change or disable this account before any real use. Never use real member data until CJA provides it.
 
 ## Prerequisites
 
 - Node.js 22+
 - npm 10+
-- Cloudflare account + Wrangler (for staging/production deploy later)
-- Optional: `wrangler` login for binding create / deploy
+- Cloudflare account + Wrangler (for migrations / staging deploy)
 
 ## Install
 
 ```bash
 npm install
+cp .env.example .env.local
+cp .dev.vars.example .dev.vars
 ```
 
-Copy env placeholders (no real secrets in git):
+Do **not** commit real Turnstile keys or PATs.
+
+## D1 migrations
+
+Migrations live in `migrations/` and are referenced from `wrangler.jsonc` (`migrations_dir`).
+
+**Local (Miniflare / wrangler persist):**
 
 ```bash
-cp .env.example .env.local
-# Fill TURNSTILE_SITE_KEY / TURNSTILE_SECRET_KEY when available
+npx wrangler d1 migrations apply cja-db --local
 ```
 
-## Local development
+**Staging (remote):**
 
-Standard Next.js dev server (with OpenNext Cloudflare binding helpers):
+```bash
+npx wrangler d1 migrations apply cja-website-db-staging --remote --env staging
+```
+
+After migrate, local preview / `next dev` (with OpenNext Cloudflare for Dev) can authenticate the sample admin.
+
+## Local development
 
 ```bash
 npm run dev
 ```
 
-Preview the Workers runtime build locally (no production deploy):
+Workers-style preview:
 
 ```bash
 npm run preview
@@ -47,55 +80,61 @@ npm run preview
 
 ## Build
 
-Next.js production build:
-
 ```bash
 npm run build
-```
-
-OpenNext Worker bundle (used by preview / staging deploy):
-
-```bash
 npm run build:worker
 ```
 
-## Bindings (placeholders)
+## Turnstile behaviour
 
-`wrangler.jsonc` includes:
+- Set `TURNSTILE_SITE_KEY` + `TURNSTILE_SECRET_KEY` (Wrangler secrets or `.dev.vars`) to enable.
+- If keys are empty **or** `TURNSTILE_BYPASS=true`, forms accept submissions with a clear “not configured” notice (local/dev).
+- Never set bypass on production.
 
-| Binding | Type | Notes |
-|--------|------|--------|
-| `DB` | D1 | Placeholder `database_id` — create with `wrangler d1 create cja-website-db` and replace the ID |
-| `MEDIA` | R2 | Create with `wrangler r2 bucket create cja-website-media` |
-| `ASSETS` | Assets | Filled by OpenNext build output |
+## Deploy staging only
 
-`env.staging` and `env.production` stubs mirror these bindings with separate names.
+1. Ensure staging D1 exists and migrations are applied (see above).
+2. R2: enable R2 in the Cloudflare dashboard, then create `cja-website-media-staging` (or remove the R2 block from `env.staging` until ready).
+3. Optional Turnstile secrets:
 
-**Do not commit real API tokens or secret keys.** Use Wrangler secrets / dashboard for Turnstile secret and other credentials.
+```bash
+npx wrangler secret put TURNSTILE_SITE_KEY --env staging
+npx wrangler secret put TURNSTILE_SECRET_KEY --env staging
+```
 
-## Deploy to staging (later — not part of Phase 1 push)
-
-1. Create D1 + R2 resources; update `database_id` / bucket names in `wrangler.jsonc` for the `staging` env.
-2. Set Turnstile secrets via Wrangler / dashboard (never commit them).
-3. Deploy **staging only** after approval:
+4. Deploy:
 
 ```bash
 npm run deploy:staging
 ```
 
-**Do not deploy to production until explicitly approved.**
+**Do not deploy to production until explicitly approved.** Production Worker name / D1 IDs remain placeholders.
 
-## Out of scope (Phase 1)
+Staging Worker name: `cja-website-staging`  
+Intended staging host (later): `draft.cjacanada.ca`
 
-This skeleton intentionally does **not** include:
+## Out of scope (this module)
 
-- Member directory / business listings
-- Auth (member or admin), MFA, email verification
-- Payments / Stripe
-- Full public site content (About, News, Gallery, Heritage, etc.)
-- Matrimonial module
-- Admin CMS tools
-- Production Cloudflare deploy
+- Full public CMS content, directory, matrimonial, Stripe, news editor, officials CRUD
+- Member register/login (stubs only under `/members/*`)
+- Production deploy / DNS changes
+- Real member data
+
+## Module layout
+
+```
+src/
+  app/                 # routes (public stubs + admin)
+  components/          # shell, forms, Turnstile, PWA register
+  lib/                 # db, env, site-config
+  modules/
+    auth/              # password, session, roles, actions
+    admin/             # contact/volunteer stubs
+    turnstile/         # server verify
+migrations/            # D1 SQL
+public/icons/          # PWA icons
+public/sw.js           # offline shell cache
+```
 
 ## License / ownership
 

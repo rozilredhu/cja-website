@@ -1,0 +1,52 @@
+"use client";
+
+import Link from "next/link";
+import { useState } from "react";
+import { navLinks, siteConfig } from "@/lib/site-config";
+
+export function SiteHeader() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <header className="site-header">
+      <div className="site-header-inner">
+        <Link href="/" className="brand" onClick={() => setOpen(false)}>
+          <span className="brand-mark" aria-hidden>
+            CJA
+          </span>
+          <span className="brand-text">
+            <strong>{siteConfig.shortName}</strong>
+            <span className="brand-sub">Canadian Jats Association</span>
+          </span>
+        </Link>
+
+        <button
+          type="button"
+          className="nav-toggle"
+          aria-expanded={open}
+          aria-controls="primary-nav"
+          onClick={() => setOpen((v) => !v)}
+        >
+          <span className="sr-only">Menu</span>
+          <span aria-hidden>{open ? "✕" : "☰"}</span>
+        </button>
+
+        <nav
+          id="primary-nav"
+          className={`primary-nav ${open ? "is-open" : ""}`}
+          aria-label="Primary"
+        >
+          <ul>
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <Link href={link.href} onClick={() => setOpen(false)}>
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </header>
+  );
+}

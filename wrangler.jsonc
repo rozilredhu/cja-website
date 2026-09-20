@@ -15,55 +15,50 @@
   "observability": {
     "enabled": true
   },
-  // Placeholder D1 binding — create a real D1 database and set database_id before deploy.
-  // See README: wrangler d1 create cja-website-db
+  // Public / non-secret defaults. Put TURNSTILE_SECRET_KEY via `wrangler secret put`.
+  "vars": {
+    "TURNSTILE_BYPASS": "true"
+  },
+  // Local / default: existing D1 `cja-db`
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "cja-website-db",
-      // Empty / placeholder — replace with real ID from `wrangler d1 create`
-      "database_id": "00000000-0000-0000-0000-000000000000"
+      "database_name": "cja-db",
+      "database_id": "5c136fb8-3e90-40de-ba91-76fd5fd763d3",
+      "migrations_dir": "migrations"
     }
   ],
-  // Placeholder R2 binding for media (photos, documents)
-  "r2_buckets": [
-    {
-      "binding": "MEDIA",
-      "bucket_name": "cja-website-media"
-      // Create with: wrangler r2 bucket create cja-website-media
-    }
-  ],
-  // Staging / production env stubs (override name + bindings per env as needed)
+  // R2: account must enable R2 in the dashboard before adding bindings.
+  // Re-add when ready, e.g.:
+  // "r2_buckets": [{ "binding": "MEDIA", "bucket_name": "cja-website-media" }]
   "env": {
     "staging": {
       "name": "cja-website-staging",
+      "vars": {
+        "TURNSTILE_BYPASS": "true"
+      },
       "d1_databases": [
         {
           "binding": "DB",
           "database_name": "cja-website-db-staging",
-          "database_id": "00000000-0000-0000-0000-000000000000"
-        }
-      ],
-      "r2_buckets": [
-        {
-          "binding": "MEDIA",
-          "bucket_name": "cja-website-media-staging"
+          "database_id": "6e76599c-f60c-4b3e-b0f0-9056e233c381",
+          "migrations_dir": "migrations"
         }
       ]
+      // R2 omitted until R2 is enabled on the Cloudflare account
     },
     "production": {
       "name": "cja-website-production",
+      "vars": {
+        "TURNSTILE_BYPASS": "false"
+      },
       "d1_databases": [
         {
           "binding": "DB",
           "database_name": "cja-website-db-production",
-          "database_id": "00000000-0000-0000-0000-000000000000"
-        }
-      ],
-      "r2_buckets": [
-        {
-          "binding": "MEDIA",
-          "bucket_name": "cja-website-media-production"
+          // Placeholder — create before any production deploy (requires human approval)
+          "database_id": "00000000-0000-0000-0000-000000000000",
+          "migrations_dir": "migrations"
         }
       ]
     }
