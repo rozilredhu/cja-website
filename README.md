@@ -110,6 +110,23 @@ npm run deploy:staging
 
 **Do not deploy to production until explicitly approved.** Production Worker name / D1 IDs remain placeholders.
 
+### Staging deploy blocker (current Cloudflare account)
+
+Deploy build succeeds, but Wrangler cannot publish until a **workers.dev subdomain** is registered (or a custom route is configured):
+
+1. Open https://dash.cloudflare.com/982ff1b360633bdb369edc994c3ea4dd/workers/onboarding and register a workers.dev subdomain **or**
+2. Add a staging route / custom domain (e.g. `draft.cjacanada.ca`) in `wrangler.jsonc` for `env.staging` after DNS is ready.
+
+Then:
+
+```bash
+npm run db:migrate:staging   # already applied once for cja-website-db-staging
+npm run deploy:staging
+```
+
+R2 remains disabled on this account — MEDIA binding is omitted from wrangler until R2 is enabled in the dashboard.
+
+
 Staging Worker name: `cja-website-staging`  
 Intended staging host (later): `draft.cjacanada.ca`
 
