@@ -23,7 +23,7 @@ const staticPaths = [
   "/terms",
 ] as const;
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const lastModified = new Date();
 
   const staticEntries = staticPaths.map((path) => ({
@@ -35,7 +35,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: path === "/" ? 1 : 0.6,
   }));
 
-  const newsEntries = getNewsSlugs().map((slug) => ({
+  const newsSlugs = await getNewsSlugs();
+  const newsEntries = newsSlugs.map((slug) => ({
     url: `${siteConfig.url}/news/${slug}`,
     lastModified,
     changeFrequency: "monthly" as const,

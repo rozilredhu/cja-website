@@ -1,8 +1,14 @@
 import type { Metadata, Viewport } from "next";
+import { headers } from "next/headers";
 import { Geist, Geist_Mono } from "next/font/google";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { ServiceWorkerRegister } from "@/components/service-worker-register";
+import {
+  MaintenanceBanner,
+  MaintenancePage,
+} from "@/components/maintenance-banner";
+import { isMaintenanceMode } from "@/modules/admin/site-settings";
 import { siteConfig } from "@/lib/site-config";
 import "./globals.css";
 
@@ -53,12 +59,19 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const pathname = (await headers()).get("x-cja-pathname") ?? "";
+  const isAdminRoute = pathname.startsWith("/admin");
+  const maintenance = await isMaintenanceMode().catch(() => false);
+
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body>
         <SiteHeader />
-        <main className="site-main">{children}</main>
+        <main className="site-main">
+          {maintenance && isAdminRoute ? <MaintenanceBanner /> : null}
+          {maintenance && !isAdminRoute ? <MaintenancePage /> : children}
+        </main>
         <SiteFooter />
         <ServiceWorkerRegister />
       </body>

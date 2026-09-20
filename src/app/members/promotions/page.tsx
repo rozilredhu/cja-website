@@ -4,6 +4,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHero } from "@/components/page-hero";
 import { requireMemberUser } from "@/modules/auth/session";
+import { isFeatureEnabled } from "@/modules/admin/feature-flags";
+import { FeatureUnavailable } from "@/components/feature-unavailable";
 import {
   getOwnBusinesses,
   getOwnProfile,
@@ -24,6 +26,11 @@ export const metadata: Metadata = {
 
 export default async function MemberPromotionsPage() {
   const user = await requireMemberUser();
+  if (!(await isFeatureEnabled("promotions"))) {
+    return (
+      <FeatureUnavailable title="Paid promotions" moduleLabel="Paid promotions" />
+    );
+  }
   const [profile, businesses, matProfile, orders] = await Promise.all([
     getOwnProfile(user.id),
     getOwnBusinesses(user.id),

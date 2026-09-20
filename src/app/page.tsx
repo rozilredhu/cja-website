@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import Link from "next/link";
 import type { Metadata } from "next";
 import { OrganizationJsonLd } from "@/components/json-ld";
@@ -19,10 +21,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default function HomePage() {
+export default async function HomePage() {
   const upcoming = getPrimaryUpcoming();
-  const featured = getFeaturedOfficials(4);
-  const latest = getLatestNews(3);
+  const featured = await getFeaturedOfficials(4);
+  const latest = await getLatestNews(3);
 
   return (
     <>

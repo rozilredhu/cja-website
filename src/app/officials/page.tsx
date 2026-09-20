@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHero } from "@/components/page-hero";
@@ -18,15 +20,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default function OfficialsPage() {
-  const groups = groupOfficialsByCategory(getActiveOfficials());
+export default async function OfficialsPage() {
+  const groups = groupOfficialsByCategory(await getActiveOfficials());
 
   return (
     <>
       <PageHero
         eyebrow="Leadership"
         title="Officials / Leadership"
-        description="Current CJA team. Categories and counts come from content data — admins can add or remove without code changes."
+        description="Current CJA team. Categories and counts come from the database — admins can add, edit, reorder, or archive without code changes."
       />
 
       {groups.map((group) => (
@@ -55,8 +57,8 @@ export default function OfficialsPage() {
           <Link href="/past-executives">View Past Executives</Link>
         </p>
         <p className="stub-note">
-          Sample names only — no real private contact details. Photos are
-          placeholders until R2 media uploads are enabled.
+          Sample names only — no real private contact details. Photos accept a
+          URL or R2 key stub until media uploads are enabled.
         </p>
       </section>
     </>

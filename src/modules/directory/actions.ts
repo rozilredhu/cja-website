@@ -1,5 +1,7 @@
 "use server";
 
+import { featureDisabledMessage } from "@/modules/admin/feature-flags";
+
 import { revalidatePath } from "next/cache";
 import { getDb, getMediaBucket } from "@/lib/db";
 import { requireAdminUser, requireMemberUser } from "@/modules/auth/session";
@@ -49,6 +51,9 @@ export async function saveDirectoryProfileAction(
   _prev: DirectoryFormState,
   formData: FormData,
 ): Promise<DirectoryFormState> {
+  const __ff = await featureDisabledMessage("directory");
+  if (__ff) return { error: __ff };
+
   const user = await requireMemberUser();
   const displayName = str(formData, "display_name") || user.name || user.email;
   const phone = str(formData, "phone") || null;
@@ -182,6 +187,9 @@ export async function saveBusinessListingAction(
   _prev: DirectoryFormState,
   formData: FormData,
 ): Promise<DirectoryFormState> {
+  const __ff = await featureDisabledMessage("directory");
+  if (__ff) return { error: __ff };
+
   const user = await requireMemberUser();
   const idRaw = str(formData, "id");
   const id = idRaw ? Number(idRaw) : null;
@@ -292,6 +300,9 @@ export async function saveBusinessListingAction(
 export async function deleteBusinessListingAction(
   formData: FormData,
 ): Promise<void> {
+  const __ff = await featureDisabledMessage("directory");
+  if (__ff) return;
+
   const user = await requireMemberUser();
   const id = Number(str(formData, "id"));
   if (!Number.isFinite(id)) return;
@@ -307,6 +318,9 @@ export async function deleteBusinessListingAction(
 export async function adminSetProfileDisabledAction(
   formData: FormData,
 ): Promise<void> {
+  const __ff = await featureDisabledMessage("directory");
+  if (__ff) return;
+
   await requireAdminUser();
   const id = Number(str(formData, "id"));
   const disabled = boolFlag(formData, "disabled");
@@ -325,6 +339,9 @@ export async function adminSetProfileDisabledAction(
 export async function adminSetBusinessDisabledAction(
   formData: FormData,
 ): Promise<void> {
+  const __ff = await featureDisabledMessage("directory");
+  if (__ff) return;
+
   await requireAdminUser();
   const id = Number(str(formData, "id"));
   const disabled = boolFlag(formData, "disabled");

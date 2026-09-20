@@ -5,6 +5,8 @@ import Link from "next/link";
 import { PageHero } from "@/components/page-hero";
 import { getMediaBucket } from "@/lib/db";
 import { requireMemberUser } from "@/modules/auth/session";
+import { isFeatureEnabled } from "@/modules/admin/feature-flags";
+import { FeatureUnavailable } from "@/components/feature-unavailable";
 import { deleteBusinessListingAction } from "@/modules/directory/actions";
 import { BusinessEditForm } from "@/modules/directory/components/business-edit-form";
 import { ProfileEditForm } from "@/modules/directory/components/profile-edit-form";
@@ -23,6 +25,11 @@ export const metadata: Metadata = {
 
 export default async function DirectoryHomePage() {
   const user = await requireMemberUser();
+  if (!(await isFeatureEnabled("directory"))) {
+    return (
+      <FeatureUnavailable title="Community Directory" moduleLabel="Community Directory" />
+    );
+  }
   const [profile, businesses, memberCount, bizCount, canSensitive, media] =
     await Promise.all([
       getOwnProfile(user.id),

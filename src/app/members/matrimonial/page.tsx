@@ -5,6 +5,8 @@ import Link from "next/link";
 import { PageHero } from "@/components/page-hero";
 import { getMediaBucket } from "@/lib/db";
 import { requireMemberUser } from "@/modules/auth/session";
+import { isFeatureEnabled } from "@/modules/admin/feature-flags";
+import { FeatureUnavailable } from "@/components/feature-unavailable";
 import { MatrimonialProfileEditForm } from "@/modules/matrimonial/components/profile-edit-form";
 import { getOwnMatrimonialProfile } from "@/modules/matrimonial/queries";
 import { ageFromDob, formatHeightCm } from "@/modules/matrimonial/utils";
@@ -16,6 +18,11 @@ export const metadata: Metadata = {
 
 export default async function MatrimonialManagePage() {
   const user = await requireMemberUser();
+  if (!(await isFeatureEnabled("matrimonial"))) {
+    return (
+      <FeatureUnavailable title="Matrimonial profile" moduleLabel="Matrimonial" />
+    );
+  }
   const [profile, media] = await Promise.all([
     getOwnMatrimonialProfile(user.id),
     getMediaBucket().catch(() => null),

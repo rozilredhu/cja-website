@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import type { Metadata } from "next";
 import { PageHero } from "@/components/page-hero";
 import { NewsCard } from "@/modules/public/components/news-card";
@@ -14,15 +16,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default function NewsListPage() {
-  const articles = getAllNews();
+export default async function NewsListPage() {
+  const articles = await getAllNews();
 
   return (
     <>
       <PageHero
         eyebrow="Updates"
         title="News & Announcements"
-        description="Sample articles for Phase 1. An admin CMS editor arrives in a later module."
+        description="Published articles from the admin CMS (falls back to sample file content if the database is empty)."
       />
       <div className="card-grid">
         {articles.map((a) => (

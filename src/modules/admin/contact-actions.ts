@@ -1,5 +1,6 @@
 "use server";
 
+import { featureDisabledMessage } from "@/modules/admin/feature-flags";
 import { verifyTurnstile } from "@/modules/turnstile/verify";
 
 export type ContactState = {
@@ -40,6 +41,9 @@ export async function submitVolunteerAction(
   _prev: ContactState,
   formData: FormData,
 ): Promise<ContactState> {
+  const disabled = await featureDisabledMessage("volunteer_form");
+  if (disabled) return { error: disabled };
+
   const name = String(formData.get("name") ?? "").trim();
   const email = String(formData.get("email") ?? "").trim();
   const interest = String(formData.get("interest") ?? "").trim();

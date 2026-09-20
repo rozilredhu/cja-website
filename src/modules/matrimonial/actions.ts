@@ -1,5 +1,7 @@
 "use server";
 
+import { featureDisabledMessage } from "@/modules/admin/feature-flags";
+
 import { revalidatePath } from "next/cache";
 import { getDb, getMediaBucket } from "@/lib/db";
 import { enqueueEmailStub } from "@/modules/auth/email";
@@ -99,6 +101,9 @@ export async function saveMatrimonialProfileAction(
   _prev: MatrimonialFormState,
   formData: FormData,
 ): Promise<MatrimonialFormState> {
+  const __ff = await featureDisabledMessage("matrimonial");
+  if (__ff) return { error: __ff };
+
   const user = await requireMemberUser();
   const gender = str(formData, "gender") as MatrimonialGender;
   const dob = str(formData, "date_of_birth");
@@ -259,6 +264,9 @@ export async function saveMatrimonialProfileAction(
 export async function adminReviewMatrimonialAction(
   formData: FormData,
 ): Promise<void> {
+  const __ff = await featureDisabledMessage("matrimonial");
+  if (__ff) return;
+
   const admin = await requireAdminUser();
   const id = Number(str(formData, "id"));
   const decision = str(formData, "decision"); // approve | reject
@@ -311,6 +319,9 @@ export async function sendMatrimonialContactAction(
   _prev: MatrimonialFormState,
   formData: FormData,
 ): Promise<MatrimonialFormState> {
+  const __ff = await featureDisabledMessage("matrimonial");
+  if (__ff) return { error: __ff };
+
   const user = await requireMemberUser();
   const profileId = Number(str(formData, "profile_id"));
   const subject = str(formData, "subject") || "Matrimonial interest";
@@ -375,6 +386,9 @@ export async function sendMatrimonialContactAction(
 export async function blockMatrimonialUserAction(
   formData: FormData,
 ): Promise<void> {
+  const __ff = await featureDisabledMessage("matrimonial");
+  if (__ff) return;
+
   const user = await requireMemberUser();
   const blockedUserId = Number(str(formData, "blocked_user_id"));
   if (!Number.isFinite(blockedUserId) || blockedUserId === user.id) return;
@@ -396,6 +410,9 @@ export async function reportMatrimonialProfileAction(
   _prev: MatrimonialFormState,
   formData: FormData,
 ): Promise<MatrimonialFormState> {
+  const __ff = await featureDisabledMessage("matrimonial");
+  if (__ff) return { error: __ff };
+
   const user = await requireMemberUser();
   const profileId = Number(str(formData, "profile_id"));
   const reason = str(formData, "reason");
@@ -442,6 +459,9 @@ export async function reportMatrimonialProfileAction(
 }
 
 export async function adminResolveReportAction(formData: FormData): Promise<void> {
+  const __ff = await featureDisabledMessage("matrimonial");
+  if (__ff) return;
+
   await requireAdminUser();
   const id = Number(str(formData, "id"));
   const status = str(formData, "status");

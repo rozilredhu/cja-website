@@ -1,8 +1,13 @@
+export const dynamic = "force-dynamic";
+
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHero } from "@/components/page-hero";
 import { OfficialCard } from "@/modules/public/components/official-card";
-import { groupArchivedByTenure } from "@/modules/public/officials";
+import {
+  getArchivedOfficials,
+  groupArchivedByTenure,
+} from "@/modules/public/officials";
 
 export const metadata: Metadata = {
   title: "Past Executives",
@@ -15,16 +20,22 @@ export const metadata: Metadata = {
   },
 };
 
-export default function PastExecutivesPage() {
-  const tenures = groupArchivedByTenure();
+export default async function PastExecutivesPage() {
+  const tenures = groupArchivedByTenure(await getArchivedOfficials());
 
   return (
     <>
       <PageHero
         eyebrow="Archives"
         title="Past Executives"
-        description="Archived officials grouped by tenure. Sample terms shown for layout — replace with real archived records later."
+        description="Archived officials grouped by tenure. Managed from the admin Officials tool."
       />
+
+      {tenures.length === 0 ? (
+        <section className="card">
+          <p className="muted">No archived officials yet.</p>
+        </section>
+      ) : null}
 
       {tenures.map((group) => (
         <section

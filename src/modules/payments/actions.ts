@@ -1,5 +1,7 @@
 "use server";
 
+import { featureDisabledMessage } from "@/modules/admin/feature-flags";
+
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getDb } from "@/lib/db";
@@ -91,6 +93,9 @@ export async function createPromotionOrderAction(
   _prev: PromotionFormState,
   formData: FormData,
 ): Promise<PromotionFormState> {
+  const __ff = await featureDisabledMessage("promotions");
+  if (__ff) return { error: __ff };
+
   const user = await requireMemberUser();
   const packageCode = str(formData, "package_code");
   const targetType = str(formData, "target_type") as PromotionTargetType;
@@ -168,6 +173,9 @@ export async function createPromotionOrderAction(
  * No card data is collected. Real Stripe will use Checkout + webhooks instead.
  */
 export async function stubPayOrderAction(formData: FormData): Promise<void> {
+  const __ff = await featureDisabledMessage("promotions");
+  if (__ff) return;
+
   const user = await requireMemberUser();
   const orderId = Number(str(formData, "order_id"));
   if (!Number.isFinite(orderId)) return;
@@ -267,6 +275,9 @@ export async function stubPayOrderAction(formData: FormData): Promise<void> {
 export async function cancelOwnPendingOrderAction(
   formData: FormData,
 ): Promise<void> {
+  const __ff = await featureDisabledMessage("promotions");
+  if (__ff) return;
+
   const user = await requireMemberUser();
   const orderId = Number(str(formData, "order_id"));
   if (!Number.isFinite(orderId)) return;
@@ -284,6 +295,9 @@ export async function cancelOwnPendingOrderAction(
 export async function adminSetOrderStatusAction(
   formData: FormData,
 ): Promise<void> {
+  const __ff = await featureDisabledMessage("promotions");
+  if (__ff) return;
+
   await requireAdminUser();
   const orderId = Number(str(formData, "order_id"));
   const status = str(formData, "status");
