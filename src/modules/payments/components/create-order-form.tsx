@@ -16,10 +16,12 @@ export function CreateOrderForm({
   packages,
   profileTargets,
   businessTargets,
+  matrimonialTargets,
 }: {
   packages: PromotionPackage[];
   profileTargets: TargetOption[];
   businessTargets: TargetOption[];
+  matrimonialTargets?: TargetOption[];
 }) {
   const [state, action, pending] = useActionState(
     createPromotionOrderAction,
@@ -32,6 +34,10 @@ export function CreateOrderForm({
   const businessPkgs = packages.filter(
     (p) => p.targetType === "business_listing",
   );
+  const matPkgs = packages.filter(
+    (p) => p.targetType === "matrimonial_profile",
+  );
+  const matTargets = matrimonialTargets ?? [];
 
   return (
     <div className="promo-create">
@@ -102,6 +108,47 @@ export function CreateOrderForm({
                 Business
                 <select name="target_id" required>
                   {businessTargets.map((t) => (
+                    <option key={t.id} value={t.id}>
+                      {t.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <p className="form-hint">
+                CAD only. Stub checkout — no card numbers collected.
+              </p>
+              <button type="submit" className="btn-saffron" disabled={pending}>
+                {pending ? "Creating…" : "Continue to checkout"}
+              </button>
+            </>
+          )}
+        </form>
+      ) : null}
+
+      {matPkgs.length > 0 ? (
+        <form action={action} className="promo-package-form">
+          <h3>Promote your matrimonial profile</h3>
+          {matTargets.length === 0 ? (
+            <p className="muted">
+              Get an approved matrimonial profile before purchasing a highlight.
+            </p>
+          ) : (
+            <>
+              <label>
+                Package
+                <select name="package_code" required defaultValue={matPkgs[0]?.code}>
+                  {matPkgs.map((p) => (
+                    <option key={p.code} value={p.code}>
+                      {p.name} — {formatCadCents(p.amountCadCents)} / {p.durationDays} days
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <input type="hidden" name="target_type" value="matrimonial_profile" />
+              <label>
+                Matrimonial profile
+                <select name="target_id" required>
+                  {matTargets.map((t) => (
                     <option key={t.id} value={t.id}>
                       {t.label}
                     </option>

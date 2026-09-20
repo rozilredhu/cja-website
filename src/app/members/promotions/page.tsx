@@ -8,6 +8,7 @@ import {
   getOwnBusinesses,
   getOwnProfile,
 } from "@/modules/directory/queries";
+import { getOwnMatrimonialProfile } from "@/modules/matrimonial/queries";
 import { cancelOwnPendingOrderAction } from "@/modules/payments/actions";
 import { CreateOrderForm } from "@/modules/payments/components/create-order-form";
 import {
@@ -23,9 +24,10 @@ export const metadata: Metadata = {
 
 export default async function MemberPromotionsPage() {
   const user = await requireMemberUser();
-  const [profile, businesses, orders] = await Promise.all([
+  const [profile, businesses, matProfile, orders] = await Promise.all([
     getOwnProfile(user.id),
     getOwnBusinesses(user.id),
+    getOwnMatrimonialProfile(user.id),
     listOrdersForUser(user.id),
   ]);
 
@@ -46,13 +48,23 @@ export default async function MemberPromotionsPage() {
       label: `${b.name} (#${b.id})`,
     }));
 
+  const matrimonialTargets =
+    matProfile && matProfile.status === "approved"
+      ? [
+          {
+            id: matProfile.id,
+            label: `Matrimonial #${matProfile.id} (${matProfile.gender})`,
+          },
+        ]
+      : [];
+
   const activePackages = PROMOTION_PACKAGES.filter((p) => p.active);
 
   return (
     <>
       <PageHero
         title="Paid promotions"
-        description="Highlight your directory profile or business listing (CAD). Stub checkout — no real charges."
+        description="Highlight your directory, business, or matrimonial profile (CAD). Stub checkout — no real charges."
         eyebrow="Members"
       />
 
@@ -87,6 +99,7 @@ export default async function MemberPromotionsPage() {
           packages={[...activePackages]}
           profileTargets={profileTargets}
           businessTargets={businessTargets}
+          matrimonialTargets={matrimonialTargets}
         />
       </section>
 

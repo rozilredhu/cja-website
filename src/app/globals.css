@@ -1111,3 +1111,64 @@ img {
   font-size: 0.75rem;
   word-break: break-all;
 }
+
+/* Matrimonial (§3F) */
+.form-ok {
+  color: #1b5e20;
+  background: #e8f5e9;
+  padding: 0.65rem 0.85rem;
+  border-radius: 6px;
+  margin: 0 0 0.75rem;
+}
+
+.height-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.mat-filter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.mat-photo {
+  display: block;
+  max-width: 240px;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+  margin: 0.75rem 0 1rem;
+  background: #f3f0ea;
+}
+
+.mat-overdue-badge {
+  display: inline-block;
+  background: #c62828;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.mat-row-overdue {
+  background: #ffebee;
+}
+
+.mat-admin-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  align-items: center;
+}
+
+.mat-admin-actions input[type="text"] {
+  min-width: 8rem;
+  padding: 0.25rem 0.4rem;
+}

@@ -11,7 +11,10 @@
  * Stripe keys to run the stub adapter.
  */
 
-export type PromotionTargetType = "directory_profile" | "business_listing";
+export type PromotionTargetType =
+  | "directory_profile"
+  | "business_listing"
+  | "matrimonial_profile";
 
 export type PromotionPackage = {
   code: string;
@@ -42,6 +45,16 @@ export const PROMOTION_PACKAGES: readonly PromotionPackage[] = [
       "Boost your opted-in business listing for 30 days. Appears first in browse with a Promoted badge.",
     targetType: "business_listing",
     amountCadCents: 1500, // 15.00 CAD
+    durationDays: 30,
+    active: true,
+  },
+  {
+    code: "matrimonial_highlight_30d",
+    name: "Matrimonial profile highlight",
+    description:
+      "Boost your approved matrimonial profile for 30 days. Appears first in browse with a Promoted badge.",
+    targetType: "matrimonial_profile",
+    amountCadCents: 1200, // 12.00 CAD
     durationDays: 30,
     active: true,
   },

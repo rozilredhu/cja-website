@@ -1,6 +1,6 @@
 # Canadian Jats Association (CJA) Website
 
-**Phase 1 — Paid promotions / Stripe stub (§3E)** on top of Foundation (§3A) + Public pages (§3B) + Member accounts (§3C) + Community Directory (§3D).
+**Phase 1 — Matrimonial module (§3F)** on top of Foundation (§3A) + Public pages (§3B) + Member accounts (§3C) + Community Directory (§3D) + Paid promotions (§3E).
 
 Repo: https://github.com/rozilredhu/cja-website
 
@@ -8,34 +8,47 @@ Repo: https://github.com/rozilredhu/cja-website
 
 - Next.js App Router + TypeScript
 - Cloudflare Workers via [`@opennextjs/cloudflare`](https://opennext.js.org/cloudflare)
-- **D1** (`DB`) — users, sessions, directory, **promotion packages & orders**
-- **R2** (`MEDIA`) — optional photo upload
-- **Payments** — `PaymentAdapter` + **`StripeStubAdapter`** (no Stripe keys required)
+- **D1** (`DB`) — users, sessions, directory, promotions, **matrimonial profiles / blocks / reports / messages**
+- **R2** (`MEDIA`) — optional photo upload (URL stub OK)
+- **Payments** — Stripe stub + `matrimonial_highlight_30d` package
 - **Turnstile** — public / auth forms
 - **File-based content** in `src/content/` until Admin CMS (§3G)
 
-## What’s in this module (Paid promotions §3E)
+## What’s in this module (Matrimonial §3F)
 
-- **Promotion packages (CAD)** — typed constants in `src/modules/payments/packages.ts` (+ mirrored `promotion_packages` table for reporting / future admin edits):
-  - Directory profile highlight — **10.00 CAD / 30 days** (`directory_highlight_30d`)
-  - Business listing highlight — **15.00 CAD / 30 days** (`business_highlight_30d`)
-- **Orders** — `promotion_orders` with status `pending|paid|failed|expired|cancelled`, provider `stripe_stub`, amounts in **CAD cents**
-- **Payment adapter** — `src/modules/payments/` with `PaymentAdapter` + `StripeStubAdapter` (no-ops / simulates success). Documented where real Stripe keys go later. **Does not require Stripe keys to run.**
-- **Checkout UI** — `/members/promotions` (create order) + `/members/promotions/checkout/[orderId]` stub **Pay** marks paid and sets `starts_at` / `ends_at`
-- **Directory integration** — browse lists sort boosted items first and show a **Promoted** badge while `status = paid` and `ends_at > now` (query-time filter; optional cron note for later)
-- **Admin** — `/admin/promotions` list + mark expired / cancelled
-- **Webhook stub** — `POST|GET /api/payments/webhook` accepts events; safe no-op for stub (webhooks become source of truth later)
-- **Never store card numbers**
+- **Account required** — members-only; `noindex` / robots disallow `/members/`
+- **Profile fields** — gender, date_of_birth (store DOB; **display age only**), height_cm (UI ft/in → cm), marital_status, city, province, education, occupation, gotra, mother_gotra, native_place, mother_tongue, diet, willing_to_relocate, partner_preferences, short_bio, profile_photo
+- **Not collected** — exact home address, income, full family names
+- **Workflow** — create/edit → `pending` → admin approve/reject; **overdue flag if pending > 24 hours**; `notification_outbox` stub on new submission
+- **Browse** — after `approved`, opposite-gender only (man→women, woman→men)
+- **Filters** — age range, height range, city, province, education, occupation, gotra, marital_status
+- **Privacy** — never show phone/email on cards; contact via **platform message form** (DB + email outbox stub)
+- **Report** and **Block** from day one
+- **Paid promotion hook** — `matrimonial_highlight_30d` (12.00 CAD / 30 days); Promoted badge + sort-first when active
+- **Scale** — designed for ≤ ~1000 profiles; D1 indexes on gender, status, city, province
 
-## Schema changes
+## Routes
 
-New migration: `migrations/0004_paid_promotions.sql`
+| Route | Purpose |
+|-------|---------|
+| `/members/matrimonial` | Create / edit own profile |
+| `/members/matrimonial/browse` | Opposite-gender browse + filters |
+| `/members/matrimonial/browse/[id]` | Detail + contact / report / block |
+| `/members/matrimonial/messages` | Platform message inbox |
+| `/admin/matrimonial` | Review inbox (approve/reject, overdue) |
+
+## Schema
+
+Migration: `migrations/0005_matrimonial.sql`
 
 | Object | Purpose |
 |--------|---------|
-| `promotion_packages` | Optional mirror of package codes (CAD cents, duration, target_type) |
-| `promotion_orders` | Orders: user, target, package, amount_cad_cents, status, provider, dates |
-| Seed order | Sample paid boost for `member@example.com` directory profile (~30 days) |
+| `matrimonial_profiles` | One profile per user; status pending/approved/rejected |
+| `matrimonial_blocks` | Mutual hide on browse/detail |
+| `matrimonial_reports` | Abuse reports |
+| `matrimonial_contact_messages` | Platform contact messages |
+| `promotion_packages` / `orders` | CHECK expanded for `matrimonial_profile`; seed `matrimonial_highlight_30d` |
+| Sample seed | 4 approved profiles (mixed genders) on sample members |
 
 ### Apply migrations
 
@@ -44,18 +57,19 @@ npm run db:migrate:local
 npm run db:migrate:staging
 ```
 
-## How stub pay works
+## Privacy / SEO rules
 
-1. Logged-in member opens `/members/promotions`, picks a package + opted-in target → creates a **pending** order.
-2. `StripeStubAdapter.createCheckout` returns an on-site checkout URL + `provider_ref` (`stub_sess_…`). No Stripe API.
-3. On checkout, **Pay (stub)** calls `confirmPayment` (always succeeds) and sets `status=paid`, `paid_at`, `starts_at`, `ends_at` (+duration days; stacks on an existing active end if present).
-4. No card form, no secrets required. Real Stripe later: put `STRIPE_SECRET_KEY` / `STRIPE_WEBHOOK_SECRET` in Workers secrets / `.dev.vars`, implement `StripeAdapter`, and treat `/api/payments/webhook` as source of truth.
+- Members-only (`requireMemberUser` / `requireAdminUser`)
+- `robots: { index: false, follow: false }` on every matrimonial page; `/members/` disallowed in `robots.ts`
+- Server-side gender + approval checks on every browse/detail query
+- Blocks applied both directions
+- Cards never include phone or email
 
-## How promotions appear in the directory
+## Admin 24h overdue
 
-- Browse queries load an active-promotion map (`status = paid` AND `ends_at > datetime('now')`).
-- Results are sorted **promoted first**, then by name; cards/detail show a **Promoted** badge.
-- After `ends_at`, the row drops out of the map automatically (query-time). Admin can also mark `expired`/`cancelled`. Optional cron can flip status later for housekeeping.
+- On submit, `submitted_at = datetime('now')` and status → `pending`
+- Admin inbox (`/admin/matrimonial`) computes overdue when `now - submitted_at > 24 hours`
+- Overdue rows get a red **Overdue** badge and highlighted row; dashboard counts overdue pending
 
 ## Sample accounts (unchanged)
 
@@ -67,9 +81,9 @@ npm run db:migrate:staging
 | Member | `member3@example.com` | `SampleMember123!` |
 | Member | `member4@example.com` | `SampleMember123!` |
 
-## Prerequisites / install / local
+Seeded matrimonial: member + member2 = man; member3 + member4 = woman (all `approved`).
 
-Same as prior modules. After pull:
+## Prerequisites / install / local
 
 ```bash
 npm install
@@ -79,39 +93,14 @@ npm run dev
 
 ### Quick test checklist
 
-1. Login as `member@example.com` → `/members/promotions` → create directory highlight → stub Pay → see paid + ends_at
-2. Browse `/members/directory/browse` → Sample Member first with **Promoted** badge
-3. Create business boost as `member2@example.com` / `member4@example.com` → businesses browse shows promoted first
-4. Admin → `/admin/promotions` → Mark expired → badge disappears on next browse
-5. `curl -X POST http://localhost:3000/api/payments/webhook` → `{ ok: true, … no-op }`
+1. Sign in as `member3@example.com` → `/members/matrimonial/browse` shows men only.
+2. Sign in as `member@example.com` → browse shows women only.
+3. Edit profile → status becomes `pending`; admin inbox shows it; outbox stub logs admin email.
+4. Leave a profile pending > 24h (or adjust `submitted_at` in D1) → **Overdue** flag.
+5. Send a platform message → appears in `/members/matrimonial/messages` + outbox.
+6. Report / Block from a detail page.
+7. Promote via `/members/promotions` with `matrimonial_highlight_30d` (approved profile required).
 
-## Build
+## Out of scope (this module)
 
-```bash
-npm run build
-npm run build:worker
-```
-
-## Module layout
-
-```
-src/
-  app/
-    members/promotions/           # create order + order list
-    members/promotions/checkout/[orderId]/  # stub Pay
-    admin/promotions/             # order list + expire/cancel
-    api/payments/webhook/         # stub webhook
-  modules/
-    payments/                     # packages, adapter, stub, queries, actions
-migrations/
-  0004_paid_promotions.sql
-```
-
-## Out of scope
-
-- Real Stripe keys / card storage / production charge flow
-- Matrimonial, production deploy, full CMS
-
-## License / ownership
-
-Code is owned by the Canadian Jats Association (CJA).
+- Real SMS/push, advanced matchmaking AI, production deploy, real Stripe

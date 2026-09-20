@@ -48,9 +48,7 @@ export default async function MembersDashboardPage() {
             <Link href="/members/promotions">Paid promotions (CAD stub)</Link>
           </li>
           <li>
-            <span className="stub-note">
-              Matrimonial profiles — coming in a later Phase 1 module
-            </span>
+            <Link href="/members/matrimonial">Matrimonial profiles</Link>
           </li>
           {user.role === "admin" ? (
             <li>

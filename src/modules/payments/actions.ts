@@ -38,6 +38,24 @@ async function assertOwnsTarget(
     return { ok: true };
   }
 
+  if (targetType === "matrimonial_profile") {
+    const row = await db
+      .prepare(
+        `SELECT id, status FROM matrimonial_profiles
+         WHERE id = ? AND user_id = ?`,
+      )
+      .bind(targetId, userId)
+      .first<{ id: number; status: string }>();
+    if (!row) return { ok: false, error: "Matrimonial profile not found." };
+    if (row.status !== "approved") {
+      return {
+        ok: false,
+        error: "Matrimonial profile must be approved before promoting.",
+      };
+    }
+    return { ok: true };
+  }
+
   const row = await db
     .prepare(
       `SELECT id, opted_in, disabled, status FROM business_listings
@@ -85,7 +103,8 @@ export async function createPromotionOrderAction(
   }
   if (
     targetType !== "directory_profile" &&
-    targetType !== "business_listing"
+    targetType !== "business_listing" &&
+    targetType !== "matrimonial_profile"
   ) {
     return { error: "Invalid target type." };
   }
@@ -240,6 +259,7 @@ export async function stubPayOrderAction(formData: FormData): Promise<void> {
   revalidatePath("/members/promotions");
   revalidatePath("/members/directory/browse");
   revalidatePath("/members/directory/businesses");
+  revalidatePath("/members/matrimonial/browse");
   revalidatePath("/admin/promotions");
   redirect(`/members/promotions/checkout/${orderId}?paid=1`);
 }
@@ -279,4 +299,5 @@ export async function adminSetOrderStatusAction(
   revalidatePath("/admin/promotions");
   revalidatePath("/members/directory/browse");
   revalidatePath("/members/directory/businesses");
+  revalidatePath("/members/matrimonial/browse");
 }

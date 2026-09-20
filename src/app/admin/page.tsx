@@ -28,8 +28,8 @@ export default async function AdminDashboardPage() {
       <section className="card">
         <h2>Administration</h2>
         <p className="muted">
-          Officials manager, members, directory approvals, news CMS, and
-          matrimonial review will attach here in later modules.
+          Officials manager, members, news CMS, and more will attach here in
+          later modules.
         </p>
         <ul className="member-dash-links">
           <li>
@@ -42,6 +42,9 @@ export default async function AdminDashboardPage() {
           </li>
           <li>
             <Link href="/admin/promotions">Promotion orders</Link>
+          </li>
+          <li>
+            <Link href="/admin/matrimonial">Matrimonial review inbox</Link>
           </li>
           <li>
             <Link href="/members">Member area</Link>
