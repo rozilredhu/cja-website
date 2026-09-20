@@ -1,14 +1,17 @@
 :root {
-  --cja-navy: #1a237e;
-  --cja-navy-light: #3949ab;
-  --cja-saffron: #e65100;
-  --cja-saffron-soft: #ff9800;
-  --cja-dark: #212121;
-  --cja-muted: #5f6368;
-  --cja-bg: #f7f8fb;
+  /* Palette from cjacanada.com (MDB primary-color + logo accents) */
+  --cja-navy: #4285f4; /* site navbar primary-color */
+  --cja-navy-light: #6ea8fe; /* lighter hover/tint */
+  --cja-navy-dark: #0d47a1; /* primary-color-dark / footer depth */
+  --cja-saffron: #f57c00; /* logo saffron/orange */
+  --cja-saffron-soft: #ffb74d;
+  --cja-green: #108000; /* logo green accent */
+  --cja-dark: #333333; /* custom.css label text */
+  --cja-muted: #6c757d;
+  --cja-bg: #f8f9fa;
   --cja-surface: #ffffff;
-  --cja-border: #e3e6ef;
-  --cja-shadow: 0 2px 8px rgba(26, 35, 126, 0.08);
+  --cja-border: #dee2e6;
+  --cja-shadow: 0 2px 8px rgba(66, 133, 244, 0.12);
   --cja-radius: 0.75rem;
   --header-h: 4rem;
   --max: 68rem;
@@ -221,7 +224,7 @@ img {
 }
 
 .site-footer {
-  background: #12184f;
+  background: #0d47a1;
   color: rgba(255, 255, 255, 0.88);
   padding: 2rem 1rem 1.25rem;
   margin-top: auto;
@@ -330,7 +333,7 @@ img {
     135deg,
     var(--cja-navy) 0%,
     var(--cja-navy-light) 55%,
-    #5c6bc0 100%
+    #5a9bf8 100%
   );
   color: #fff;
   border-radius: var(--cja-radius);
@@ -367,7 +370,7 @@ img {
 
 .home-grid a.card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(26, 35, 126, 0.12);
+  box-shadow: 0 6px 18px rgba(66, 133, 244, 0.12);
   color: inherit;
 }
 
@@ -428,7 +431,7 @@ img {
 
 .stack-form input:focus,
 .stack-form textarea:focus {
-  outline: 2px solid rgba(26, 35, 126, 0.35);
+  outline: 2px solid rgba(66, 133, 244, 0.35);
   border-color: var(--cja-navy-light);
 }
 
@@ -558,7 +561,7 @@ img {
   margin-left: 0.5rem;
   padding: 0.1rem 0.5rem;
   border-radius: 999px;
-  background: #e8eaf6;
+  background: #e3f2fd;
   color: var(--cja-navy);
   font-size: 0.75rem;
   font-weight: 600;
@@ -626,7 +629,7 @@ img {
 
 .official-photo {
   aspect-ratio: 4 / 3;
-  background: linear-gradient(145deg, #c5cae9, #e8eaf6);
+  background: linear-gradient(145deg, #bbdefb, #e3f2fd);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -711,7 +714,7 @@ img {
 
 .photo-placeholder {
   aspect-ratio: 16 / 10;
-  background: linear-gradient(135deg, #3949ab, #5c6bc0 40%, #ff9800);
+  background: linear-gradient(135deg, #6ea8fe, #5a9bf8 40%, #ff9800);
   color: #fff;
   display: flex;
   align-items: center;
@@ -829,7 +832,7 @@ img {
   justify-content: center;
   text-align: center;
   padding: 1rem;
-  background: #fafbff;
+  background: #f8fbff;
 }
 
 .draft-banner {
@@ -1018,7 +1021,7 @@ img {
 }
 
 .admin-table th {
-  background: #eef0f8;
+  background: #e8f0fe;
   color: var(--cja-navy);
 }
 
