@@ -1,7 +1,10 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/site-config";
+import { getEventSlugs } from "@/modules/public/events";
+import { getHeritageArticleSlugs } from "@/modules/public/heritage";
+import { getNewsSlugs } from "@/modules/public/news";
 
-const paths = [
+const staticPaths = [
   "/",
   "/about",
   "/contact",
@@ -11,6 +14,8 @@ const paths = [
   "/events",
   "/gallery",
   "/heritage",
+  "/heritage/timeline",
+  "/heritage/gallery",
   "/documents",
   "/social",
   "/volunteer",
@@ -20,10 +25,41 @@ const paths = [
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
-  return paths.map((path) => ({
+
+  const staticEntries = staticPaths.map((path) => ({
     url: `${siteConfig.url}${path === "/" ? "" : path}`,
     lastModified,
-    changeFrequency: path === "/" ? "weekly" : "monthly",
+    changeFrequency: (path === "/" ? "weekly" : "monthly") as
+      | "weekly"
+      | "monthly",
     priority: path === "/" ? 1 : 0.6,
   }));
+
+  const newsEntries = getNewsSlugs().map((slug) => ({
+    url: `${siteConfig.url}/news/${slug}`,
+    lastModified,
+    changeFrequency: "monthly" as const,
+    priority: 0.5,
+  }));
+
+  const eventEntries = getEventSlugs().map((slug) => ({
+    url: `${siteConfig.url}/events/${slug}`,
+    lastModified,
+    changeFrequency: "monthly" as const,
+    priority: 0.5,
+  }));
+
+  const heritageEntries = getHeritageArticleSlugs().map((slug) => ({
+    url: `${siteConfig.url}/heritage/articles/${slug}`,
+    lastModified,
+    changeFrequency: "monthly" as const,
+    priority: 0.4,
+  }));
+
+  return [
+    ...staticEntries,
+    ...newsEntries,
+    ...eventEntries,
+    ...heritageEntries,
+  ];
 }

@@ -1,19 +1,28 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/page-hero";
+import { galleryItems } from "@/content/gallery";
+import { GalleryGrid } from "@/modules/public/components/gallery-grid";
 
 export const metadata: Metadata = {
   title: "Photo & Video Gallery",
-  description: "Community photos and videos.",
+  description:
+    "Community photo placeholders and video embeds from CJA events.",
+  openGraph: {
+    title: "Photo & Video Gallery",
+    description: "CJA community photos and videos.",
+    url: "/gallery",
+  },
 };
 
-export default function Page() {
+export default function GalleryPage() {
   return (
     <>
-      <PageHero title={"Photo & Video Gallery"} description={"Community photos and videos."} />
-      <section className="card">
-        <p className="muted">Placeholder page for Phase 1 Foundation.</p>
-        <p className="stub-note">Gallery media on R2 comes later.</p>
-      </section>
+      <PageHero
+        eyebrow="Media"
+        title="Photo & Video Gallery"
+        description="Sample grid with photo placeholders and external video embeds. Real media will move to R2 in a later module."
+      />
+      <GalleryGrid items={galleryItems} />
     </>
   );
 }

@@ -1,6 +1,6 @@
 # Canadian Jats Association (CJA) Website
 
-**Phase 1 — Foundation (§3A)** on top of the Next.js + Cloudflare Workers skeleton.
+**Phase 1 — Public pages (§3B)** on top of Foundation (§3A).
 
 Repo: https://github.com/rozilredhu/cja-website
 
@@ -8,29 +8,41 @@ Repo: https://github.com/rozilredhu/cja-website
 
 - Next.js App Router + TypeScript
 - Cloudflare Workers via [`@opennextjs/cloudflare`](https://opennext.js.org/cloudflare)
-- **D1** (`DB`) — users + sessions
-- **R2** (`MEDIA`) — placeholder (enable R2 in the Cloudflare dashboard before using)
-- **Turnstile** — env placeholders; bypass when keys are missing
+- **D1** (`DB`) — users + sessions (Foundation only; no new tables in Public pages)
+- **R2** (`MEDIA`) — placeholder (enable R2 before using)
+- **Turnstile** — Contact + Volunteer forms
+- **File-based content** in `src/content/` (typed TS) until Admin CMS (§3G)
 
-## What’s in Foundation
+## What’s in this module (Public pages)
 
-- Public site shell (header / nav / footer), mobile-first, navy + saffron branding
-- Thin stub pages for About, Contact, Officials, News, Events, Gallery, Heritage, Documents, Social, Privacy, Terms, Volunteer, Past Executives
-- PWA basics: web manifest, icons, minimal service worker (`public/sw.js`)
-- SEO: per-page metadata, `sitemap.xml`, `robots.txt`, Open Graph, Organization JSON-LD on home
-- Turnstile client widget + server verify; wired to Contact + Volunteer stubs
-- Admin login separate from members (`/admin/login`), D1 sessions, server checks on `/admin`
-- Modular folders: `src/modules/auth`, `src/modules/admin`, `src/modules/turnstile`, `src/lib`
-- SQL migration: `migrations/0001_foundation.sql`
+- **Home** — hero, upcoming event banner, featured officials, latest news, social strip
+- **About CJA** — mission, vision, values, what we do
+- **Contact** — Turnstile form (Foundation) + contact aside
+- **Officials / Leadership** — data-driven responsive grid by category (sample Executives / Directors / Corporate Secretary; counts not hard-coded)
+- **Past Executives** — archived tenures grouped (e.g. 2022–2025, 2019–2022)
+- **Past Functions / Events** — list + `/events/[slug]` detail; optional Google Drive link field
+- **News & Announcements** — list + `/news/[slug]` articles (sample MD-style content in TS)
+- **Photo & Video Gallery** — sample photo grid + YouTube embed placeholders
+- **Jats Heritage** — landing, articles, timeline, gallery stubs
+- **Document Centre** — public documents only (sample links)
+- **Social** — X / Facebook placeholders + YouTube embed (**no Instagram**)
+- **Privacy Policy** & **Terms of Use** — readable drafts clearly marked for CJA counsel
+- **Volunteer** — Turnstile interest form retained
 
-## Sample admin (sample data only)
+## Schema changes
+
+**None — file-based content.** No new D1 migrations in this module. Foundation migration `0001_foundation.sql` unchanged.
+
+Content lives under `src/content/` and is read via `src/modules/public/`. A later Admin CMS can replace these modules with D1-backed editors without changing page routes.
+
+## Sample admin (from Foundation)
 
 | Field | Value |
 |-------|--------|
 | Email | `admin@example.com` |
 | Password | `SampleAdmin123!` |
 
-Change or disable this account before any real use. Never use real member data until CJA provides it.
+Sample officials / news / events use fictional names only. Never use real private member data until CJA provides it.
 
 ## Prerequisites
 
@@ -48,34 +60,11 @@ cp .dev.vars.example .dev.vars
 
 Do **not** commit real Turnstile keys or PATs.
 
-## D1 migrations
-
-Migrations live in `migrations/` and are referenced from `wrangler.jsonc` (`migrations_dir`).
-
-**Local (Miniflare / wrangler persist):**
-
-```bash
-npx wrangler d1 migrations apply cja-db --local
-```
-
-**Staging (remote):**
-
-```bash
-npx wrangler d1 migrations apply cja-website-db-staging --remote --env staging
-```
-
-After migrate, local preview / `next dev` (with OpenNext Cloudflare for Dev) can authenticate the sample admin.
-
 ## Local development
 
 ```bash
+npm run db:migrate:local   # Foundation tables for admin login
 npm run dev
-```
-
-Workers-style preview:
-
-```bash
-npm run preview
 ```
 
 ## Build
@@ -85,73 +74,43 @@ npm run build
 npm run build:worker
 ```
 
-## Turnstile behaviour
-
-- Set `TURNSTILE_SITE_KEY` + `TURNSTILE_SECRET_KEY` (Wrangler secrets or `.dev.vars`) to enable.
-- If keys are empty **or** `TURNSTILE_BYPASS=true`, forms accept submissions with a clear “not configured” notice (local/dev).
-- Never set bypass on production.
-
 ## Deploy staging only
 
-1. Ensure staging D1 exists and migrations are applied (see above).
-2. R2: enable R2 in the Cloudflare dashboard, then create `cja-website-media-staging` (or remove the R2 block from `env.staging` until ready).
-3. Optional Turnstile secrets:
-
-```bash
-npx wrangler secret put TURNSTILE_SITE_KEY --env staging
-npx wrangler secret put TURNSTILE_SECRET_KEY --env staging
-```
-
-4. Deploy:
-
-```bash
-npm run deploy:staging
-```
-
-**Do not deploy to production until explicitly approved.** Production Worker name / D1 IDs remain placeholders.
-
-### Staging deploy blocker (current Cloudflare account)
-
-Deploy build succeeds, but Wrangler cannot publish until a **workers.dev subdomain** is registered (or a custom route is configured):
-
-1. Open https://dash.cloudflare.com/982ff1b360633bdb369edc994c3ea4dd/workers/onboarding and register a workers.dev subdomain **or**
-2. Add a staging route / custom domain (e.g. `draft.cjacanada.ca`) in `wrangler.jsonc` for `env.staging` after DNS is ready.
-
-Then:
-
-```bash
-npm run db:migrate:staging   # already applied once for cja-website-db-staging
-npm run deploy:staging
-```
-
-R2 remains disabled on this account — MEDIA binding is omitted from wrangler until R2 is enabled in the dashboard.
-
-
 Staging Worker name: `cja-website-staging`  
-Intended staging host (later): `draft.cjacanada.ca`
+Intended host (later): `draft.cjacanada.ca`
 
-## Out of scope (this module)
+**Current blocker:** Cloudflare account still needs a **workers.dev subdomain** registered (or a custom staging route). Deploy build succeeds; publish fails until that is fixed. See Foundation README notes.
 
-- Full public CMS content, directory, matrimonial, Stripe, news editor, officials CRUD
-- Member register/login (stubs only under `/members/*`)
-- Production deploy / DNS changes
-- Real member data
+```bash
+npm run db:migrate:staging
+npm run deploy:staging
+```
+
+**Do not deploy to production until explicitly approved.**
 
 ## Module layout
 
 ```
 src/
-  app/                 # routes (public stubs + admin)
-  components/          # shell, forms, Turnstile, PWA register
-  lib/                 # db, env, site-config
+  app/                      # routes (public pages + admin + member stubs)
+  content/                  # typed sample content (officials, news, events, …)
+  components/               # shell, forms, Turnstile, PWA
+  lib/                      # db, env, site-config
   modules/
-    auth/              # password, session, roles, actions
-    admin/             # contact/volunteer stubs
-    turnstile/         # server verify
-migrations/            # D1 SQL
-public/icons/          # PWA icons
-public/sw.js           # offline shell cache
+    auth/                   # Foundation admin sessions
+    admin/                  # contact/volunteer actions
+    turnstile/              # server verify
+    public/                 # content helpers + public UI cards
+migrations/                 # D1 SQL (Foundation only so far)
 ```
+
+## Out of scope (do not build here)
+
+- Member directory, matrimonial, Stripe
+- Full admin CMS editors / officials CRUD UI
+- Member auth beyond existing stubs
+- Instagram
+- Production deploy / real member data
 
 ## License / ownership
 

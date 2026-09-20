@@ -1,19 +1,68 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PageHero } from "@/components/page-hero";
+import { OfficialCard } from "@/modules/public/components/official-card";
+import {
+  getActiveOfficials,
+  groupOfficialsByCategory,
+} from "@/modules/public/officials";
 
 export const metadata: Metadata = {
   title: "Officials / Leadership",
-  description: "Current executives, directors, and corporate secretary.",
+  description:
+    "Current executives, directors, and corporate secretary of the Canadian Jats Association.",
+  openGraph: {
+    title: "Officials / Leadership",
+    description: "Current CJA leadership team.",
+    url: "/officials",
+  },
 };
 
-export default function Page() {
+export default function OfficialsPage() {
+  const groups = groupOfficialsByCategory(getActiveOfficials());
+
   return (
     <>
-      <PageHero title={"Officials / Leadership"} description={"Current executives, directors, and corporate secretary."} />
+      <PageHero
+        eyebrow="Leadership"
+        title="Officials / Leadership"
+        description="Current CJA team. Categories and counts come from content data — admins can add or remove without code changes."
+      />
+
+      {groups.map((group) => (
+        <section
+          key={group.category}
+          className="section-block"
+          aria-labelledby={`cat-${slugify(group.category)}`}
+        >
+          <div className="section-head">
+            <h2 id={`cat-${slugify(group.category)}`}>
+              {group.category}
+              <span className="count-pill">{group.items.length}</span>
+            </h2>
+          </div>
+          <div className="officials-grid">
+            {group.items.map((o) => (
+              <OfficialCard key={o.id} official={o} />
+            ))}
+          </div>
+        </section>
+      ))}
+
       <section className="card">
-        <p className="muted">Placeholder page for Phase 1 Foundation.</p>
-        <p className="stub-note">Officials cards and admin CRUD ship in later modules.</p>
+        <p>
+          Looking for previous terms?{" "}
+          <Link href="/past-executives">View Past Executives</Link>
+        </p>
+        <p className="stub-note">
+          Sample names only — no real private contact details. Photos are
+          placeholders until R2 media uploads are enabled.
+        </p>
       </section>
     </>
   );
+}
+
+function slugify(value: string) {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 }

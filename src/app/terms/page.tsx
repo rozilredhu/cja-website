@@ -1,19 +1,28 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/page-hero";
+import { termsOfUse } from "@/content/legal";
+import { LegalDocView } from "@/modules/public/components/legal-doc-view";
 
 export const metadata: Metadata = {
   title: "Terms of Use",
-  description: "Terms governing use of this website.",
+  description:
+    "Draft terms of use for the Canadian Jats Association website — for counsel review.",
+  openGraph: {
+    title: "Terms of Use",
+    description: "Website terms of use (draft).",
+    url: "/terms",
+  },
 };
 
-export default function Page() {
+export default function TermsPage() {
   return (
     <>
-      <PageHero title={"Terms of Use"} description={"Terms governing use of this website."} />
-      <section className="card">
-        <p className="muted">Placeholder page for Phase 1 Foundation.</p>
-        <p className="stub-note">Legal copy to be provided by CJA.</p>
-      </section>
+      <PageHero
+        eyebrow="Legal"
+        title={termsOfUse.title}
+        description="Readable draft for CJA counsel. Not final legal terms."
+      />
+      <LegalDocView doc={termsOfUse} />
     </>
   );
 }
