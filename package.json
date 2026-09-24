@@ -14,7 +14,10 @@
     "upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
     "db:migrate:local": "wrangler d1 migrations apply cja-db --local",
-    "db:migrate:staging": "wrangler d1 migrations apply cja-website-db-staging --remote --env staging"
+    "db:migrate:staging": "wrangler d1 migrations apply cja-website-db-staging --remote --env staging",
+    "generate:hindu-calendar": "node scripts/generate-hindu-calendar.mjs",
+    "deploy:production": "opennextjs-cloudflare build && opennextjs-cloudflare deploy --env production",
+    "db:migrate:production": "wrangler d1 migrations apply cja-website-db-production --remote --env production"
   },
   "dependencies": {
     "@opennextjs/cloudflare": "^1.20.6",
@@ -32,5 +35,5 @@
     "typescript": "^5",
     "wrangler": "^4.135.0"
   },
-  "description": "Canadian Jats Association website — Phase 1 Admin tools module (Next.js on Cloudflare Workers)"
+  "description": "Canadian Jats Association website \u2014 Phase 1 Admin tools module (Next.js on Cloudflare Workers)"
 }

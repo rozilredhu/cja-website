@@ -31,6 +31,7 @@ export const navLinks: readonly NavLink[] = [
   { href: "/", label: "Home" },
   { href: "/officials", label: "Officials" },
   { href: "/news", label: "News" },
+  { href: "/hindu-calendar", label: "Calendar" },
   { href: "/gallery", label: "Gallery" },
   { href: "/heritage", label: "Heritage" },
   { href: "/documents", label: "Documents" },

@@ -12,6 +12,7 @@ const staticPaths = [
   "/past-executives",
   "/news",
   "/events",
+  "/hindu-calendar",
   "/gallery",
   "/heritage",
   "/heritage/timeline",
