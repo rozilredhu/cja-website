@@ -4,6 +4,7 @@ import type { Official } from "./types";
  * Leadership roster for public Officials page and homepage preview.
  * Executives 1–3 use names published on draft.cjacanada.ca; remaining seats
  * are explicit placeholders until CJA publishes names.
+ * Bio / term fields feed the expandable person cards on /officials.
  */
 export const officials: Official[] = [
   // —— Directors (3 placeholders) ——
@@ -14,7 +15,11 @@ export const officials: Official[] = [
     category: "Directors",
     displayOrder: 1,
     status: "active",
-    shortBio: "Placeholder — name to be confirmed by CJA.",
+    shortBio: "Bio coming soon.",
+    occupation: "TBD",
+    appointedAs: "Selected as Director",
+    termStart: "TBD",
+    termEnd: "TBD",
   },
   {
     id: "dir-02",
@@ -23,7 +28,11 @@ export const officials: Official[] = [
     category: "Directors",
     displayOrder: 2,
     status: "active",
-    shortBio: "Placeholder — name to be confirmed by CJA.",
+    shortBio: "Bio coming soon.",
+    occupation: "TBD",
+    appointedAs: "Selected as Director",
+    termStart: "TBD",
+    termEnd: "TBD",
   },
   {
     id: "dir-03",
@@ -32,7 +41,11 @@ export const officials: Official[] = [
     category: "Directors",
     displayOrder: 3,
     status: "active",
-    shortBio: "Placeholder — name to be confirmed by CJA.",
+    shortBio: "Bio coming soon.",
+    occupation: "TBD",
+    appointedAs: "Selected as Director",
+    termStart: "TBD",
+    termEnd: "TBD",
   },
 
   // —— Executives (3 real + 6 placeholders) ——
@@ -43,7 +56,12 @@ export const officials: Official[] = [
     category: "Executives",
     displayOrder: 1,
     status: "active",
-    shortBio: "Mississauga · 437-259-4035 (public on draft.cjacanada.ca).",
+    shortBio:
+      "Serves on the CJA executive team. Based in Mississauga. Contact publicly listed on draft.cjacanada.ca: 437-259-4035.",
+    occupation: "Mississauga",
+    appointedAs: "Selected as Executive Member",
+    termStart: "TBD",
+    termEnd: "TBD",
     photoUrl: "/images/members/sumitr.jpg",
   },
   {
@@ -53,7 +71,12 @@ export const officials: Official[] = [
     category: "Executives",
     displayOrder: 2,
     status: "active",
-    shortBio: "Brampton · 416-569-3442 (public on draft.cjacanada.ca).",
+    shortBio:
+      "Serves on the CJA executive team. Based in Brampton. Contact publicly listed on draft.cjacanada.ca: 416-569-3442.",
+    occupation: "Brampton",
+    appointedAs: "Selected as Executive Member",
+    termStart: "TBD",
+    termEnd: "TBD",
     photoUrl: "/images/members/subhashp.jpg",
   },
   {
@@ -63,7 +86,12 @@ export const officials: Official[] = [
     category: "Executives",
     displayOrder: 3,
     status: "active",
-    shortBio: "Mississauga · 647-231-4561 (public on draft.cjacanada.ca).",
+    shortBio:
+      "Serves on the CJA executive team. Based in Mississauga. Contact publicly listed on draft.cjacanada.ca: 647-231-4561.",
+    occupation: "Mississauga",
+    appointedAs: "Selected as Executive Member",
+    termStart: "TBD",
+    termEnd: "TBD",
     photoUrl: "/images/members/virenders.jpg",
   },
   {
@@ -73,7 +101,11 @@ export const officials: Official[] = [
     category: "Executives",
     displayOrder: 4,
     status: "active",
-    shortBio: "Placeholder — name to be confirmed by CJA.",
+    shortBio: "Bio coming soon.",
+    occupation: "TBD",
+    appointedAs: "Selected as Executive Member",
+    termStart: "TBD",
+    termEnd: "TBD",
   },
   {
     id: "ex-05",
@@ -82,7 +114,11 @@ export const officials: Official[] = [
     category: "Executives",
     displayOrder: 5,
     status: "active",
-    shortBio: "Placeholder — name to be confirmed by CJA.",
+    shortBio: "Bio coming soon.",
+    occupation: "TBD",
+    appointedAs: "Selected as Executive Member",
+    termStart: "TBD",
+    termEnd: "TBD",
   },
   {
     id: "ex-06",
@@ -91,7 +127,11 @@ export const officials: Official[] = [
     category: "Executives",
     displayOrder: 6,
     status: "active",
-    shortBio: "Placeholder — name to be confirmed by CJA.",
+    shortBio: "Bio coming soon.",
+    occupation: "TBD",
+    appointedAs: "Selected as Executive Member",
+    termStart: "TBD",
+    termEnd: "TBD",
   },
   {
     id: "ex-07",
@@ -100,7 +140,11 @@ export const officials: Official[] = [
     category: "Executives",
     displayOrder: 7,
     status: "active",
-    shortBio: "Placeholder — name to be confirmed by CJA.",
+    shortBio: "Bio coming soon.",
+    occupation: "TBD",
+    appointedAs: "Selected as Executive Member",
+    termStart: "TBD",
+    termEnd: "TBD",
   },
   {
     id: "ex-08",
@@ -109,7 +153,11 @@ export const officials: Official[] = [
     category: "Executives",
     displayOrder: 8,
     status: "active",
-    shortBio: "Placeholder — name to be confirmed by CJA.",
+    shortBio: "Bio coming soon.",
+    occupation: "TBD",
+    appointedAs: "Selected as Executive Member",
+    termStart: "TBD",
+    termEnd: "TBD",
   },
   {
     id: "ex-09",
@@ -118,7 +166,11 @@ export const officials: Official[] = [
     category: "Executives",
     displayOrder: 9,
     status: "active",
-    shortBio: "Placeholder — name to be confirmed by CJA.",
+    shortBio: "Bio coming soon.",
+    occupation: "TBD",
+    appointedAs: "Selected as Executive Member",
+    termStart: "TBD",
+    termEnd: "TBD",
   },
 
   // —— Corporate Secretary (1 placeholder) ——
@@ -129,7 +181,11 @@ export const officials: Official[] = [
     category: "Corporate Secretary",
     displayOrder: 1,
     status: "active",
-    shortBio: "Placeholder — name to be confirmed by CJA.",
+    shortBio: "Bio coming soon.",
+    occupation: "TBD",
+    appointedAs: "Appointed as Corporate Secretary",
+    termStart: "TBD",
+    termEnd: "TBD",
   },
 ];
 

@@ -12,7 +12,12 @@ export type Official = {
   displayOrder: number;
   status: OfficialStatus;
   photoUrl?: string | null;
+  /** Short biography shown in the expandable panel. */
   shortBio?: string;
+  /** Occupation or workplace, when known. */
+  occupation?: string;
+  /** How they were selected or appointed, e.g. "Selected as Director". */
+  appointedAs?: string;
   joinedAt?: string;
   termStart?: string;
   termEnd?: string;
@@ -76,9 +81,11 @@ export type PublicDocument = {
   title: string;
   description: string;
   category: string;
-  /** Placeholder href — sample PDFs or # until R2/CMS. */
+  /** Link to PDF, site page, or # until the file is published. */
   href: string;
   publishedAt: string;
+  /** When true, show as a Coming soon placeholder rather than a live download. */
+  comingSoon?: boolean;
 };
 
 export type LegalDoc = {

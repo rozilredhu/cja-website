@@ -13,6 +13,7 @@ function mapRow(row: OfficialRow): Official {
     status: row.status,
     photoUrl: row.photo_url,
     shortBio: row.short_bio ?? undefined,
+    // occupation / appointedAs live in file content until Admin CMS columns exist
     joinedAt: row.join_date ?? undefined,
     termStart: row.term_start ?? undefined,
     termEnd: row.term_end ?? undefined,
