@@ -1,6 +1,6 @@
 /**
  * Services Stripe helpers — one-time Checkout for listing plans.
- * When STRIPE_SECRET_KEY is set → real Checkout Session (USD).
+ * When STRIPE_SECRET_KEY is set → real Checkout Session (CAD).
  * Otherwise → stub mode (local pay buttons).
  *
  * Env (Workers secrets / .dev.vars — never commit):
@@ -123,10 +123,10 @@ export async function createServicesCheckout(input: {
     params.set("line_items[0][price]", priceId);
     params.set("line_items[0][quantity]", "1");
   } else {
-    params.set("line_items[0][price_data][currency]", "usd");
+    params.set("line_items[0][price_data][currency]", "cad");
     params.set(
       "line_items[0][price_data][unit_amount]",
-      String(plan.amountUsdCents),
+      String(plan.amountCadCents),
     );
     params.set(
       "line_items[0][price_data][product_data][name]",

@@ -114,7 +114,7 @@ export function ServicesBrowseFilters({
         </label>
 
         <label>
-          Min price (USD)
+          Min price (CAD)
           <input
             name="price_min"
             type="number"
@@ -126,7 +126,7 @@ export function ServicesBrowseFilters({
         </label>
 
         <label>
-          Max price (USD)
+          Max price (CAD)
           <input
             name="price_max"
             type="number"

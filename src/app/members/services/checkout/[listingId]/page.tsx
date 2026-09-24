@@ -11,7 +11,7 @@ import {
 } from "@/modules/services/actions";
 import {
   SERVICE_PLANS,
-  formatUsdCents,
+  formatCadCents,
   getPlanByTier,
 } from "@/modules/services/pricing";
 import { getOwnListing } from "@/modules/services/queries";
@@ -51,7 +51,7 @@ export default async function ServicesCheckoutPage({
         title="Services checkout"
         description={
           stripeReady
-            ? "Stripe Checkout — one-time USD payment for your listing period."
+            ? "Stripe Checkout — one-time CAD payment for your listing period."
             : "Stub checkout — no Stripe keys; demo pay sets pending_approval."
         }
         eyebrow="Members"
@@ -81,8 +81,8 @@ export default async function ServicesCheckoutPage({
             <dt>Plan</dt>
             <dd>
               {plan?.name ?? listing.plan_tier} —{" "}
-              {formatUsdCents(
-                listing.amount_cents ?? plan?.amountUsdCents ?? 0,
+              {formatCadCents(
+                listing.amount_cents ?? plan?.amountCadCents ?? 0,
               )}{" "}
               / {listing.duration_days ?? plan?.durationDays} days after
               approval
@@ -133,7 +133,7 @@ export default async function ServicesCheckoutPage({
               </p>
             ) : (
               <p className="muted">
-                Real Stripe Checkout will open for a one-time USD payment.
+                Real Stripe Checkout will open for a one-time CAD payment.
               </p>
             )}
 
@@ -149,7 +149,7 @@ export default async function ServicesCheckoutPage({
                 <div key={p.tier} className="card">
                   <h4>{p.name}</h4>
                   <p>
-                    <strong>{formatUsdCents(p.amountUsdCents)}</strong> USD
+                    <strong>{formatCadCents(p.amountCadCents)}</strong> CAD
                   </p>
                   <p className="muted">{p.description}</p>
                   {stripeReady ? (
@@ -165,7 +165,7 @@ export default async function ServicesCheckoutPage({
                       <input type="hidden" name="listing_id" value={listing.id} />
                       <input type="hidden" name="plan_tier" value={p.tier} />
                       <button type="submit" className="btn-saffron btn-small">
-                        Stub pay {formatUsdCents(p.amountUsdCents)}
+                        Stub pay {formatCadCents(p.amountCadCents)}
                       </button>
                     </form>
                   )}

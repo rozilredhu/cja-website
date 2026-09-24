@@ -101,7 +101,7 @@ npm run dev
 
 Public browse: `/services` (no login). Members manage listings at `/members/services`. Admin moderation: `/admin/services`.
 
-**Plans (USD one-time Checkout):** Monthly $10 (30d) · Quarterly $25 (90d) · Annual $90 (365d). Payment → `pending_approval` → admin approve → live for duration from `approved_at`.
+**Plans (CAD one-time Checkout):** Monthly $10 (30d) · Quarterly $25 (90d) · Annual $90 (365d). Payment → `pending_approval` → admin approve → live for duration from `approved_at`.
 
 Migration: `migrations/0007_services.sql`. Feature flag: `services`.
 

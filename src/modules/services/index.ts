@@ -1,7 +1,7 @@
 export {
   SERVICE_PLANS,
   getPlanByTier,
-  formatUsdCents,
+  formatCadCents,
   formatServicePrice,
 } from "./pricing";
 export type { ServicePlan } from "./pricing";

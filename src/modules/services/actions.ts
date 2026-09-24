@@ -73,7 +73,7 @@ export async function saveServiceListingAction(
   const contactEmail = str(formData, "contact_email") || null;
   const city = str(formData, "city");
   const province = str(formData, "province").toUpperCase();
-  // Form collects whole USD dollars; store as cents
+  // Form collects whole CAD dollars; store as cents
   const priceDollars = numOrNull(formData, "price_cents");
   const priceCents =
     priceDollars != null ? Math.round(priceDollars * 100) : null;
@@ -184,7 +184,7 @@ export async function saveServiceListingAction(
         lat,
         lng,
         plan.tier,
-        plan.amountUsdCents,
+        plan.amountCadCents,
         plan.durationDays,
         id,
         user.id,
@@ -224,7 +224,7 @@ export async function saveServiceListingAction(
       lat,
       lng,
       plan.tier,
-      plan.amountUsdCents,
+      plan.amountCadCents,
       plan.durationDays,
     )
     .run();
@@ -260,7 +260,7 @@ export async function startServicesCheckoutAction(
   if (planTierOverride && getPlanByTier(planTierOverride)) {
     const plan = getPlanByTier(planTierOverride)!;
     planTier = plan.tier;
-    amount = plan.amountUsdCents;
+    amount = plan.amountCadCents;
     duration = plan.durationDays;
     const db = await getDb();
     await db
@@ -270,7 +270,7 @@ export async function startServicesCheckoutAction(
           status = 'pending_payment', updated_at = datetime('now')
          WHERE id = ? AND user_id = ?`,
       )
-      .bind(plan.tier, plan.amountUsdCents, plan.durationDays, listingId, user.id)
+      .bind(plan.tier, plan.amountCadCents, plan.durationDays, listingId, user.id)
       .run();
   }
 
@@ -353,7 +353,7 @@ export async function stubPayServiceListingAction(
     )
     .bind(
       plan.tier,
-      plan.amountUsdCents,
+      plan.amountCadCents,
       plan.durationDays,
       providerRef,
       paidAt,
@@ -406,7 +406,7 @@ export async function markListingPaidFromStripe(input: {
       input.sessionId,
       paidAt,
       plan?.tier ?? null,
-      plan?.amountUsdCents ?? null,
+      plan?.amountCadCents ?? null,
       plan?.durationDays ?? null,
       input.listingId,
     )

@@ -10,7 +10,7 @@ import {
   deleteOwnPendingListingAction,
 } from "@/modules/services/actions";
 import { ServiceListingForm } from "@/modules/services/components/listing-form";
-import { formatUsdCents } from "@/modules/services/pricing";
+import { formatCadCents } from "@/modules/services/pricing";
 import {
   listCategories,
   listOwnListings,
@@ -38,7 +38,7 @@ export default async function MemberServicesPage() {
     <>
       <PageHero
         title="My service listings"
-        description="Create a listing, pay ($10 / $25 / $90 USD), then wait for admin approval before it goes live."
+        description="Create a listing, pay ($10 / $25 / $90 CAD), then wait for admin approval before it goes live."
         eyebrow="Members"
       />
 
@@ -83,7 +83,7 @@ export default async function MemberServicesPage() {
                     <td>
                       {l.plan_tier ?? "—"}
                       {l.amount_cents != null
-                        ? ` (${formatUsdCents(l.amount_cents)})`
+                        ? ` (${formatCadCents(l.amount_cents)})`
                         : ""}
                     </td>
                     <td>{l.status}</td>

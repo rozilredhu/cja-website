@@ -2,7 +2,7 @@
 
 import { useActionState } from "react";
 import { saveServiceListingAction } from "../actions";
-import { SERVICE_PLANS, formatUsdCents } from "../pricing";
+import { SERVICE_PLANS, formatCadCents } from "../pricing";
 import {
   CA_PROVINCES,
   SERVICE_AVAILABILITY_OPTIONS,
@@ -106,7 +106,7 @@ export function ServiceListingForm({ categories, initial }: Props) {
       </label>
 
       <label>
-        Service price (USD, whole dollars — optional)
+        Service price (CAD, whole dollars — optional)
         <input
           name="price_cents"
           type="number"
@@ -195,7 +195,7 @@ export function ServiceListingForm({ categories, initial }: Props) {
 
       {!lockedPlan ? (
         <fieldset>
-          <legend>Listing plan (USD one-time)</legend>
+          <legend>Listing plan (CAD one-time)</legend>
           <p className="muted">
             Payment moves your listing to <strong>pending approval</strong>. It
             goes live only after an admin approves (within 24h target). Duration
@@ -213,7 +213,7 @@ export function ServiceListingForm({ categories, initial }: Props) {
                 }
               />
               <span>
-                <strong>{p.name}</strong> — {formatUsdCents(p.amountUsdCents)}{" "}
+                <strong>{p.name}</strong> — {formatCadCents(p.amountCadCents)}{" "}
                 / {p.durationDays} days after approval
                 <br />
                 <span className="muted">{p.description}</span>

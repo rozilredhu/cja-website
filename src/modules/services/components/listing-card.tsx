@@ -1,7 +1,7 @@
 import Link from "next/link";
 import {
   formatServicePrice,
-  formatUsdCents,
+  formatCadCents,
 } from "../pricing";
 import {
   SERVICE_AVAILABILITY_OPTIONS,
@@ -72,7 +72,7 @@ export function ServiceListingCard({ listing, distanceKm }: Props) {
       <p className="muted" style={{ marginTop: "0.5rem", fontSize: "0.85rem" }}>
         Plan: {listing.plan_tier ?? "—"}
         {listing.amount_cents != null
-          ? ` (${formatUsdCents(listing.amount_cents)} listing fee)`
+          ? ` (${formatCadCents(listing.amount_cents)} listing fee)`
           : ""}
       </p>
       <p style={{ marginTop: "0.5rem" }}>

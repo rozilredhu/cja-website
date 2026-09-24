@@ -79,7 +79,7 @@ export default async function ServicesPage({ searchParams }: Props) {
     <>
       <PageHero
         title="Services marketplace"
-        description="Find community providers across Canada. Browse is public — providers need a member account to list ($10 / $25 / $90 USD plans)."
+        description="Find community providers across Canada. Browse is public — providers need a member account to list ($10 / $25 / $90 CAD plans)."
         eyebrow="Community"
       />
 

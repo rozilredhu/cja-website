@@ -8,7 +8,7 @@ import {
   adminDisableServiceListingAction,
   adminReviewServiceListingAction,
 } from "@/modules/services/actions";
-import { formatUsdCents } from "@/modules/services/pricing";
+import { formatCadCents } from "@/modules/services/pricing";
 import {
   adminListLive,
   adminListPending,
@@ -100,7 +100,7 @@ export default async function AdminServicesPage() {
                         <br />
                         <span className="muted">
                           {p.amount_cents != null
-                            ? formatUsdCents(p.amount_cents)
+                            ? formatCadCents(p.amount_cents)
                             : "—"}{" "}
                           / {p.duration_days}d
                         </span>
