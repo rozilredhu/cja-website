@@ -125,10 +125,37 @@ function NavItem({
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [openSub, setOpenSub] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
   const closeMobile = useCallback(() => {
     setOpen(false);
     setOpenSub(null);
   }, []);
+
+  useEffect(() => {
+    const threshold = 24;
+    let ticking = false;
+
+    function update() {
+      const next = window.scrollY > threshold;
+      setScrolled((prev) => (prev === next ? prev : next));
+      ticking = false;
+    }
+
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(update);
+    }
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    document.body.classList.toggle("header-compact", scrolled);
+    return () => document.body.classList.remove("header-compact");
+  }, [scrolled]);
 
   useEffect(() => {
     if (!open && !openSub) return;
@@ -151,7 +178,7 @@ export function SiteHeader() {
   }, [open, openSub]);
 
   return (
-    <header className="site-header">
+    <header className={`site-header${scrolled ? " is-scrolled" : ""}`}>
       <div className="site-header-inner">
         <Link
           href="/"
