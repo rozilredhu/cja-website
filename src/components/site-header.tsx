@@ -65,24 +65,43 @@ function NavItem({
       }}
     >
       <div className="nav-item-row">
-        <Link href={link.href} onClick={closeMobile}>
-          {link.label}
-        </Link>
-        <button
-          type="button"
-          className="nav-sub-toggle"
-          data-nav-sub-trigger
-          aria-expanded={isExpanded}
-          aria-haspopup="true"
-          aria-controls={subId}
-          aria-label={`${link.label} submenu`}
-          onClick={(event) => {
-            event.preventDefault();
-            setOpenSub(isExpanded ? null : link.href);
-          }}
-        >
-          <span aria-hidden>{isExpanded ? "▴" : "▾"}</span>
-        </button>
+        {link.menuOnly ? (
+          <button
+            type="button"
+            className="nav-parent-label"
+            data-nav-sub-trigger
+            aria-expanded={isExpanded}
+            aria-haspopup="true"
+            aria-controls={subId}
+            onClick={() => setOpenSub(isExpanded ? null : link.href)}
+          >
+            {link.label}
+            <span aria-hidden className="nav-chevron">
+              {isExpanded ? "▴" : "▾"}
+            </span>
+          </button>
+        ) : (
+          <>
+            <Link href={link.href} onClick={closeMobile}>
+              {link.label}
+            </Link>
+            <button
+              type="button"
+              className="nav-sub-toggle"
+              data-nav-sub-trigger
+              aria-expanded={isExpanded}
+              aria-haspopup="true"
+              aria-controls={subId}
+              aria-label={`${link.label} submenu`}
+              onClick={(event) => {
+                event.preventDefault();
+                setOpenSub(isExpanded ? null : link.href);
+              }}
+            >
+              <span aria-hidden>{isExpanded ? "▴" : "▾"}</span>
+            </button>
+          </>
+        )}
       </div>
       <ul id={subId} className="nav-sub" role="list">
         {link.children!.map((child) => (

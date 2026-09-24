@@ -193,8 +193,36 @@ img {
   gap: 0.15rem;
 }
 
-.nav-item-row > a {
+.nav-item-row > a,
+.nav-item-row > .nav-parent-label {
   flex: 1;
+}
+
+.nav-parent-label {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.55rem 0.4rem;
+  border-radius: 0.4rem;
+  font: inherit;
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.nav-parent-label:hover,
+.nav-parent-label:focus-visible {
+  background: rgba(255, 255, 255, 0.1);
+  outline: none;
+}
+
+.nav-chevron {
+  font-size: 0.75rem;
+  line-height: 1;
 }
 
 .nav-sub-toggle {
@@ -216,7 +244,8 @@ img {
   outline: none;
 }
 
-.nav-sub {
+/* Higher specificity than `.primary-nav ul { display: flex }` so closed submenus stay hidden. */
+.primary-nav .nav-sub {
   list-style: none;
   margin: 0 0 0.15rem 0.75rem;
   padding: 0;
@@ -225,7 +254,7 @@ img {
   gap: 0.05rem;
 }
 
-.nav-item-has-children.is-sub-open > .nav-sub {
+.primary-nav .nav-item-has-children.is-sub-open > .nav-sub {
   display: flex;
 }
 
@@ -248,7 +277,12 @@ img {
     padding: 0.3rem 0.35rem;
   }
 
-  .nav-sub {
+  .nav-parent-label {
+    padding: 0.4rem 0.55rem;
+    font-size: 0.88rem;
+  }
+
+  .primary-nav .nav-sub {
     position: absolute;
     top: 100%;
     left: 0;
@@ -264,8 +298,8 @@ img {
   }
 
   /* Hover for pointer; is-sub-open for keyboard / mobile (Escape clears class). */
-  .nav-item-has-children:hover > .nav-sub,
-  .nav-item-has-children.is-sub-open > .nav-sub {
+  .primary-nav .nav-item-has-children:hover > .nav-sub,
+  .primary-nav .nav-item-has-children.is-sub-open > .nav-sub {
     display: flex;
   }
 }

@@ -24,17 +24,14 @@ export const siteConfig = {
 export type NavLink = {
   href: string;
   label: string;
+  /** Parent is a submenu trigger only (no destination page). */
+  menuOnly?: boolean;
   children?: readonly { href: string; label: string }[];
 };
 
-/** Primary top nav — Events / Volunteer removed from header (pages remain reachable). About CJA dropdown includes Our Socials. */
+/** Primary top nav — slim bar (~7 items + Login). Officials/Calendar/Gallery removed from top-level (pages remain reachable). */
 export const navLinks: readonly NavLink[] = [
   { href: "/", label: "Home" },
-  { href: "/officials", label: "Officials" },
-  { href: "/news", label: "News" },
-  { href: "/hindu-calendar", label: "Calendar" },
-  { href: "/gallery", label: "Gallery" },
-  { href: "/heritage", label: "Heritage" },
   {
     href: "/about",
     label: "About CJA",
@@ -43,6 +40,18 @@ export const navLinks: readonly NavLink[] = [
       { href: "/social", label: "Our Socials" },
     ],
   },
+  { href: "/services", label: "Services" },
+  { href: "/heritage", label: "Heritage" },
+  {
+    href: "#media",
+    label: "Media",
+    menuOnly: true,
+    children: [
+      { href: "/hindu-calendar", label: "Calendar" },
+      { href: "/gallery", label: "Gallery" },
+    ],
+  },
+  { href: "/news", label: "News" },
   { href: "/contact", label: "Contact" },
   { href: "/members/login", label: "Login" },
 ] as const;
