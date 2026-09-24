@@ -1,17 +1,21 @@
 :root {
-  /* Palette from cjacanada.com (MDB primary-color + logo accents) */
-  --cja-navy: #4285f4; /* site navbar primary-color */
-  --cja-navy-light: #6ea8fe; /* lighter hover/tint */
-  --cja-navy-dark: #0d47a1; /* primary-color-dark / footer depth */
-  --cja-saffron: #f57c00; /* logo saffron/orange */
-  --cja-saffron-soft: #ffb74d;
-  --cja-green: #108000; /* logo green accent */
-  --cja-dark: #333333; /* custom.css label text */
-  --cja-muted: #6c757d;
-  --cja-bg: #f8f9fa;
-  --cja-surface: #ffffff;
-  --cja-border: #dee2e6;
-  --cja-shadow: 0 2px 8px rgba(66, 133, 244, 0.12);
+  /* Palette from CJA logo pack */
+  --cja-red: #E31937; /* Canada red */
+  --cja-green: #138808; /* India green */
+  --cja-saffron: #FF9933; /* India saffron */
+  --cja-saffron-soft: #ffb866;
+  --cja-ashoka: #000080; /* Ashoka blue */
+  --cja-navy: #0b1f3a; /* deep royal navy */
+  --cja-navy-light: #1a3a5c;
+  --cja-navy-dark: #071526;
+  --cja-gold: #d4a017; /* subtle gold hairline accent */
+  --cja-dark: #1a1a1a;
+  --cja-muted: #5c6570;
+  --cja-bg: #f7f4ef; /* cream / off-white page body */
+  --cja-surface: rgba(255, 255, 255, 0.72);
+  --cja-surface-solid: #ffffff;
+  --cja-border: rgba(11, 31, 58, 0.1);
+  --cja-shadow: 0 2px 12px rgba(11, 31, 58, 0.08);
   --cja-radius: 0.75rem;
   --header-h: 4rem;
   --max: 68rem;
@@ -48,12 +52,12 @@ body {
 }
 
 a {
-  color: var(--cja-navy);
+  color: var(--cja-ashoka);
   text-decoration: none;
 }
 
 a:hover {
-  color: var(--cja-saffron);
+  color: var(--cja-red);
 }
 
 img {
@@ -78,9 +82,12 @@ img {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: var(--cja-navy);
+  background: rgba(11, 31, 58, 0.78);
   color: #fff;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 16px rgba(7, 21, 38, 0.28);
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  border-bottom: 1px solid rgba(212, 160, 23, 0.35);
 }
 
 .site-header-inner {
@@ -108,7 +115,7 @@ img {
 .brand-logo {
   display: block;
   width: auto;
-  height: 2.6rem;
+  height: 2.85rem;
   object-fit: contain;
 }
 
@@ -125,20 +132,10 @@ img {
   object-fit: contain;
 }
 
-.brand-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.15;
-}
-
-.brand-text strong {
-  font-size: 1.05rem;
-}
-
+/* Brand wordmark removed from header — logo mark + sr-only name only */
+.brand-text,
 .brand-sub {
-  font-size: 0.7rem;
-  opacity: 0.85;
-  font-weight: 400;
+  display: none;
 }
 
 .nav-toggle {
@@ -158,8 +155,10 @@ img {
   left: 0;
   right: 0;
   top: 100%;
-  background: var(--cja-navy);
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(11, 31, 58, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(212, 160, 23, 0.28);
   padding: 0.5rem 1rem 1rem;
 }
 
@@ -216,10 +215,11 @@ img {
     min-width: 10.5rem;
     margin: 0;
     padding: 0.35rem;
-    background: var(--cja-navy);
-    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(11, 31, 58, 0.96);
+    border: 1px solid rgba(212, 160, 23, 0.28);
     border-radius: 0.45rem;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(10px);
     z-index: 40;
   }
 
@@ -272,10 +272,11 @@ img {
 }
 
 .site-footer {
-  background: #0d47a1;
+  background: linear-gradient(180deg, var(--cja-navy) 0%, var(--cja-navy-dark) 100%);
   color: rgba(255, 255, 255, 0.88);
   padding: 2rem 1rem 1.25rem;
   margin-top: auto;
+  border-top: 1px solid rgba(212, 160, 23, 0.32);
 }
 
 .site-footer a {
@@ -413,6 +414,12 @@ img {
   border-radius: var(--cja-radius);
   box-shadow: var(--cja-shadow);
   padding: 1.25rem 1.35rem;
+  backdrop-filter: blur(10px) saturate(1.15);
+  -webkit-backdrop-filter: blur(10px) saturate(1.15);
+  border-top: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow:
+    var(--cja-shadow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
 }
 
 .card + .card {
@@ -430,14 +437,15 @@ img {
 }
 
 .home-hero {
-  /* Option A: Unsplash Canada landscape (photo-1503614472) + semi-transparent brand blue */
+  /* Canada landscape + royal navy / saffron glass wash */
   background-color: var(--cja-navy-dark);
   background-image:
     linear-gradient(
       135deg,
-      rgba(13, 71, 161, 0.78) 0%,
-      rgba(66, 133, 244, 0.72) 55%,
-      rgba(110, 168, 254, 0.68) 100%
+      rgba(7, 21, 38, 0.82) 0%,
+      rgba(11, 31, 58, 0.72) 45%,
+      rgba(227, 25, 55, 0.28) 78%,
+      rgba(255, 153, 51, 0.22) 100%
     ),
     url("/images/hero-canada-unsplash.jpg");
   background-size: cover;
@@ -447,6 +455,7 @@ img {
   padding: 2.25rem 1.5rem;
   margin-bottom: 1.5rem;
   box-shadow: var(--cja-shadow);
+  border: 1px solid rgba(212, 160, 23, 0.28);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
 }
 
@@ -479,14 +488,14 @@ img {
 
 .home-grid a.card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(66, 133, 244, 0.12);
+  box-shadow: 0 6px 18px rgba(11, 31, 58, 0.12);
   color: inherit;
 }
 
 .btn-primary {
   appearance: none;
   border: 0;
-  background: var(--cja-navy);
+  background: var(--cja-red);
   color: #fff;
   font: inherit;
   font-weight: 600;
@@ -496,7 +505,7 @@ img {
 }
 
 .btn-primary:hover:not(:disabled) {
-  background: var(--cja-navy-light);
+  background: #c4142f;
 }
 
 .btn-primary:disabled {
@@ -540,7 +549,7 @@ img {
 
 .stack-form input:focus,
 .stack-form textarea:focus {
-  outline: 2px solid rgba(66, 133, 244, 0.35);
+  outline: 2px solid rgba(227, 25, 55, 0.4);
   border-color: var(--cja-navy-light);
 }
 
@@ -1076,7 +1085,7 @@ img {
 
 .photo-placeholder {
   aspect-ratio: 16 / 10;
-  background: linear-gradient(135deg, #6ea8fe, #5a9bf8 40%, #ff9800);
+  background: linear-gradient(135deg, var(--cja-navy-light), var(--cja-red) 45%, var(--cja-saffron));
   color: #fff;
   display: flex;
   align-items: center;
@@ -1620,8 +1629,8 @@ img {
   font-weight: 700;
   padding: 0.15rem 0.55rem;
   border-radius: 999px;
-  background: #e3f2fd;
-  color: #0d47a1;
+  background: rgba(0, 0, 128, 0.08);
+  color: var(--cja-ashoka);
   letter-spacing: 0.02em;
 }
 
@@ -1708,8 +1717,8 @@ img {
 
 /* ----- Motion / hover (inspired by draft.rozilredhu.ca) ----- */
 :root {
-  --cja-shadow-hover: 0 14px 28px rgba(66, 133, 244, 0.16),
-    0 6px 14px rgba(13, 71, 161, 0.1);
+  --cja-shadow-hover: 0 14px 28px rgba(11, 31, 58, 0.14),
+    0 6px 14px rgba(227, 25, 55, 0.08);
   --cja-ease-ui: 180ms ease;
 }
 
@@ -1816,9 +1825,9 @@ img {
   justify-content: center;
   gap: 0.45rem;
   background: #fff;
-  border: 1px solid rgba(13, 71, 161, 0.08);
+  border: 1px solid rgba(11, 31, 58, 0.08);
   border-radius: 0.45rem;
-  box-shadow: 0 2px 8px rgba(13, 71, 161, 0.06);
+  box-shadow: 0 2px 8px rgba(11, 31, 58, 0.06);
   padding: 0.55rem 0.65rem 0.7rem;
   min-height: 100%;
   transition:
@@ -2246,4 +2255,46 @@ img {
   .hindu-cal-toolbar .btn-secondary {
     flex: 1;
   }
+}
+
+
+/* ----- Royal glass accents (logo palette) ----- */
+.preview-card,
+.calendar-preview-card,
+.official-card,
+.sponsor-card,
+.section-block > .card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px) saturate(1.2);
+  -webkit-backdrop-filter: blur(12px) saturate(1.2);
+  border: 1px solid rgba(11, 31, 58, 0.08);
+  box-shadow:
+    0 4px 18px rgba(11, 31, 58, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  position: relative;
+}
+
+.preview-card::before,
+.calendar-preview-card::before,
+.section-block > .card::before {
+  content: "";
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(212, 160, 23, 0.55),
+    rgba(255, 153, 51, 0.45),
+    transparent
+  );
+  pointer-events: none;
+}
+
+.page-hero h1,
+.card h2,
+.section-head h2 {
+  color: var(--cja-navy);
 }

@@ -11,7 +11,12 @@ export function SiteHeader() {
   return (
     <header className="site-header">
       <div className="site-header-inner">
-        <Link href="/" className="brand" onClick={() => setOpen(false)}>
+        <Link
+          href="/"
+          className="brand"
+          aria-label={siteConfig.name}
+          onClick={() => setOpen(false)}
+        >
           <Image
             src="/images/brand/CJA_Icon.svg"
             alt=""
@@ -21,10 +26,7 @@ export function SiteHeader() {
             priority
             unoptimized
           />
-          <span className="brand-text">
-            <strong>{siteConfig.shortName}</strong>
-            <span className="brand-sub">Canadian Jats Association</span>
-          </span>
+          <span className="sr-only">{siteConfig.name}</span>
         </Link>
 
         <button

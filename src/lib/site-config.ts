@@ -11,8 +11,8 @@ export const siteConfig = {
   email: "info@cjacanada.com",
   /** Mailing address from cjacanada.com contact panel */
   address: "230-2980 Drew Rd, Mississauga ON L4T0A7, Canada",
-  themeColor: "#4285f4",
-  backgroundColor: "#ffffff",
+  themeColor: "#0b1f3a",
+  backgroundColor: "#f7f4ef",
   social: {
     facebook: "https://www.facebook.com/p/Canadian-Jats-Association-61576962496974/",
     instagram: "https://www.instagram.com/cjacanadaofficial/",

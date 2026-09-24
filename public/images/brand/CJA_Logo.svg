@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" role="img" aria-label="Canadian Jats Association">
   <title>Canadian Jats Association</title>
-  <!-- Colors: Canada red, India green, India saffron, Ashoka blue -->
+  <!-- Colors: Canada red #E31937, India green #138808, saffron #FF9933, Ashoka blue #000080 -->
+  <!-- Counters are true cut-outs (transparent), not white fills. -->
   <defs>
-    <!-- Simple 11-point maple leaf -->
     <g id="maple">
       <path fill="#E31937" d="M0,-36
         C3,-28 8,-22 10,-14
@@ -17,9 +17,7 @@
         L-10,-14 C-8,-22 -3,-28 0,-36 Z
         M-3,28 L0,46 L3,28 Z"/>
     </g>
-    <!-- Ashoka Chakra-style 24-spoke wheel -->
     <g id="chakra">
-      <circle cx="0" cy="0" r="28" fill="#FFFFFF"/>
       <circle cx="0" cy="0" r="24" fill="none" stroke="#000080" stroke-width="2.4"/>
       <circle cx="0" cy="0" r="5.2" fill="#000080"/>
       <g stroke="#000080" stroke-width="1.35" stroke-linecap="round">
@@ -35,17 +33,11 @@
       </g>
     </g>
   </defs>
-
-  <!-- Letters -->
   <g transform="translate(400, 210)">
-    <!-- C -->
     <g transform="translate(-230,0)">
-      <circle cx="8" cy="0" r="92" fill="#E31937"/>
-      <circle cx="8" cy="0" r="54" fill="#FFFFFF"/>
-      <rect x="30" y="-40" width="80" height="80" fill="#FFFFFF"/>
+      <path fill="#E31937" d="M69.560,-68.369 A92,92 0 1 0 69.560,68.369 L44.133,40.130 A54,54 0 1 1 44.133,-40.130 Z"/>
       <use href="#maple" transform="translate(4,4) scale(1.15)"/>
     </g>
-    <!-- J -->
     <g transform="translate(-20,0)">
       <path fill="#138808" d="M-28,-92 H28 V48
         C28,78 8,96 -28,96
@@ -55,15 +47,11 @@
         C-10,74 4,64 4,48
         V-92 Z"/>
     </g>
-    <!-- A -->
     <g transform="translate(210,0)">
-      <path fill="#FF9933" d="M0,-96 L96,96 H52 L38,64 H-38 L-52,96 H-96 Z
-        M0,-28 L-24,36 H24 Z"/>
+      <path fill="#FF9933" fill-rule="evenodd" d="M0,-96 L96,96 H52 L38,64 H-38 L-52,96 H-96 Z M0,-28 L-24,36 H24 Z"/>
       <use href="#chakra" transform="translate(0,8) scale(1.05)"/>
     </g>
   </g>
-
-  <!-- Wordmark -->
   <g fill="#111111" font-family="Arial, Helvetica, 'Noto Sans', sans-serif" font-weight="700" text-anchor="middle">
     <text x="400" y="400" font-size="36" letter-spacing="4">CANADIAN JATS</text>
     <text x="400" y="452" font-size="36" letter-spacing="6">ASSOCIATION</text>
