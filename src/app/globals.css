@@ -642,6 +642,56 @@ img {
   font-size: clamp(1rem, 2.2vw, 1.15rem);
 }
 
+.about-hero {
+  /* Full-bleed About hero — CJA Diwali Party 2022 family/gathering (cjacanada.com → Drive)
+     Photo: public/images/hero-cja-about-gathering.jpg
+     Source folder: https://drive.google.com/drive/folders/1Lqqov40YI1fn5edZ6iMyYbHglBmWUUFh
+     File: NisargMedia14.jpg (https://drive.google.com/file/d/13jfsMjGcAqai8XtGQePFnZuzlC25l85c)
+     Different from homepage hero (NisargMedia1.jpg). */
+  position: relative;
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  margin-top: -1.5rem;
+  margin-bottom: 1.75rem;
+  min-height: clamp(18rem, 48vh, 32rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding:
+    clamp(2.75rem, 8vh, 5.5rem)
+    max(1.25rem, calc((100vw - var(--max)) / 2 + 1rem));
+  background-color: var(--cja-navy-dark);
+  background-image:
+    linear-gradient(
+      135deg,
+      rgba(7, 21, 38, 0.82) 0%,
+      rgba(11, 31, 58, 0.72) 38%,
+      rgba(26, 58, 110, 0.62) 72%,
+      rgba(11, 31, 58, 0.7) 100%
+    ),
+    url("/images/hero-cja-about-gathering.jpg");
+  background-size: cover;
+  background-position: center 35%;
+  background-repeat: no-repeat;
+  color: #fff;
+  border-radius: 0;
+  box-shadow: none;
+  border: 0;
+  border-bottom: 1px solid rgba(212, 160, 23, 0.35);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55);
+}
+
+.about-hero h1 {
+  font-size: clamp(1.65rem, 4.5vw, 2.65rem);
+  margin: 0;
+  max-width: 22ch;
+  line-height: 1.2;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
+}
+
 .home-grid {
   display: grid;
   gap: 1rem;
@@ -2108,6 +2158,7 @@ img {
 .section-block,
 .event-banner,
 .home-hero,
+.about-hero,
 .social-strip {
   animation: cja-section-appear 0.45s ease both;
 }
@@ -2229,6 +2280,7 @@ img {
   .section-block,
   .event-banner,
   .home-hero,
+  .about-hero,
   .social-strip {
     animation: none;
   }

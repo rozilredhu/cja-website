@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { PageHero } from "@/components/page-hero";
 import { aboutContent } from "@/content/about";
 import { publicDocuments } from "@/content/documents";
 
@@ -21,11 +20,9 @@ export default function AboutPage() {
 
   return (
     <>
-      <PageHero
-        eyebrow="About Us"
-        title="About CJA"
-        description={aboutContent.lede}
-      />
+      <section className="about-hero" aria-label="About CJA">
+        <h1>About CJA — Serving Jaat families across Canada since 2006</h1>
+      </section>
 
       <section className="card" aria-labelledby="about-cja">
         <h2 id="about-cja">Who we are</h2>
