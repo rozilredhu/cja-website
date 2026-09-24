@@ -5,7 +5,7 @@ export const homeContent = {
   heroTitle: "Connecting Jat families across Canada",
   heroBody:
     "A non-for-profit for the Jat community in Canada — networking, newcomer support, and cultural celebrations including Holi and Diwali. Formed in 2006; based in the Greater Toronto Area.",
-  heroCtas: [],
+  heroCtas: [] as { href: string; label: string }[],
   /** Homepage About teaser — mission + short vision cue from aboutContent */
   aboutPreview: {
     title: "About CJA",
