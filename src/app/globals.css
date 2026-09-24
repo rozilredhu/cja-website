@@ -692,6 +692,81 @@ img {
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
 }
 
+/* Contact page band — banquet welcoming scene (cjacanada.com gallery → Drive)
+   Photo: public/images/contact-cja-banquet.jpg
+   Source folder: https://drive.google.com/drive/folders/1Lqqov40YI1fn5edZ6iMyYbHglBmWUUFh
+   File: NisargMedia2.jpg (https://drive.google.com/file/d/1snv3GZRAPa7oxthyV-XfJKYcpmjTuL1S)
+   Different from homepage hero (NisargMedia1), About (NisargMedia14), Follow CJA (NisargMedia28). */
+.contact-section {
+  position: relative;
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  margin-top: -1.5rem;
+  margin-bottom: 1.25rem;
+  padding:
+    clamp(2.25rem, 6vh, 3.75rem)
+    max(1.25rem, calc((100vw - var(--max)) / 2 + 1rem))
+    clamp(1.75rem, 4vh, 2.75rem);
+  background-color: var(--cja-navy-dark);
+  background-image:
+    linear-gradient(
+      145deg,
+      rgba(7, 21, 38, 0.78) 0%,
+      rgba(11, 31, 58, 0.7) 40%,
+      rgba(11, 31, 58, 0.62) 70%,
+      rgba(7, 21, 38, 0.74) 100%
+    ),
+    url("/images/contact-cja-banquet.jpg");
+  background-size: cover;
+  background-position: center 42%;
+  background-repeat: no-repeat;
+  color: #fff;
+  border-bottom: 1px solid rgba(212, 160, 23, 0.35);
+}
+
+.contact-section-head {
+  margin-bottom: 1.25rem;
+  max-width: var(--max);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contact-section-head h1 {
+  color: #fff;
+  font-size: clamp(1.65rem, 4.2vw, 2.4rem);
+  line-height: 1.2;
+  margin: 0 0 0.55rem;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
+}
+
+.contact-section-lede {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 1.05rem;
+  max-width: 40rem;
+  margin: 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+}
+
+.contact-section-body {
+  max-width: var(--max);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contact-section .contact-form-card,
+.contact-section .contact-info-card {
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--cja-ink, #1a237e);
+  text-shadow: none;
+}
+
+.contact-section .contact-form-card h2,
+.contact-section .contact-info-card h2 {
+  color: var(--cja-navy);
+}
+
 .home-grid {
   display: grid;
   gap: 1rem;
@@ -1331,6 +1406,56 @@ img {
   gap: 0.35rem 0.65rem;
   margin-top: 0.65rem;
   font-weight: 600;
+}
+
+/* Homepage Follow CJA — community gathering photo (different from home/About/Contact heroes)
+   Photo: public/images/follow-cja-gathering.jpg
+   Source folder: https://drive.google.com/drive/folders/1Lqqov40YI1fn5edZ6iMyYbHglBmWUUFh
+   File: NisargMedia28.jpg (https://drive.google.com/file/d/1kBhQQPXFSH2OideNfi94AWzcOri_B59A) */
+.social-strip--photo {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(1.5rem, 4vw, 2.25rem) clamp(1.15rem, 3vw, 1.75rem);
+  background-color: var(--cja-navy-dark);
+  background-image:
+    linear-gradient(
+      135deg,
+      rgba(7, 21, 38, 0.72) 0%,
+      rgba(11, 31, 58, 0.62) 45%,
+      rgba(26, 58, 110, 0.55) 100%
+    ),
+    url("/images/follow-cja-gathering.jpg");
+  background-size: cover;
+  background-position: center 40%;
+  background-repeat: no-repeat;
+  color: #fff;
+  border: 1px solid rgba(212, 160, 23, 0.28);
+  box-shadow: var(--cja-shadow);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+}
+
+.social-strip--photo h2 {
+  color: #fff;
+  margin: 0 0 0.4rem;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.social-strip--photo .social-strip-body {
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 40rem;
+  margin: 0;
+}
+
+.social-strip--photo .social-strip-links a {
+  color: #ffe0b2;
+}
+
+.social-strip--photo .social-strip-links a:hover {
+  color: #fff;
+}
+
+.social-strip--photo .social-strip-links span {
+  color: rgba(255, 255, 255, 0.55);
 }
 
 .gallery-grid {
@@ -2159,6 +2284,7 @@ img {
 .event-banner,
 .home-hero,
 .about-hero,
+.contact-section,
 .social-strip {
   animation: cja-section-appear 0.45s ease both;
 }
@@ -2184,7 +2310,7 @@ img {
   animation-delay: 200ms;
 }
 
-/* Member features: three equal square cards in a row */
+/* Member features: three equal-width cards in a row (height fits content; no internal scroll) */
 .home-preview-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -2194,12 +2320,24 @@ img {
 
 .home-preview-grid > .card {
   margin-top: 0; /* override .card + .card stacking margin */
-  aspect-ratio: 1 / 1;
+  /* Drop forced square: aspect-ratio:1 clipped content and forced overflow:auto scroll */
+  aspect-ratio: auto;
+  min-height: 12rem;
   display: flex;
   flex-direction: column;
   min-width: 0;
   box-sizing: border-box;
-  overflow: auto;
+  overflow: visible;
+}
+
+.home-preview-register {
+  margin: 0.15rem 0 0.65rem;
+  font-weight: 700;
+  font-size: 1.02rem;
+}
+
+.home-preview-register .text-link {
+  font-weight: 700;
 }
 
 @media (max-width: 719px) {
@@ -2208,7 +2346,6 @@ img {
   }
 
   .home-preview-grid > .card {
-    aspect-ratio: auto;
     min-height: 0;
   }
 }
@@ -2281,6 +2418,7 @@ img {
   .event-banner,
   .home-hero,
   .about-hero,
+  .contact-section,
   .social-strip {
     animation: none;
   }

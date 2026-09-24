@@ -228,16 +228,17 @@ export default async function HomePage() {
           <Link href="/members/register">Join / Register →</Link>
         </div>
         <div className="card-grid home-preview-grid">
-          <article className="card preview-card">
+          <article className="card preview-card home-preview-card--matrimonial">
             <h3>{matrimonial.title}</h3>
+            <p className="home-preview-register">
+              <Link className="text-link" href="/members/register">
+                Register
+              </Link>
+            </p>
             <p>{matrimonial.body}</p>
             <p className="stub-note">{matrimonial.note}</p>
             <Link className="text-link" href={matrimonial.href}>
               {matrimonial.cta} →
-            </Link>
-            {" · "}
-            <Link className="text-link" href="/members/register">
-              Register
             </Link>
           </article>
           <article className="card preview-card">
@@ -307,9 +308,9 @@ export default async function HomePage() {
         </article>
       </section>
 
-      <section className="card social-strip" aria-labelledby="social-strip">
+      <section className="card social-strip social-strip--photo" aria-labelledby="social-strip">
         <h2 id="social-strip">{homeContent.socialStripTitle}</h2>
-        <p className="muted">{homeContent.socialStripBody}</p>
+        <p className="social-strip-body">{homeContent.socialStripBody}</p>
         <div className="social-strip-links">
           <Link href="/social">Open social hubs</Link>
           <span aria-hidden>·</span>
