@@ -14,9 +14,10 @@ export const siteConfig = {
   themeColor: "#4285f4",
   backgroundColor: "#ffffff",
   social: {
-    x: "https://twitter.com/cjacanada",
-    facebook: "https://www.facebook.com/groups/1761711964079236/",
+    facebook: "https://www.facebook.com/p/Canadian-Jats-Association-61576962496974/",
+    instagram: "https://www.instagram.com/cjacanadaofficial/",
     youtube: "https://youtu.be/snPEyAif9xc",
+    x: "https://twitter.com/cjacanada",
   },
 } as const;
 
@@ -46,4 +47,23 @@ export const footerLinks = [
   { href: "/past-executives", label: "Past Executives" },
   { href: "/members/register", label: "Join / Register" },
   { href: "/members/login", label: "Login" },
+] as const;
+
+/** Footer social icons — Facebook, Instagram, YouTube (official CJA links). */
+export const footerSocialLinks = [
+  {
+    key: "facebook",
+    label: "Facebook",
+    href: siteConfig.social.facebook,
+  },
+  {
+    key: "instagram",
+    label: "Instagram",
+    href: siteConfig.social.instagram,
+  },
+  {
+    key: "youtube",
+    label: "YouTube",
+    href: siteConfig.social.youtube,
+  },
 ] as const;

@@ -40,5 +40,5 @@ export const homeContent = {
   },
   socialStripTitle: "Follow CJA",
   socialStripBody:
-    "Find CJA on Facebook, X (Twitter), and YouTube — links from the public cjacanada.com site.",
+    "Find CJA on Facebook, Instagram, and YouTube — official links on the Social page.",
 };

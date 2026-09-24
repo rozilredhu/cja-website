@@ -5,43 +5,24 @@ import { socialEmbeds } from "@/content/social";
 export const metadata: Metadata = {
   title: "Social",
   description:
-    "CJA on X, Facebook, and YouTube. Instagram is not included by design.",
+    "Follow the Canadian Jats Association on Facebook, Instagram, and YouTube.",
   openGraph: {
     title: "Social",
-    description: "Follow CJA on X, Facebook, and YouTube.",
+    description: "Follow CJA on Facebook, Instagram, and YouTube.",
     url: "/social",
   },
 };
 
 export default function SocialPage() {
-  const { x, facebook, youtube } = socialEmbeds;
+  const { facebook, instagram, youtube, x } = socialEmbeds;
 
   return (
     <>
       <PageHero
         eyebrow="Connect"
         title="Social"
-        description="Official public links from draft.cjacanada.ca / cjacanada.com. Instagram is intentionally not built."
+        description="Official CJA links on Facebook, Instagram, and YouTube."
       />
-
-      <section className="card embed-card">
-        <h2>{x.label}</h2>
-        <p className="muted">{x.note}</p>
-        {x.profileUrl ? (
-          <p>
-            <a href={x.profileUrl} rel="noopener noreferrer" target="_blank">
-              {x.handlePlaceholder}
-            </a>
-          </p>
-        ) : null}
-        <div className="embed-placeholder">
-          <p>
-            Timeline embed Coming Soon
-            <br />
-            <span className="muted">{x.handlePlaceholder}</span>
-          </p>
-        </div>
-      </section>
 
       <section className="card embed-card">
         <h2>{facebook.label}</h2>
@@ -49,13 +30,26 @@ export default function SocialPage() {
         {facebook.pageUrl ? (
           <p>
             <a href={facebook.pageUrl} rel="noopener noreferrer" target="_blank">
-              Open Facebook group
+              Open Facebook page
             </a>
           </p>
         ) : null}
-        <div className="embed-placeholder">
-          <p>Facebook group link above (Page Plugin not used — source is a group URL).</p>
-        </div>
+      </section>
+
+      <section className="card embed-card">
+        <h2>{instagram.label}</h2>
+        <p className="muted">{instagram.note}</p>
+        {instagram.profileUrl ? (
+          <p>
+            <a
+              href={instagram.profileUrl}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              Open Instagram (@cjacanadaofficial)
+            </a>
+          </p>
+        ) : null}
       </section>
 
       <section className="card embed-card">
@@ -79,10 +73,17 @@ export default function SocialPage() {
         </div>
       </section>
 
-      <p className="stub-note">
-        No Instagram embed or link (not present on public CJA sites; handoff
-        also excludes Instagram).
-      </p>
+      <section className="card embed-card">
+        <h2>{x.label}</h2>
+        <p className="muted">{x.note}</p>
+        {x.profileUrl ? (
+          <p>
+            <a href={x.profileUrl} rel="noopener noreferrer" target="_blank">
+              {x.handlePlaceholder}
+            </a>
+          </p>
+        ) : null}
+      </section>
     </>
   );
 }

@@ -311,6 +311,38 @@ img {
   font-size: 0.92rem;
 }
 
+.footer-social {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 1rem;
+  padding: 0;
+}
+
+.footer-social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+.footer-social-link:hover {
+  background: rgba(255, 255, 255, 0.22);
+  color: var(--cja-saffron-soft);
+  transform: translateY(-1px);
+}
+
+.footer-social-link:focus-visible {
+  outline: 2px solid var(--cja-saffron-soft);
+  outline-offset: 2px;
+}
+
 .footer-copy {
   max-width: var(--max);
   margin: 1.5rem auto 0;

@@ -1,23 +1,28 @@
 /**
- * Social links from public cjacanada.com.
- * Instagram: not linked on the source site; do not invent.
+ * Official CJA social links.
+ * Facebook and Instagram from association; YouTube from existing site content.
  */
 export const socialEmbeds = {
-  x: {
-    label: "X (Twitter)",
-    handlePlaceholder: "@cjacanada",
-    profileUrl: "https://twitter.com/cjacanada",
-    note: "Official X/Twitter account linked from cjacanada.com.",
-  },
   facebook: {
-    label: "Facebook Group",
-    pageUrl: "https://www.facebook.com/groups/1761711964079236/",
-    note: "CJA Facebook group linked from cjacanada.com (group, not a Page plugin URL).",
+    label: "Facebook",
+    pageUrl: "https://www.facebook.com/p/Canadian-Jats-Association-61576962496974/",
+    note: "Official Canadian Jats Association Facebook page.",
+  },
+  instagram: {
+    label: "Instagram",
+    profileUrl: "https://www.instagram.com/cjacanadaofficial/",
+    note: "Official CJA Instagram — @cjacanadaofficial.",
   },
   youtube: {
     label: "YouTube",
     channelUrl: "https://youtu.be/snPEyAif9xc",
     sampleEmbedUrl: "https://www.youtube.com/embed/snPEyAif9xc",
-    note: "YouTube link from cjacanada.com navigation.",
+    note: "YouTube link already used on the CJA site.",
+  },
+  x: {
+    label: "X (Twitter)",
+    handlePlaceholder: "@cjacanada",
+    profileUrl: "https://twitter.com/cjacanada",
+    note: "X/Twitter account linked from public CJA sites.",
   },
 };
