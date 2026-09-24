@@ -1,7 +1,15 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* Phase 1 skeleton — add options as modules land */
+  async redirects() {
+    return [
+      {
+        source: "/volunteer",
+        destination: "/contact/volunteer",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

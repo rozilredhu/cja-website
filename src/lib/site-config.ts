@@ -20,7 +20,14 @@ export const siteConfig = {
   },
 } as const;
 
-export const navLinks = [
+export type NavLink = {
+  href: string;
+  label: string;
+  children?: readonly { href: string; label: string }[];
+};
+
+/** Primary top nav — Services removed (reachable from homepage); Volunteer nested under Contact. */
+export const navLinks: readonly NavLink[] = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/officials", label: "Officials" },
@@ -30,11 +37,12 @@ export const navLinks = [
   { href: "/heritage", label: "Heritage" },
   { href: "/documents", label: "Documents" },
   { href: "/social", label: "Social" },
-  { href: "/services", label: "Services" },
-  { href: "/contact", label: "Contact" },
-  { href: "/volunteer", label: "Volunteer" },
+  {
+    href: "/contact",
+    label: "Contact",
+    children: [{ href: "/contact/volunteer", label: "Volunteer" }],
+  },
   { href: "/members/login", label: "Login" },
-  { href: "/admin/login", label: "Admin" },
 ] as const;
 
 export const footerLinks = [
@@ -42,6 +50,5 @@ export const footerLinks = [
   { href: "/terms", label: "Terms of Use" },
   { href: "/past-executives", label: "Past Executives" },
   { href: "/members/register", label: "Join / Register" },
-  { href: "/members/login", label: "Member login" },
-  { href: "/admin/login", label: "Admin" },
+  { href: "/members/login", label: "Login" },
 ] as const;

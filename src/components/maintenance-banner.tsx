@@ -10,7 +10,7 @@ export function MaintenancePage() {
         shortly. Administrators can still sign in at the admin area.
       </p>
       <p style={{ marginTop: "1.25rem" }}>
-        <Link href="/admin/login" className="btn-secondary">
+        <Link href="/members/login#admin" className="btn-secondary">
           Admin sign-in
         </Link>
       </p>

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Volunteer",
     description: "Share how you’d like to help CJA.",
-    url: "/volunteer",
+    url: "/contact/volunteer",
   },
 };
 

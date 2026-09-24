@@ -76,30 +76,16 @@ export type ServiceFormState = {
   listingId?: number;
 };
 
-export type ServiceSort =
-  | "relevance"
-  | "price_asc"
-  | "price_desc"
-  | "rating"
-  | "experience"
-  | "distance";
+export type ServiceSort = "price_asc" | "price_desc";
 
+/** Public browse keeps category, city/location, and price only. */
 export type ServiceBrowseFilters = {
-  q?: string;
   category?: string;
   city?: string;
   province?: string;
   priceMinCents?: number;
   priceMaxCents?: number;
-  minRating?: number;
-  availability?: ServiceAvailability;
-  language?: string;
-  minExperience?: number;
-  verifiedOnly?: boolean;
   sort?: ServiceSort;
-  /** Browser geolocation for distance sort */
-  userLat?: number;
-  userLng?: number;
 };
 
 /** Re-export provinces list from directory for forms */
@@ -115,15 +101,3 @@ export const SERVICE_AVAILABILITY_OPTIONS: {
   { value: "by_appointment", label: "By appointment" },
 ];
 
-export const LANGUAGE_SUGGESTIONS = [
-  "English",
-  "French",
-  "Punjabi",
-  "Hindi",
-  "Urdu",
-  "Gujarati",
-  "Tamil",
-  "Spanish",
-  "Mandarin",
-  "Cantonese",
-] as const;

@@ -2,32 +2,52 @@ export const dynamic = "force-dynamic";
 
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
+import { AdminLoginForm } from "@/components/admin-login-form";
 import { PageHero } from "@/components/page-hero";
 import { getCurrentUser } from "@/modules/auth/session";
 import { MemberLoginForm } from "@/modules/members/components/member-login-form";
 
 export const metadata: Metadata = {
-  title: "Member login",
-  description: "Sign in to your Canadian Jats Association member account.",
+  title: "Login",
+  description:
+    "Sign in as a CJA member or administrator. One page, two account types.",
   robots: { index: false, follow: false },
 };
 
-export default async function MemberLoginPage() {
+export default async function UnifiedLoginPage() {
   const user = await getCurrentUser();
-  if (user?.role === "member" || user?.role === "admin") {
+  if (user?.role === "admin") {
+    redirect("/admin");
+  }
+  if (user?.role === "member") {
     redirect("/members");
   }
 
   return (
     <>
       <PageHero
-        title="Member login"
-        description="Separate from admin sign-in. Sample credentials are in the README."
-        eyebrow="Members"
+        title="Sign in"
+        description="Choose Admin or Regular users (आम लोग). Each section uses its own account type."
+        eyebrow="Accounts"
       />
-      <section className="card admin-login-card">
-        <MemberLoginForm />
-      </section>
+      <div className="login-split">
+        <section className="card login-panel" id="admin">
+          <h2>Admin login</h2>
+          <p className="muted">
+            Site administrators only. After sign-in you go to the admin hub
+            (MFA if enabled).
+          </p>
+          <AdminLoginForm />
+        </section>
+        <section className="card login-panel" id="members">
+          <h2>Regular users (आम लोग)</h2>
+          <p className="muted">
+            Member accounts for directory, matrimonial, promotions, and
+            Services listings.
+          </p>
+          <MemberLoginForm />
+        </section>
+      </div>
     </>
   );
 }

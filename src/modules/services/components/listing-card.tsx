@@ -53,7 +53,6 @@ export function ServiceListingCard({ listing, distanceKm }: Props) {
       ) : null}
       <ul className="muted" style={{ marginTop: "0.65rem", paddingLeft: "1.1rem" }}>
         <li>Availability: {availLabel}</li>
-        <li>Languages: {listing.languages}</li>
         <li>Experience: {listing.years_experience} years</li>
         {listing.expires_at ? (
           <li>Listed until {listing.expires_at.slice(0, 10)}</li>

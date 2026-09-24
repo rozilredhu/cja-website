@@ -38,10 +38,24 @@ export function SiteHeader() {
         >
           <ul>
             {navLinks.map((link) => (
-              <li key={link.href}>
+              <li
+                key={link.href}
+                className={link.children?.length ? "nav-item-has-children" : undefined}
+              >
                 <Link href={link.href} onClick={() => setOpen(false)}>
                   {link.label}
                 </Link>
+                {link.children?.length ? (
+                  <ul className="nav-sub">
+                    {link.children.map((child) => (
+                      <li key={child.href}>
+                        <Link href={child.href} onClick={() => setOpen(false)}>
+                          {child.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
               </li>
             ))}
           </ul>

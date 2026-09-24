@@ -79,7 +79,7 @@ export async function saveServiceListingAction(
     priceDollars != null ? Math.round(priceDollars * 100) : null;
   const priceRange = str(formData, "price_range") || null;
   const availability = str(formData, "availability") as ServiceAvailability;
-  const languages = str(formData, "languages") || "English";
+  const languages = str(formData, "languages") || "";
   const yearsExperience = numOrNull(formData, "years_experience") ?? 0;
   const verifiedLicensed = formData.get("verified_licensed") ? 1 : 0;
   const lat = numOrNull(formData, "lat");

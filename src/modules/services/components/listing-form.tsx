@@ -5,7 +5,6 @@ import { saveServiceListingAction } from "../actions";
 import { SERVICE_PLANS, formatUsdCents } from "../pricing";
 import {
   CA_PROVINCES,
-  LANGUAGE_SUGGESTIONS,
   SERVICE_AVAILABILITY_OPTIONS,
   type ServiceCategoryRow,
   type ServiceFormState,
@@ -157,21 +156,6 @@ export function ServiceListingForm({ categories, initial }: Props) {
       </label>
 
       <label>
-        Languages spoken (comma-separated)
-        <input
-          name="languages"
-          type="text"
-          list="lang-suggestions"
-          defaultValue={initial?.languages ?? "English"}
-        />
-        <datalist id="lang-suggestions">
-          {LANGUAGE_SUGGESTIONS.map((l) => (
-            <option key={l} value={l} />
-          ))}
-        </datalist>
-      </label>
-
-      <label>
         Years of experience
         <input
           name="years_experience"
@@ -191,7 +175,7 @@ export function ServiceListingForm({ categories, initial }: Props) {
       </label>
 
       <label>
-        Latitude (optional — for distance sort)
+        Latitude (optional)
         <input
           name="lat"
           type="number"

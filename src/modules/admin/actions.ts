@@ -552,7 +552,7 @@ export async function toggleFeatureFlagAction(
   revalidatePath("/admin/features");
   revalidatePath("/admin");
   revalidatePath("/members");
-  revalidatePath("/volunteer");
+  revalidatePath("/contact/volunteer");
 }
 
 /* ── Maintenance ───────────────────────────────────────── */

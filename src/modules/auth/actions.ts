@@ -115,7 +115,7 @@ export async function adminLoginAction(
   }
 
   if (row.role !== "admin") {
-    return { error: "This account is not an admin. Use member login instead." };
+    return { error: "This account is not an admin. Use the Regular users section." };
   }
 
   const ok = await verifyPassword(password, row.salt, row.password_hash);
@@ -135,7 +135,7 @@ export async function adminLoginAction(
 
 export async function adminLogoutAction(): Promise<void> {
   await destroySession();
-  redirect("/admin/login");
+  redirect("/members/login#admin");
 }
 
 export async function adminMfaChallengeAction(
@@ -411,7 +411,7 @@ export async function memberLoginAction(
 
   if (row.role === "admin") {
     return {
-      error: "Admin accounts sign in at /admin/login, not member login.",
+      error: "Admin accounts use the Admin login section on this page.",
     };
   }
 

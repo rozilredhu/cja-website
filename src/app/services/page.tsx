@@ -16,7 +16,6 @@ import {
   markExpiredListings,
 } from "@/modules/services/queries";
 import type {
-  ServiceAvailability,
   ServiceBrowseFilters,
   ServiceSort,
 } from "@/modules/services/types";
@@ -41,12 +40,8 @@ function parseFilters(
 ): ServiceBrowseFilters {
   const priceMin = one(sp.price_min);
   const priceMax = one(sp.price_max);
-  const minRating = one(sp.min_rating);
-  const minExp = one(sp.min_experience);
-  const lat = one(sp.lat);
-  const lng = one(sp.lng);
+  const sort = one(sp.sort) as ServiceSort | undefined;
   return {
-    q: one(sp.q),
     category: one(sp.category),
     city: one(sp.city),
     province: one(sp.province),
@@ -58,18 +53,7 @@ function parseFilters(
       priceMax && Number.isFinite(Number(priceMax))
         ? Math.round(Number(priceMax) * 100)
         : undefined,
-    minRating:
-      minRating && Number.isFinite(Number(minRating))
-        ? Number(minRating)
-        : undefined,
-    availability: one(sp.availability) as ServiceAvailability | undefined,
-    language: one(sp.language),
-    minExperience:
-      minExp && Number.isFinite(Number(minExp)) ? Number(minExp) : undefined,
-    verifiedOnly: one(sp.verified) === "1",
-    sort: (one(sp.sort) as ServiceSort) || "rating",
-    userLat: lat && Number.isFinite(Number(lat)) ? Number(lat) : undefined,
-    userLng: lng && Number.isFinite(Number(lng)) ? Number(lng) : undefined,
+    sort: sort === "price_desc" ? "price_desc" : "price_asc",
   };
 }
 

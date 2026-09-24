@@ -7,7 +7,7 @@ export const homeContent = {
     "A non-for-profit for the Jat community in Canada — networking, newcomer support, and cultural celebrations including Holi and Diwali. Formed in 2006; based in the Greater Toronto Area.",
   heroCtas: [
     { href: "/events", label: "Events" },
-    { href: "/volunteer", label: "Volunteer" },
+    { href: "/contact/volunteer", label: "Volunteer" },
     { href: "/about", label: "About CJA" },
   ],
   /** Homepage About teaser — mission + short vision cue from aboutContent */
@@ -37,7 +37,7 @@ export const homeContent = {
   /** Public Services marketplace teaser */
   servicesPreview: {
     title: "Services",
-    body: "Browse babysitters, plumbers, electricians, lawyers, realtors, and mortgage agents. Filter by city, price, rating, languages, and more — no login required to search.",
+    body: "Browse babysitters, plumbers, electricians, lawyers, realtors, and mortgage agents. Filter by category, city, and price — no login required to search.",
     note: "Providers need a member account and a $10 / $25 / $90 USD listing plan plus admin approval.",
     href: "/services",
     cta: "Browse Services",

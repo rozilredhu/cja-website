@@ -48,14 +48,23 @@ export default async function ContactPage() {
             <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
           </p>
           <p className="muted" style={{ marginTop: "0.75rem" }}>
-            Prefer to help on the ground?{" "}
-            <Link href="/volunteer">Volunteer interest form</Link>
-          </p>
-          <p className="muted" style={{ marginTop: "0.75rem" }}>
             Follow updates on the <Link href="/social">Social</Link> page.
           </p>
         </aside>
       </div>
+
+      <section className="card" style={{ marginTop: "1.25rem" }} id="volunteer">
+        <h2>Volunteer</h2>
+        <p className="muted">
+          Prefer to help on the ground at festivals, sports, youth programs, or
+          communications? Share your interest and the team will follow up.
+        </p>
+        <p style={{ marginTop: "0.85rem" }}>
+          <Link className="btn-saffron" href="/contact/volunteer">
+            Volunteer interest form
+          </Link>
+        </p>
+      </section>
     </>
   );
 }

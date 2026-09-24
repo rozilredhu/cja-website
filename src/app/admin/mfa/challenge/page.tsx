@@ -22,7 +22,7 @@ export default async function AdminMfaChallengePage() {
   }
   const pending = await getMfaPendingUserId();
   if (!pending) {
-    redirect("/admin/login");
+    redirect("/members/login#admin");
   }
 
   return (
@@ -35,7 +35,7 @@ export default async function AdminMfaChallengePage() {
       <section className="card admin-login-card">
         <AdminMfaChallengeForm />
         <p className="form-hint" style={{ marginTop: "1rem" }}>
-          <Link href="/admin/login">Cancel and return to login</Link>
+          <Link href="/members/login#admin">Cancel and return to login</Link>
         </p>
       </section>
     </>

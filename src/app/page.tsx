@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 
 export default async function HomePage() {
   const upcoming = getPrimaryUpcoming();
-  const featured = await getFeaturedOfficials(4);
+  const featured = await getFeaturedOfficials(12);
   const latest = await getLatestNews(3);
   const about = homeContent.aboutPreview;
   const matrimonial = homeContent.matrimonialPreview;
@@ -47,7 +47,7 @@ export default async function HomePage() {
               key={cta.href}
               href={cta.href}
               className={
-                cta.href === "/volunteer" ? "btn-saffron" : "btn-on-dark"
+                cta.href === "/contact/volunteer" ? "btn-saffron" : "btn-on-dark"
               }
             >
               {cta.label}
@@ -106,9 +106,9 @@ export default async function HomePage() {
           Meet featured members of CJA leadership. Full roster and categories on
           the Officials page.
         </p>
-        <div className="officials-grid">
+        <div className="officials-grid officials-grid--home">
           {featured.map((o) => (
-            <OfficialCard key={o.id} official={o} />
+            <OfficialCard key={o.id} official={o} compact />
           ))}
         </div>
         <p style={{ marginTop: "0.85rem" }}>
