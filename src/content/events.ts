@@ -1,28 +1,37 @@
 import type { CommunityEvent } from "./types";
 
 /**
- * Events: Diwali 2026 from draft.cjacanada.ca (preferred).
+ * Events: Diwali 2026 from gathered CJA package + Instagram flyers + draft site.
+ * Venue and start time are intentionally soft-confirmed (sources differ / pending).
  * Outdated Diwali 2024 (cjacanada.com) intentionally omitted.
  * Past Holi/Picnic album dates replaced with Coming Soon / future placeholders per staging policy.
  */
 export const events: CommunityEvent[] = [
   {
     slug: "diwali-2026",
-    title: "Diwali Function 2026",
+    title: "CJA Annual Diwali Mahotsav 2026",
     summary:
-      "Spectacular Diwali celebration — snacks & dinner, live music and dance, games for all ages. Venue details TBA.",
+      "CJA’s annual Diwali celebration in Brampton — Indian snacks and dinner, DJ and live singer, cultural performances, fashion show, kids’ activities, awards, lucky draw, and games for all ages. Festive dress encouraged.",
     dateStart: "2026-10-24",
-    location: "Venue details TBA",
+    location:
+      "Likely venue: Chandni Banquet Hall, Brampton — to be confirmed",
     upcoming: true,
-    coverLabel: "Diwali Function 2026",
+    coverLabel: "Diwali Mahotsav 2026",
     googleDriveUrl:
       "https://drive.google.com/drive/folders/1Lqqov40YI1fn5edZ6iMyYbHglBmWUUFh",
     body: [
-      "You're Invited to a Spectacular Diwali Celebration! presented by Canadian Jats Association !!",
-      "Date: Saturday, 24 October 2026 · Time: 6 PM onwards · Location: Venue details TBA.",
-      "Highlights: Delicious Indian Snacks and Dinner; Live music and dance performances; Fun games and activities for all ages.",
-      "Tickets: Adult $70 CAD; Early bird $10 CAD off (expires 10 October 2026); CJA member $5 CAD off (discounts combinable); Child (6–12) $60 CAD; Child (under 6) free.",
-      "Email info@cjacanada.com with ticket counts, or contact CJA Executives.",
+      "You're invited to a spectacular Diwali celebration presented by the Canadian Jats Association — also known as Diwali Function 2026 / Diwali Mahotsav 2026.",
+      "Date: Saturday, 24 October 2026 · City: Brampton, Ontario.",
+      "Time: Sources differ. Instagram flyers list 4:00 PM onwards; the CJA package and website list 6:00 PM onwards. Showing from 4:00 PM (program details / doors to be confirmed) — we have not assigned which time is doors versus program start.",
+      "Venue: Likely Chandni Banquet Hall, Brampton (venue confirmation pending). Do not treat the hall as final until CJA confirms.",
+      "Celebrate the Festival of Lights with delicious food, vibrant music, cultural performances, and togetherness — a fun-filled, family-friendly day for all ages, and a great chance for newcomers in Canada to meet other Jat families.",
+      "Program and inclusions: Indian snacks and dinner; DJ and live singer; music, cultural and dance performances, and bhangra; fashion show; kids’ activities; awards; lucky draw; games for all ages. Festive dress is encouraged.",
+      "Super Early Bird pricing (through 25 September 2026), CAD: Adult $60; Child (7–15) $50; Kids 6 and under free; Table of 10 $500.",
+      "Standard / package pricing, CAD: Adult $70; Early bird $10 off until 10 October 2026; CJA member additional $5 off (early bird and member discounts are combinable); Child (6–12) $60; Under 6 free; Table of 10 $600.",
+      "Note: Child age bands differ between Super Early Bird (7–15) and standard (6–12) materials — both are shown as published; confirm with organizers when booking if unsure.",
+      "Sponsorship tiers (CAD, optional): Title $1,500 · Platinum $1,100 · Gold $750 · Silver $500 · Bronze $250. Named 2026 sponsors are not listed here unless already published on the site.",
+      "To request tickets, email info@cjacanada.com with ticket counts, or contact: Yoginder Gulia 416-557-4137; Sandeep Phogat 416-939-5369; Sanjeev Malik 647-883-4445; Sumit Rana 437-259-4035; Mandeep Kataria 437-256-3000; Subhash Punia 416-569-3442; Pardeep Punia 905-407-8642; Virender Rathee 437-237-5000; Virendra Sheoran 647-231-4561. Website: cjacanada.com.",
+      "Warm wishes, CJA Executive Team.",
     ],
   },
   {
