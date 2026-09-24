@@ -12,7 +12,7 @@ import {
 export const metadata: Metadata = {
   title: "Officials / Leadership",
   description:
-    "Current executives, directors, and corporate secretary of the Canadian Jats Association.",
+    "Current directors, executives, and corporate secretary of the Canadian Jats Association.",
   openGraph: {
     title: "Officials / Leadership",
     description: "Current CJA leadership team.",
@@ -28,13 +28,13 @@ export default async function OfficialsPage() {
       <PageHero
         eyebrow="Leadership"
         title="Officials / Leadership"
-        description="Executive Committee as published on draft.cjacanada.ca. Categories and counts come from the database."
+        description="Three Directors, nine Executives, and one Corporate Secretary. Named executives match draft.cjacanada.ca; remaining seats are placeholders until CJA publishes names."
       />
 
       {groups.map((group) => (
         <section
           key={group.category}
-          className="section-block"
+          className="section-block officials-category"
           aria-labelledby={`cat-${slugify(group.category)}`}
         >
           <div className="section-head">
@@ -43,7 +43,15 @@ export default async function OfficialsPage() {
               <span className="count-pill">{group.items.length}</span>
             </h2>
           </div>
-          <div className="officials-grid">
+          <div
+            className={
+              group.category === "Directors"
+                ? "officials-grid officials-grid--directors"
+                : group.category === "Corporate Secretary"
+                  ? "officials-grid officials-grid--secretary"
+                  : "officials-grid"
+            }
+          >
             {group.items.map((o) => (
               <OfficialCard key={o.id} official={o} />
             ))}
@@ -57,10 +65,10 @@ export default async function OfficialsPage() {
           <Link href="/past-executives">View Past Executives</Link>
         </p>
         <p className="stub-note">
-          Named executives and public phone/city details match draft.cjacanada.ca.
-          Additional seats shown as TBA on that draft are omitted here until CJA
-          publishes names. Officer titles (e.g. President) are not listed on the
-          public sites.
+          Sumit Rana, Subhash Punia, and Virendra Sheoran are published on
+          draft.cjacanada.ca. Other seats use placeholders (Director 1–3,
+          Executive 4–9, Corporate Secretary) until CJA confirms names. Officer
+          titles such as President are not listed on the public sites.
         </p>
       </section>
     </>

@@ -14,6 +14,14 @@ export const homeContent = {
     href: "/about",
     cta: "Learn more about CJA",
   },
+  /** Hindu calendar teaser — points visitors to the full panchang page */
+  calendarPreview: {
+    title: "Hindu Calendar",
+    body: "Browse an indicative Hindu panchang for the Greater Toronto Area — tithi timings, Purnima, Amavasya, and festivals, month by month.",
+    note: "Times are shown in America/Toronto for Mississauga / GTA. Indicative only — verify muhurat with a local pandit.",
+    href: "/hindu-calendar",
+    cta: "Open Hindu Calendar",
+  },
   /** Members-only matrimonial — public teaser pointing at login */
   matrimonialPreview: {
     title: "Matrimonial",
@@ -37,6 +45,56 @@ export const homeContent = {
     note: "Providers need a member account and a $10 / $25 / $90 CAD listing plan plus admin approval.",
     href: "/services",
     cta: "Browse Services",
+  },
+  /**
+   * Homepage sponsors — same set and order as cjacanada.com / draft scrape
+   * (images copied from the previous CJA static site assets).
+   */
+  sponsors: {
+    title: "Our Sponsors",
+    body: "Thank you to the community businesses and professionals who support CJA.",
+    items: [
+      {
+        name: "Ruhil Holdings",
+        image: "/images/sponsors/ruhil.png",
+        alt: "Ruhil Holdings — Real Estate, Tech Solutions, Eco-Organic Farming",
+      },
+      {
+        name: "Anshul Ruhil",
+        image: "/images/sponsors/anshulruhil.png",
+        alt: "Anshul Ruhil, CEO and Founder of Ruhil Holdings",
+      },
+      {
+        name: "Sunshine Dental",
+        image: "/images/sponsors/sunshine.png",
+        alt: "Sunshine Dental clinic, Brampton",
+      },
+      {
+        name: "Atlantic Immigration Lawyer",
+        image: "/images/sponsors/atlantic.png",
+        alt: "Atlantic Immigration Lawyer — Amardeep Singh",
+      },
+      {
+        name: "Ravi Hooda",
+        image: "/images/sponsors/ravihooda.png",
+        alt: "Ravi Hooda and Rashmi Hooda — Century 21 Red Star Realty",
+      },
+      {
+        name: "Parveen Dalal",
+        image: "/images/sponsors/parveen.png",
+        alt: "Parveen Dalal — Century 21 Red Star Realty Inc.",
+      },
+      {
+        name: "Sweet Tooth Dentistry",
+        image: "/images/sponsors/sweettooth.png",
+        alt: "Sweet Tooth Dentistry — Dr Amit Narwal DDS",
+      },
+      {
+        name: "Sanjeev Malik",
+        image: "/images/sponsors/sanjeevmalik.png",
+        alt: "Sanjeev Malik — Financial Security Advisor",
+      },
+    ],
   },
   socialStripTitle: "Follow CJA",
   socialStripBody:

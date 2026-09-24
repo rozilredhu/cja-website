@@ -2,28 +2,62 @@
 -- Do NOT run against production.
 
 DELETE FROM officials;
-DELETE FROM news_articles;
 
 INSERT INTO official_categories (name, display_order, active)
-VALUES ('Executives', 1, 1)
+VALUES
+  ('Directors', 1, 1),
+  ('Executives', 2, 1),
+  ('Corporate Secretary', 3, 1)
 ON CONFLICT(name) DO UPDATE SET display_order = excluded.display_order, active = 1, updated_at = datetime('now');
 
 INSERT INTO officials (
   id, full_name, designation, category, photo_url, short_bio,
   display_order, status, created_at, updated_at
 ) VALUES
-  (1, 'Sumit Rana', 'Executive Member', 'Executives',
+  (1, 'Director 1', 'Director', 'Directors',
+   NULL, 'Placeholder — name to be confirmed by CJA.',
+   1, 'active', datetime('now'), datetime('now')),
+  (2, 'Director 2', 'Director', 'Directors',
+   NULL, 'Placeholder — name to be confirmed by CJA.',
+   2, 'active', datetime('now'), datetime('now')),
+  (3, 'Director 3', 'Director', 'Directors',
+   NULL, 'Placeholder — name to be confirmed by CJA.',
+   3, 'active', datetime('now'), datetime('now')),
+  (4, 'Sumit Rana', 'Executive Member', 'Executives',
    '/images/members/sumitr.jpg',
    'Mississauga · 437-259-4035 (public on draft.cjacanada.ca).',
    1, 'active', datetime('now'), datetime('now')),
-  (2, 'Subhash Punia', 'Executive Member', 'Executives',
+  (5, 'Subhash Punia', 'Executive Member', 'Executives',
    '/images/members/subhashp.jpg',
    'Brampton · 416-569-3442 (public on draft.cjacanada.ca).',
    2, 'active', datetime('now'), datetime('now')),
-  (3, 'Virendra Sheoran', 'Executive Member', 'Executives',
+  (6, 'Virendra Sheoran', 'Executive Member', 'Executives',
    '/images/members/virenders.jpg',
    'Mississauga · 647-231-4561 (public on draft.cjacanada.ca).',
-   3, 'active', datetime('now'), datetime('now'));
+   3, 'active', datetime('now'), datetime('now')),
+  (7, 'Executive 4', 'Executive Member', 'Executives',
+   NULL, 'Placeholder — name to be confirmed by CJA.',
+   4, 'active', datetime('now'), datetime('now')),
+  (8, 'Executive 5', 'Executive Member', 'Executives',
+   NULL, 'Placeholder — name to be confirmed by CJA.',
+   5, 'active', datetime('now'), datetime('now')),
+  (9, 'Executive 6', 'Executive Member', 'Executives',
+   NULL, 'Placeholder — name to be confirmed by CJA.',
+   6, 'active', datetime('now'), datetime('now')),
+  (10, 'Executive 7', 'Executive Member', 'Executives',
+   NULL, 'Placeholder — name to be confirmed by CJA.',
+   7, 'active', datetime('now'), datetime('now')),
+  (11, 'Executive 8', 'Executive Member', 'Executives',
+   NULL, 'Placeholder — name to be confirmed by CJA.',
+   8, 'active', datetime('now'), datetime('now')),
+  (12, 'Executive 9', 'Executive Member', 'Executives',
+   NULL, 'Placeholder — name to be confirmed by CJA.',
+   9, 'active', datetime('now'), datetime('now')),
+  (13, 'Corporate Secretary', 'Corporate Secretary', 'Corporate Secretary',
+   NULL, 'Placeholder — name to be confirmed by CJA.',
+   1, 'active', datetime('now'), datetime('now'));
+
+DELETE FROM news_articles;
 
 INSERT INTO news_articles (
   id, title, slug, meta_description, body, published, published_at, author, featured,

@@ -59,6 +59,11 @@ export function SiteFooter() {
               </li>
             ))}
           </ul>
+          <p className="footer-calendar">
+            <Link href="/hindu-calendar" className="footer-calendar-link">
+              Hindu Calendar
+            </Link>
+          </p>
         </div>
         <ul className="footer-links">
           {footerLinks.map((link) => (

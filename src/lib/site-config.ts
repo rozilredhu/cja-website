@@ -42,6 +42,7 @@ export const navLinks: readonly NavLink[] = [
 ] as const;
 
 export const footerLinks = [
+  { href: "/hindu-calendar", label: "Hindu Calendar" },
   { href: "/privacy", label: "Privacy Policy" },
   { href: "/terms", label: "Terms of Use" },
   { href: "/past-executives", label: "Past Executives" },

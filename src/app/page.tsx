@@ -9,7 +9,10 @@ import { OfficialCard } from "@/modules/public/components/official-card";
 import { NewsCard } from "@/modules/public/components/news-card";
 import { getPrimaryUpcoming } from "@/modules/public/events";
 import { getLatestNews } from "@/modules/public/news";
-import { getFeaturedOfficials } from "@/modules/public/officials";
+import {
+  getActiveOfficials,
+  groupOfficialsByCategory,
+} from "@/modules/public/officials";
 import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
@@ -24,12 +27,21 @@ export const metadata: Metadata = {
 
 export default async function HomePage() {
   const upcoming = getPrimaryUpcoming();
-  const featured = await getFeaturedOfficials(12);
+  const officialGroups = groupOfficialsByCategory(await getActiveOfficials());
+  const directors =
+    officialGroups.find((g) => g.category === "Directors")?.items ?? [];
+  const executives =
+    officialGroups.find((g) => g.category === "Executives")?.items ?? [];
+  const secretaries =
+    officialGroups.find((g) => g.category === "Corporate Secretary")?.items ??
+    [];
   const latest = await getLatestNews(3);
   const about = homeContent.aboutPreview;
+  const calendar = homeContent.calendarPreview;
   const matrimonial = homeContent.matrimonialPreview;
   const directory = homeContent.directoryPreview;
   const services = homeContent.servicesPreview;
+  const sponsors = homeContent.sponsors;
 
   return (
     <>
@@ -69,6 +81,22 @@ export default async function HomePage() {
         </section>
       ) : null}
 
+      <section className="section-block" aria-labelledby="calendar-preview">
+        <div className="section-head">
+          <h2 id="calendar-preview">{calendar.title}</h2>
+          <Link href={calendar.href}>{calendar.cta} →</Link>
+        </div>
+        <article className="card preview-card calendar-preview-card">
+          <p className="eyebrow">Panchang · GTA</p>
+          <h3>{calendar.title}</h3>
+          <p>{calendar.body}</p>
+          <p className="stub-note">{calendar.note}</p>
+          <Link className="btn-primary" href={calendar.href}>
+            {calendar.cta}
+          </Link>
+        </article>
+      </section>
+
       <section className="section-block" aria-labelledby="about-preview">
         <div className="section-head">
           <h2 id="about-preview">{about.title}</h2>
@@ -99,14 +127,41 @@ export default async function HomePage() {
           <Link href="/officials">View full leadership →</Link>
         </div>
         <p className="muted" style={{ marginBottom: "0.85rem" }}>
-          Meet featured members of CJA leadership. Full roster and categories on
-          the Officials page.
+          Leadership at a glance — three Directors, nine Executives, and a
+          Corporate Secretary. Open the Officials page for the full roster.
         </p>
-        <div className="officials-grid officials-grid--home">
-          {featured.map((o) => (
-            <OfficialCard key={o.id} official={o} compact />
-          ))}
+
+        <div className="home-officials">
+          <div className="home-officials-block">
+            <h3 className="home-officials-label">Directors</h3>
+            <div className="officials-grid officials-grid--home-directors">
+              {directors.map((o) => (
+                <OfficialCard key={o.id} official={o} compact />
+              ))}
+            </div>
+          </div>
+
+          <div className="home-officials-block">
+            <h3 className="home-officials-label">Executives</h3>
+            <div className="officials-grid officials-grid--home-executives">
+              {executives.map((o) => (
+                <OfficialCard key={o.id} official={o} compact />
+              ))}
+            </div>
+          </div>
+
+          {secretaries.length > 0 ? (
+            <p className="home-officials-secretary muted">
+              <strong>Corporate Secretary:</strong>{" "}
+              {secretaries.map((o) => o.fullName).join(", ")}
+              {" · "}
+              <Link className="text-link" href="/officials">
+                Details on Officials page →
+              </Link>
+            </p>
+          ) : null}
         </div>
+
         <p style={{ marginTop: "0.85rem" }}>
           <Link className="text-link" href="/officials">
             Learn more about officials →
@@ -207,6 +262,24 @@ export default async function HomePage() {
             </Link>
           </article>
         </div>
+      </section>
+
+
+      <section className="section-block sponsors-section" aria-labelledby="sponsors-heading" id="sponsors">
+        <div className="section-head">
+          <h2 id="sponsors-heading">{sponsors.title}</h2>
+        </div>
+        <p className="muted" style={{ marginBottom: "0.85rem" }}>
+          {sponsors.body}
+        </p>
+        <ul className="sponsors-grid">
+          {sponsors.items.map((sponsor) => (
+            <li key={sponsor.image} className="sponsor-card">
+              <img src={sponsor.image} alt={sponsor.alt} loading="lazy" />
+              <span className="sponsor-name">{sponsor.name}</span>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <section className="section-block" aria-labelledby="contact-preview">

@@ -343,6 +343,27 @@ img {
   outline-offset: 2px;
 }
 
+.footer-calendar {
+  margin-top: 0.85rem;
+}
+
+.footer-calendar-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+  padding-bottom: 0.1rem;
+}
+
+.footer-calendar-link:hover {
+  color: var(--cja-saffron-soft);
+  border-bottom-color: var(--cja-saffron-soft);
+}
+
 .footer-copy {
   max-width: var(--max);
   margin: 1.5rem auto 0;
@@ -720,6 +741,81 @@ img {
   .officials-grid--home {
     grid-template-columns: repeat(6, 1fr);
   }
+}
+
+/* Homepage officials: directors row + executives strip */
+.home-officials {
+  display: grid;
+  gap: 1.1rem;
+}
+
+.home-officials-label {
+  font-size: 0.95rem;
+  color: var(--cja-navy);
+  margin: 0 0 0.55rem;
+}
+
+.home-officials-secretary {
+  margin: 0;
+  font-size: 0.92rem;
+}
+
+.officials-grid--home-directors {
+  gap: 0.65rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 560px) {
+  .officials-grid--home-directors {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.officials-grid--home-executives {
+  gap: 0.45rem;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (min-width: 560px) {
+  .officials-grid--home-executives {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .officials-grid--home-executives {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1100px) {
+  .officials-grid--home-executives {
+    grid-template-columns: repeat(9, 1fr);
+  }
+}
+
+.officials-grid--directors {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 560px) {
+  .officials-grid--directors {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.officials-grid--secretary {
+  grid-template-columns: 1fr;
+  max-width: 22rem;
+}
+
+.officials-grid--home-executives .official-card--compact .official-body h3 {
+  font-size: 0.82rem;
+}
+
+.officials-grid--home-executives .official-card--compact .official-role,
+.officials-grid--home-executives .official-card--compact .official-cat {
+  font-size: 0.72rem;
 }
 
 .official-card--compact .official-photo {
@@ -1537,6 +1633,77 @@ img {
 .home-grid a.card:hover {
   transform: translateY(-4px);
   box-shadow: var(--cja-shadow-hover);
+}
+
+
+/* ----- Sponsors (homepage, matching cjacanada.com layout spirit) ----- */
+.sponsors-section {
+  margin-top: 0.5rem;
+}
+
+.sponsors-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+@media (min-width: 720px) {
+  .sponsors-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+}
+
+.sponsor-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  background: #fff;
+  border: 1px solid rgba(13, 71, 161, 0.08);
+  border-radius: 0.45rem;
+  box-shadow: 0 2px 8px rgba(13, 71, 161, 0.06);
+  padding: 0.55rem 0.65rem 0.7rem;
+  min-height: 100%;
+  transition:
+    transform var(--cja-ease-ui),
+    box-shadow var(--cja-ease-ui);
+}
+
+.sponsor-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--cja-shadow-hover);
+}
+
+.sponsor-card img {
+  display: block;
+  width: 100%;
+  max-height: 92px;
+  height: auto;
+  object-fit: contain;
+}
+
+.sponsor-name {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--cja-navy);
+  text-align: center;
+  line-height: 1.25;
+}
+
+.calendar-preview-card .btn-primary {
+  margin-top: 0.85rem;
+  display: inline-flex;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sponsor-card:hover {
+    transform: none;
+  }
 }
 
 /* Gentle section appear (CSS only) */
