@@ -34,6 +34,14 @@ export const homeContent = {
     href: "/members/login",
     cta: "Member login",
   },
+  /** Public Services marketplace teaser */
+  servicesPreview: {
+    title: "Services",
+    body: "Browse babysitters, plumbers, electricians, lawyers, realtors, and mortgage agents. Filter by city, price, rating, languages, and more — no login required to search.",
+    note: "Providers need a member account and a $10 / $25 / $90 USD listing plan plus admin approval.",
+    href: "/services",
+    cta: "Browse Services",
+  },
   socialStripTitle: "Follow CJA",
   socialStripBody:
     "Find CJA on Facebook, X (Twitter), and YouTube — links from the public cjacanada.com site.",

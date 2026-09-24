@@ -6,3 +6,10 @@ TURNSTILE_BYPASS=true
 # STRIPE_SECRET_KEY=
 # STRIPE_WEBHOOK_SECRET=
 # STRIPE_PUBLISHABLE_KEY=
+
+# Services marketplace Stripe (optional — stub works without keys)
+# STRIPE_SECRET_KEY=
+# STRIPE_WEBHOOK_SECRET=
+# STRIPE_PRICE_SERVICES_MONTHLY=   # one-time $10 USD Price id
+# STRIPE_PRICE_SERVICES_QUARTERLY= # one-time $25 USD Price id
+# STRIPE_PRICE_SERVICES_ANNUAL=    # one-time $90 USD Price id

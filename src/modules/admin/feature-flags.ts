@@ -5,6 +5,7 @@ const DEFAULTS: Record<FeatureFlagKey, boolean> = {
   directory: true,
   matrimonial: true,
   promotions: true,
+  services: true,
   volunteer_form: true,
 };
 
@@ -54,6 +55,7 @@ export async function featureDisabledMessage(
     directory: "Community Directory",
     matrimonial: "Matrimonial",
     promotions: "Paid promotions",
+    services: "Services marketplace",
     volunteer_form: "Volunteer form",
   };
   return `${labels[key]} is temporarily unavailable.`;

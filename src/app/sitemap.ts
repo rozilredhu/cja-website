@@ -19,6 +19,7 @@ const staticPaths = [
   "/documents",
   "/social",
   "/volunteer",
+  "/services",
   "/privacy",
   "/terms",
 ] as const;

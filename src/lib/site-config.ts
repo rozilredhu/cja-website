@@ -30,6 +30,7 @@ export const navLinks = [
   { href: "/heritage", label: "Heritage" },
   { href: "/documents", label: "Documents" },
   { href: "/social", label: "Social" },
+  { href: "/services", label: "Services" },
   { href: "/contact", label: "Contact" },
   { href: "/volunteer", label: "Volunteer" },
   { href: "/members/login", label: "Login" },

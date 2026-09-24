@@ -1,5 +1,9 @@
 import { getDb } from "@/lib/db";
 import { countOverduePending } from "@/modules/matrimonial/queries";
+import {
+  countOverduePendingServices,
+  countPendingServices,
+} from "@/modules/services/queries";
 import { isMaintenanceMode } from "./site-settings";
 import type {
   DashboardCounts,
@@ -14,6 +18,8 @@ export async function getDashboardCounts(): Promise<DashboardCounts> {
   const empty: DashboardCounts = {
     matrimonialPending: 0,
     matrimonialOverdue: 0,
+    servicesPending: 0,
+    servicesOverdue: 0,
     directoryDisabledProfiles: 0,
     directoryDisabledBusinesses: 0,
     newsDrafts: 0,
@@ -27,6 +33,8 @@ export async function getDashboardCounts(): Promise<DashboardCounts> {
     const [
       matPending,
       matOverdue,
+      svcPending,
+      svcOverdue,
       dirProf,
       dirBiz,
       newsDrafts,
@@ -40,6 +48,8 @@ export async function getDashboardCounts(): Promise<DashboardCounts> {
         )
         .first<{ c: number }>(),
       countOverduePending().catch(() => 0),
+      countPendingServices().catch(() => 0),
+      countOverduePendingServices().catch(() => 0),
       db
         .prepare(
           `SELECT COUNT(*) AS c FROM directory_profiles WHERE disabled = 1`,
@@ -69,6 +79,8 @@ export async function getDashboardCounts(): Promise<DashboardCounts> {
     return {
       matrimonialPending: matPending?.c ?? 0,
       matrimonialOverdue: matOverdue,
+      servicesPending: svcPending,
+      servicesOverdue: svcOverdue,
       directoryDisabledProfiles: dirProf?.c ?? 0,
       directoryDisabledBusinesses: dirBiz?.c ?? 0,
       newsDrafts: newsDrafts?.c ?? 0,

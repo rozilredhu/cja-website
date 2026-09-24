@@ -51,6 +51,7 @@ export type FeatureFlagKey =
   | "directory"
   | "matrimonial"
   | "promotions"
+  | "services"
   | "volunteer_form";
 
 export type UserAdminRow = {
@@ -71,6 +72,8 @@ export type AdminFormState = {
 export type DashboardCounts = {
   matrimonialPending: number;
   matrimonialOverdue: number;
+  servicesPending: number;
+  servicesOverdue: number;
   directoryDisabledProfiles: number;
   directoryDisabledBusinesses: number;
   newsDrafts: number;

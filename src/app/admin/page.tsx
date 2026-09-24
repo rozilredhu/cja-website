@@ -76,6 +76,18 @@ export default async function AdminDashboardPage() {
       badgeTone: counts.matrimonialOverdue > 0 ? "warn" : "muted",
     },
     {
+      href: "/admin/services",
+      title: "Services moderation",
+      description: "Approve/reject paid service listings. Overdue if pending > 24h.",
+      badge:
+        counts.servicesOverdue > 0
+          ? `${counts.servicesOverdue} overdue / ${counts.servicesPending} pending`
+          : counts.servicesPending > 0
+            ? `${counts.servicesPending} pending`
+            : null,
+      badgeTone: counts.servicesOverdue > 0 ? "warn" : "muted",
+    },
+    {
       href: "/admin/promotions",
       title: "Promotion orders",
       description: "Review paid promotion stub orders.",

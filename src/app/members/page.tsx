@@ -50,6 +50,12 @@ export default async function MembersDashboardPage() {
           <li>
             <Link href="/members/matrimonial">Matrimonial profiles</Link>
           </li>
+          <li>
+            <Link href="/members/services">Services listings</Link>
+          </li>
+          <li>
+            <Link href="/services">Browse Services (public)</Link>
+          </li>
           {user.role === "admin" ? (
             <li>
               <Link href="/admin">Admin dashboard</Link>

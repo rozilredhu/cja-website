@@ -91,3 +91,13 @@ npm run dev
 ## Out of scope
 
 - Full event ticketing, Stripe live keys, production deploy, native apps
+
+## Services marketplace
+
+Public browse: `/services` (no login). Members manage listings at `/members/services`. Admin moderation: `/admin/services`.
+
+**Plans (USD one-time Checkout):** Monthly $10 (30d) · Quarterly $25 (90d) · Annual $90 (365d). Payment → `pending_approval` → admin approve → live for duration from `approved_at`.
+
+Migration: `migrations/0007_services.sql`. Feature flag: `services`.
+
+Stripe secrets (optional; stub works without): `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `STRIPE_PRICE_SERVICES_MONTHLY`, `STRIPE_PRICE_SERVICES_QUARTERLY`, `STRIPE_PRICE_SERVICES_ANNUAL`. Webhook URL: `/api/payments/services/webhook` (event: `checkout.session.completed`).

@@ -29,6 +29,7 @@ export default async function HomePage() {
   const about = homeContent.aboutPreview;
   const matrimonial = homeContent.matrimonialPreview;
   const directory = homeContent.directoryPreview;
+  const services = homeContent.servicesPreview;
 
   return (
     <>
@@ -195,6 +196,18 @@ export default async function HomePage() {
             {" · "}
             <Link className="text-link" href="/members/register">
               Register
+            </Link>
+          </article>
+          <article className="card preview-card">
+            <h3>{services.title}</h3>
+            <p>{services.body}</p>
+            <p className="stub-note">{services.note}</p>
+            <Link className="text-link" href={services.href}>
+              {services.cta} →
+            </Link>
+            {" · "}
+            <Link className="text-link" href="/members/services">
+              List a service
             </Link>
           </article>
         </div>
