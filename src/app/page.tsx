@@ -37,7 +37,6 @@ export default async function HomePage() {
     [];
   const latest = await getLatestNews(3);
   const about = homeContent.aboutPreview;
-  const calendar = homeContent.calendarPreview;
   const matrimonial = homeContent.matrimonialPreview;
   const directory = homeContent.directoryPreview;
   const services = homeContent.servicesPreview;
@@ -80,22 +79,6 @@ export default async function HomePage() {
           </Link>
         </section>
       ) : null}
-
-      <section className="section-block" aria-labelledby="calendar-preview">
-        <div className="section-head">
-          <h2 id="calendar-preview">{calendar.title}</h2>
-          <Link href={calendar.href}>{calendar.cta} →</Link>
-        </div>
-        <article className="card preview-card calendar-preview-card">
-          <p className="eyebrow">Panchang · GTA</p>
-          <h3>{calendar.title}</h3>
-          <p>{calendar.body}</p>
-          <p className="stub-note">{calendar.note}</p>
-          <Link className="btn-primary" href={calendar.href}>
-            {calendar.cta}
-          </Link>
-        </article>
-      </section>
 
       <section className="section-block" aria-labelledby="about-preview">
         <div className="section-head">

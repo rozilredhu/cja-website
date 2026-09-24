@@ -14,14 +14,6 @@ export const homeContent = {
     href: "/about",
     cta: "Learn more about CJA",
   },
-  /** Hindu calendar teaser — points visitors to the full panchang page */
-  calendarPreview: {
-    title: "Hindu Calendar",
-    body: "Browse an indicative Hindu panchang for the Greater Toronto Area — tithi timings, Purnima, Amavasya, and festivals, month by month.",
-    note: "Times are shown in America/Toronto for Mississauga / GTA. Indicative only — verify muhurat with a local pandit.",
-    href: "/hindu-calendar",
-    cta: "Open Hindu Calendar",
-  },
   /** Members-only matrimonial — public teaser pointing at login */
   matrimonialPreview: {
     title: "Matrimonial",
