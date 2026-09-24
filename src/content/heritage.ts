@@ -2,18 +2,16 @@ import type { HeritageArticle, HeritageTimelineEntry, GalleryItem } from "./type
 
 export const heritageIntro = {
   title: "Jats Heritage",
-  hindiTitle: "जाट विरासत",
   lede:
-    "A respectful introduction to who the Jats (Jāṭs / जाट) are — community overview, carefully phrased history, and how diaspora life in Canada continues the story.",
+    "A respectful introduction to who the Jats (also Jaat or Jatt) are — community overview, carefully phrased history, and how diaspora life in Canada continues the story.",
 };
 
 /** Structured sections for the Heritage landing page (original summary prose). */
 export const heritageSections = {
   overview: {
     title: "Who are the Jats?",
-    hindiLabel: "परिचय",
     paragraphs: [
-      "The Jats (also spelled Jaat or Jatt; Hindi: जाट) are a large community with deep roots in the northwestern Indian subcontinent. They are traditionally associated with farming, rural life, and strong kinship networks that link villages, clans (gotras), and extended families.",
+      "The Jats (also spelled Jaat or Jatt) are a large community with deep roots in the northwestern Indian subcontinent. They are traditionally associated with farming, rural life, and strong kinship networks that link villages, clans (gotras), and extended families.",
       "Today, people who identify as Jat live mainly in parts of northern India — including Punjab, Haryana, Rajasthan, and western Uttar Pradesh — and in regions of Pakistan such as Punjab and Sindh. Communities of Hindu, Sikh, and Muslim faith are all part of this wider story, reflecting the religious diversity of the region.",
       "Beyond South Asia, Jat families have built homes and careers across the diaspora, including Canada, the United Kingdom, the United States, and elsewhere. For many in Canada, that shared heritage is what brings people together through associations such as the Canadian Jats Association (CJA).",
     ],
@@ -34,7 +32,6 @@ export const heritageSections = {
   },
   history: {
     title: "A brief history",
-    hindiLabel: "इतिहास",
     paragraphs: [
       "Accounts of early Jat history draw on a mix of oral tradition, community memory, and scholarly research. Many traditions describe pastoral beginnings in the Indus valley region, followed by gradual settlement into settled farming as families moved into the Punjab and neighbouring plains over centuries. Exact origins are still discussed among historians; this page presents those views as traditions and accounts, not as settled fact.",
       "Over time, Jat communities became closely associated with agriculture and local landholding. In various periods they also appear in military and political life — as village defenders, soldiers, and, in some eras, as local leaders. These roles differed by region and century, and no single story fits every clan or district.",
@@ -43,7 +40,6 @@ export const heritageSections = {
   },
   today: {
     title: "Today & the diaspora",
-    hindiLabel: "आज और प्रवास",
     paragraphs: [
       "In India and Pakistan, Jat communities remain prominent in rural economies and are also well represented in cities, sports, the military, business, and public life. Younger generations often balance modern careers with respect for language, festivals, and family custom.",
       "In Canada, Jat families form part of the wider Indo-Canadian community. Many arrived for study, work, or family reunification and have put down roots especially in the Greater Toronto Area and other urban centres. CJA was formed in 2006 as a non-for-profit forum so members could meet, celebrate festivals such as Holi and Diwali, support newcomers, and pass culture on to the next generation.",
@@ -52,7 +48,6 @@ export const heritageSections = {
   },
   culture: {
     title: "Culture & community identity",
-    hindiLabel: "संस्कृति",
     cards: [
       {
         title: "Festivals & gathering",

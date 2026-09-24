@@ -28,7 +28,7 @@ export default async function UnifiedLoginPage() {
     <>
       <PageHero
         title="Sign in"
-        description="Choose Admin or Regular users (आम लोग). Each section uses its own account type."
+        description="Choose Admin or Regular users. Each section uses its own account type."
         eyebrow="Accounts"
       />
       <div className="login-split">
@@ -41,7 +41,7 @@ export default async function UnifiedLoginPage() {
           <AdminLoginForm />
         </section>
         <section className="card login-panel" id="members">
-          <h2>Regular users (आम लोग)</h2>
+          <h2>Regular users</h2>
           <p className="muted">
             Member accounts for directory, matrimonial, promotions, and
             Services listings.

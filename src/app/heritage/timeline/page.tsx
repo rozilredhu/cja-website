@@ -20,7 +20,7 @@ export default function HeritageTimelinePage() {
   return (
     <>
       <PageHero
-        eyebrow="Heritage · विरासत"
+        eyebrow="Heritage"
         title="Timeline"
         description="A short, carefully phrased arc — from community traditions to CJA in Canada. Origins are presented as accounts, not absolute claims."
       />

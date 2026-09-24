@@ -6,7 +6,10 @@ export function getAllEvents(): CommunityEvent[] {
 }
 
 export function getUpcomingEvents(): CommunityEvent[] {
-  return getAllEvents().filter((e) => e.upcoming);
+  // Soonest first so Diwali Function 2026 leads the list.
+  return getAllEvents()
+    .filter((e) => e.upcoming)
+    .sort((a, b) => a.dateStart.localeCompare(b.dateStart));
 }
 
 export function getPastEvents(): CommunityEvent[] {
@@ -22,9 +25,5 @@ export function getEventSlugs(): string[] {
 }
 
 export function getPrimaryUpcoming(): CommunityEvent | undefined {
-  // Soonest upcoming first (getUpcomingEvents is date-desc from getAllEvents).
-  const upcoming = getUpcomingEvents().sort((a, b) =>
-    a.dateStart.localeCompare(b.dateStart),
-  );
-  return upcoming[0];
+  return getUpcomingEvents()[0];
 }

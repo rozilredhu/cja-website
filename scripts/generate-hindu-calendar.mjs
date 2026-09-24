@@ -27,18 +27,18 @@ const LOCATION = {
 };
 
 const MONTH_LABELS = {
-  Chaitra: { en: "Chaitra", sa: "चैत्र" },
-  Vaishakha: { en: "Vaishakha", sa: "वैशाख" },
-  Jyeshtha: { en: "Jyeshtha", sa: "ज्येष्ठ" },
-  Ashadha: { en: "Ashadha", sa: "आषाढ़" },
-  Shravana: { en: "Shravana", sa: "श्रावण" },
-  Bhadrapada: { en: "Bhadrapada", sa: "भाद्रपद" },
-  Ashwina: { en: "Ashwina", sa: "आश्विन" },
-  Kartika: { en: "Kartika", sa: "कार्तिक" },
-  Margashirsha: { en: "Margashirsha", sa: "मार्गशीर्ष" },
-  Pausha: { en: "Pausha", sa: "पौष" },
-  Magha: { en: "Magha", sa: "माघ" },
-  Phalguna: { en: "Phalguna", sa: "फाल्गुन" },
+  Chaitra: "Chaitra",
+  Vaishakha: "Vaishakha",
+  Jyeshtha: "Jyeshtha",
+  Ashadha: "Ashadha",
+  Shravana: "Shravana",
+  Bhadrapada: "Bhadrapada",
+  Ashwina: "Ashwina",
+  Kartika: "Kartika",
+  Margashirsha: "Margashirsha",
+  Pausha: "Pausha",
+  Magha: "Magha",
+  Phalguna: "Phalguna",
 };
 
 const FESTIVAL_LABELS = {
@@ -203,10 +203,7 @@ for (let ymd = todayYmd; ymd <= lastInclusive; ymd = addDaysYmd(ymd, 1)) {
   const isAmavasya = p.tithi.name === "Amavasya" || p.tithi.number === 30;
 
   const monthKey = p.month.purnimanta;
-  const monthLabel = MONTH_LABELS[monthKey] ?? {
-    en: monthKey,
-    sa: monthKey,
-  };
+  const monthLabel = MONTH_LABELS[monthKey] ?? monthKey;
 
   // Deduplicate festival names for the day
   const rawFest = festivalsByDate.get(ymd) ?? [];
@@ -230,8 +227,7 @@ for (let ymd = todayYmd; ymd <= lastInclusive; ymd = addDaysYmd(ymd, 1)) {
     ],
     hinduMonth: {
       key: monthKey,
-      en: monthLabel.en,
-      sa: monthLabel.sa,
+      en: monthLabel,
       system: "purnimanta",
       paksha: p.tithi.paksha,
     },
@@ -275,7 +271,7 @@ for (const [key, monthDays] of byMonth) {
     counts.set(k, (counts.get(k) ?? 0) + 1);
   }
   const dominant = [...counts.entries()].sort((a, b) => b[1] - a[1])[0][0];
-  const label = MONTH_LABELS[dominant] ?? { en: dominant, sa: dominant };
+  const label = MONTH_LABELS[dominant] ?? dominant;
   const [y, m] = key.split("-").map(Number);
   const gregorianLabel = new Intl.DateTimeFormat("en-CA", {
     month: "long",
@@ -286,7 +282,7 @@ for (const [key, monthDays] of byMonth) {
   months.push({
     key,
     gregorianLabel,
-    hinduMonthDominant: { key: dominant, en: label.en, sa: label.sa },
+    hinduMonthDominant: { key: dominant, en: label },
     dayCount: monthDays.length,
   });
 }

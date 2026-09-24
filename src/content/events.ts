@@ -21,7 +21,7 @@ export const events: CommunityEvent[] = [
       "You're Invited to a Spectacular Diwali Celebration! presented by Canadian Jats Association !!",
       "Date: Saturday, 24 October 2026 · Time: 6 PM onwards · Location: Venue details TBA.",
       "Highlights: Delicious Indian Snacks and Dinner; Live music and dance performances; Fun games and activities for all ages.",
-      "Tickets: Adult $70; Early bird $10 off (expires 10 October 2026); CJA member $5 off (discounts combinable); Child (6–12) $60; Child (under 6) free.",
+      "Tickets: Adult $70 CAD; Early bird $10 CAD off (expires 10 October 2026); CJA member $5 CAD off (discounts combinable); Child (6–12) $60 CAD; Child (under 6) free.",
       "Email info@cjacanada.com with ticket counts, or contact CJA Executives.",
     ],
   },

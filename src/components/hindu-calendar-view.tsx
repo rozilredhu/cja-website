@@ -67,12 +67,10 @@ export function HinduCalendarView({ data, initialMonthKey }: Props) {
           <h2 className="hindu-cal-month-title">{meta?.gregorianLabel}</h2>
           {meta ? (
             <p className="muted hindu-cal-hindu-month">
-              <span lang="sa">{meta.hinduMonthDominant.sa}</span>
-              {" · "}
-              {meta.hinduMonthDominant.en}
+              Hindu month: {meta.hinduMonthDominant.en}
               <span className="hindu-cal-range-hint">
                 {" "}
-                (pūrṇimānta · {data.location.name})
+                (purnimanta · {data.location.name})
               </span>
             </p>
           ) : null}
@@ -114,10 +112,10 @@ export function HinduCalendarView({ data, initialMonthKey }: Props) {
                 <span className="hindu-cal-cell-date">{Number(day.date.slice(8))}</span>
                 <span className="hindu-cal-cell-tithi">{day.tithi.name}</span>
                 {day.tithi.isPurnima ? (
-                  <span className="hindu-cal-badge purnima">Pūrṇimā</span>
+                  <span className="hindu-cal-badge purnima">Purnima</span>
                 ) : null}
                 {day.tithi.isAmavasya ? (
-                  <span className="hindu-cal-badge amavasya">Amāvasyā</span>
+                  <span className="hindu-cal-badge amavasya">Amavasya</span>
                 ) : null}
                 {day.festivals[0] ? (
                   <span className="hindu-cal-cell-fest" title={day.festivals.map((f) => f.name).join(", ")}>
@@ -146,17 +144,17 @@ export function HinduCalendarView({ data, initialMonthKey }: Props) {
                     <span className="muted"> · {day.weekdayShort}</span>
                   </h3>
                   <p className="muted hindu-cal-day-month">
-                    <span lang="sa">{day.hinduMonth.sa}</span> {day.hinduMonth.en}
+                    {day.hinduMonth.en}
                     {" · "}
-                    {day.tithi.paksha === "shukla" ? "Śukla" : "Kṛṣṇa"} pakṣa
+                    {day.tithi.paksha === "shukla" ? "Shukla" : "Krishna"} paksha
                   </p>
                 </div>
                 <div className="hindu-cal-day-badges">
                   {day.tithi.isPurnima ? (
-                    <span className="hindu-cal-badge purnima">Pūrṇimā</span>
+                    <span className="hindu-cal-badge purnima">Purnima</span>
                   ) : null}
                   {day.tithi.isAmavasya ? (
-                    <span className="hindu-cal-badge amavasya">Amāvasyā</span>
+                    <span className="hindu-cal-badge amavasya">Amavasya</span>
                   ) : null}
                   {day.date === todayYmd ? (
                     <span className="hindu-cal-badge today">Today</span>
@@ -189,7 +187,7 @@ export function HinduCalendarView({ data, initialMonthKey }: Props) {
                 </div>
                 {day.nakshatra ? (
                   <div>
-                    <dt>Nakṣatra</dt>
+                    <dt>Nakshatra</dt>
                     <dd>{day.nakshatra.name}</dd>
                   </div>
                 ) : null}

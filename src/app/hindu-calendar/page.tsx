@@ -9,7 +9,7 @@ import {
 export const metadata: Metadata = {
   title: "Hindu Calendar",
   description:
-    "Indicative Hindu panchang calendar for the Greater Toronto Area — tithi timings, Pūrṇimā, Amāvasyā, and festivals.",
+    "Indicative Hindu panchang calendar for the Greater Toronto Area — tithi timings, Purnima, Amavasya, and festivals.",
   openGraph: {
     title: "Hindu Calendar",
     description:
@@ -34,12 +34,12 @@ export default function HinduCalendarPage() {
 
       <aside className="card hindu-cal-footnote" aria-label="Disclaimer">
         <p>
-          <strong>Indicative only.</strong> Tithi, nakṣatra, and festival dates are
-          computed astronomically (Drik Ganita / Smārta, pūrṇimānta) with the open-source{" "}
+          <strong>Indicative only.</strong> Tithi, nakshatra, and festival dates are
+          computed astronomically (Drik Ganita / Smarta, purnimanta) with the open-source{" "}
           <code>{data.source.library}</code> library (MIT) for {data.location.name}.{" "}
           {data.source.note} Sunrise-prevailing tithi is shown with its exact start and
           end. Regional calendars and temple almanacs may differ by a day for some
-          observances.
+          observances. Verify muhurat with a local pandit.
         </p>
         <p className="muted">
           Data range: {data.range.start} – {data.range.end} ({data.range.dayCount}{" "}

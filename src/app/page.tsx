@@ -41,19 +41,15 @@ export default async function HomePage() {
         </p>
         <h1>{homeContent.heroTitle}</h1>
         <p>{homeContent.heroBody}</p>
-        <div className="hero-actions">
-          {homeContent.heroCtas.map((cta) => (
-            <Link
-              key={cta.href}
-              href={cta.href}
-              className={
-                cta.href.startsWith("/contact") && cta.label === "Volunteer" ? "btn-saffron" : "btn-on-dark"
-              }
-            >
-              {cta.label}
-            </Link>
-          ))}
-        </div>
+        {homeContent.heroCtas.length > 0 ? (
+          <div className="hero-actions">
+            {homeContent.heroCtas.map((cta) => (
+              <Link key={cta.href} href={cta.href} className="btn-on-dark">
+                {cta.label}
+              </Link>
+            ))}
+          </div>
+        ) : null}
       </section>
 
       {upcoming ? (
@@ -252,7 +248,8 @@ export default async function HomePage() {
 
 function formatDate(iso: string) {
   try {
-    return new Date(iso + "T12:00:00").toLocaleDateString("en-CA", {
+    // Canadian English long form: "24 October 2026"
+    return new Date(iso + "T12:00:00").toLocaleDateString("en-GB", {
       year: "numeric",
       month: "long",
       day: "numeric",

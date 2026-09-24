@@ -27,15 +27,10 @@ export default function HeritageLandingPage() {
   return (
     <>
       <PageHero
-        eyebrow="Culture & history · संस्कृति और इतिहास"
+        eyebrow="Culture & history"
         title={intro.title}
         description={intro.lede}
       />
-      {intro.hindiTitle ? (
-        <p className="muted" style={{ marginTop: "-0.75rem" }}>
-          {intro.hindiTitle}
-        </p>
-      ) : null}
 
       <nav className="subnav card" aria-label="Heritage sections">
         <a href="#overview">Overview</a>
@@ -49,11 +44,6 @@ export default function HeritageLandingPage() {
       <section id="overview" className="section-block" aria-labelledby="heritage-overview">
         <h2 id="heritage-overview" className="section-title">
           {sections.overview.title}
-          {sections.overview.hindiLabel ? (
-            <span className="muted" style={{ fontWeight: 500, marginLeft: "0.5rem" }}>
-              ({sections.overview.hindiLabel})
-            </span>
-          ) : null}
         </h2>
         <div className="card">
           {sections.overview.paragraphs.map((para) => (
@@ -73,11 +63,6 @@ export default function HeritageLandingPage() {
       <section id="history" className="section-block" aria-labelledby="heritage-history">
         <h2 id="heritage-history" className="section-title">
           {sections.history.title}
-          {sections.history.hindiLabel ? (
-            <span className="muted" style={{ fontWeight: 500, marginLeft: "0.5rem" }}>
-              ({sections.history.hindiLabel})
-            </span>
-          ) : null}
         </h2>
         <div className="card">
           {sections.history.paragraphs.map((para) => (
@@ -94,11 +79,6 @@ export default function HeritageLandingPage() {
       <section id="today" className="section-block" aria-labelledby="heritage-today">
         <h2 id="heritage-today" className="section-title">
           {sections.today.title}
-          {sections.today.hindiLabel ? (
-            <span className="muted" style={{ fontWeight: 500, marginLeft: "0.5rem" }}>
-              ({sections.today.hindiLabel})
-            </span>
-          ) : null}
         </h2>
         <div className="card">
           {sections.today.paragraphs.map((para) => (
@@ -119,11 +99,6 @@ export default function HeritageLandingPage() {
       <section id="culture" className="section-block" aria-labelledby="heritage-culture">
         <h2 id="heritage-culture" className="section-title">
           {sections.culture.title}
-          {sections.culture.hindiLabel ? (
-            <span className="muted" style={{ fontWeight: 500, marginLeft: "0.5rem" }}>
-              ({sections.culture.hindiLabel})
-            </span>
-          ) : null}
         </h2>
         <div className="card-grid">
           {sections.culture.cards.map((c) => (

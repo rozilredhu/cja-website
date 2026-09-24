@@ -43,16 +43,16 @@ export default async function MembersDashboardPage() {
         </p>
         <ul className="member-dash-links">
           <li>
-            <Link href="/members/directory">Directory (डायरेक्टरी)</Link>
+            <Link href="/members/directory">Directory</Link>
           </li>
           <li>
             <Link href="/members/promotions">Paid promotions (CAD stub)</Link>
           </li>
           <li>
-            <Link href="/members/matrimonial">Matrimonial (मैट्रिमोनियल)</Link>
+            <Link href="/members/matrimonial">Matrimonial</Link>
           </li>
           <li>
-            <Link href="/members/services">Services (सर्विसेज़)</Link>
+            <Link href="/members/services">Services</Link>
           </li>
           <li>
             <Link href="/services">Browse Services (public)</Link>

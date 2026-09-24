@@ -14,7 +14,6 @@ export type HinduDay = {
   hinduMonth: {
     key: string;
     en: string;
-    sa: string;
     system: string;
     paksha: string;
   };
@@ -37,7 +36,7 @@ export type HinduDay = {
 export type HinduMonthMeta = {
   key: string;
   gregorianLabel: string;
-  hinduMonthDominant: { key: string; en: string; sa: string };
+  hinduMonthDominant: { key: string; en: string };
   dayCount: number;
 };
 

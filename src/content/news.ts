@@ -16,7 +16,7 @@ export const newsArticles: NewsArticle[] = [
       "Date: Saturday, 24 October 2026. Time: 6 PM onwards. Location: Venue details TBA.",
       "Celebrate the Festival of Lights with us! Enjoy a night filled with delicious food, vibrant music, cultural performances, and the joy of togetherness. This event is a wonderful opportunity to come together, celebrate and enjoy the festive spirit of Diwali with other Jat families. It will be a fun-filled day for all ages and will be a great chance for newcomers in Canada to meet and greet other Jat families.",
       "Highlights of the Evening: Delicious Indian Snacks and Dinner; Live music and dance performances; Fun games and activities for all ages.",
-      "Ticket Price: Adult — $70; Early bird — $10 off (expires 10 October 2026); CJA member — $5 off (early bird and member discounts can be combined); Child (6 to 12) — $60; Child (Under 6) — free.",
+      "Ticket Price: Adult — $70 CAD; Early bird — $10 CAD off (expires 10 October 2026); CJA member — $5 CAD off (early bird and member discounts can be combined); Child (6 to 12) — $60 CAD; Child (Under 6) — free.",
       "Please send your request email to info@cjacanada.com with the number of tickets or contact CJA Executives. Warm wishes, CJA Executive Team.",
     ],
   },
