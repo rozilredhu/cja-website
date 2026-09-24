@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 280" role="img" aria-label="CJA">
+  <title>CJA</title>
+  <defs>
+    <g id="maple">
+      <path fill="#E31937" d="M0,-36
+        C3,-28 8,-22 10,-14
+        L22,-20 C18,-10 16,-4 18,2
+        L32,-4 C24,6 20,12 16,20
+        L28,22 C16,24 10,28 6,36
+        L0,28 L-6,36
+        C-10,28 -16,24 -28,22
+        L-16,20 C-20,12 -24,6 -32,-4
+        L-18,2 C-16,-4 -18,-10 -22,-20
+        L-10,-14 C-8,-22 -3,-28 0,-36 Z
+        M-3,28 L0,46 L3,28 Z"/>
+    </g>
+    <g id="chakra">
+      <circle cx="0" cy="0" r="28" fill="#FFFFFF"/>
+      <circle cx="0" cy="0" r="24" fill="none" stroke="#000080" stroke-width="2.4"/>
+      <circle cx="0" cy="0" r="5.2" fill="#000080"/>
+      <g stroke="#000080" stroke-width="1.35" stroke-linecap="round">
+        <line x1="0" y1="-23" x2="0" y2="-7"/>
+        <line x1="0" y1="23" x2="0" y2="7"/>
+        <line x1="-23" y1="0" x2="-7" y2="0"/>
+        <line x1="23" y1="0" x2="7" y2="0"/>
+        <g transform="rotate(15)"><line x1="0" y1="-23" x2="0" y2="-7"/><line x1="0" y1="23" x2="0" y2="7"/><line x1="-23" y1="0" x2="-7" y2="0"/><line x1="23" y1="0" x2="7" y2="0"/></g>
+        <g transform="rotate(30)"><line x1="0" y1="-23" x2="0" y2="-7"/><line x1="0" y1="23" x2="0" y2="7"/><line x1="-23" y1="0" x2="-7" y2="0"/><line x1="23" y1="0" x2="7" y2="0"/></g>
+        <g transform="rotate(45)"><line x1="0" y1="-23" x2="0" y2="-7"/><line x1="0" y1="23" x2="0" y2="7"/><line x1="-23" y1="0" x2="-7" y2="0"/><line x1="23" y1="0" x2="7" y2="0"/></g>
+        <g transform="rotate(60)"><line x1="0" y1="-23" x2="0" y2="-7"/><line x1="0" y1="23" x2="0" y2="7"/><line x1="-23" y1="0" x2="-7" y2="0"/><line x1="23" y1="0" x2="7" y2="0"/></g>
+        <g transform="rotate(75)"><line x1="0" y1="-23" x2="0" y2="-7"/><line x1="0" y1="23" x2="0" y2="7"/><line x1="-23" y1="0" x2="-7" y2="0"/><line x1="23" y1="0" x2="7" y2="0"/></g>
+      </g>
+    </g>
+  </defs>
+  <g transform="translate(320, 140)">
+    <g transform="translate(-230,0)">
+      <circle cx="8" cy="0" r="92" fill="#E31937"/>
+      <circle cx="8" cy="0" r="54" fill="#FFFFFF"/>
+      <rect x="30" y="-40" width="80" height="80" fill="#FFFFFF"/>
+      <use href="#maple" transform="translate(4,4) scale(1.15)"/>
+    </g>
+    <g transform="translate(-20,0)">
+      <path fill="#138808" d="M-28,-92 H28 V48
+        C28,78 8,96 -28,96
+        C-48,96 -62,88 -70,76
+        L-48,60
+        C-44,68 -38,74 -28,74
+        C-10,74 4,64 4,48
+        V-92 Z"/>
+    </g>
+    <g transform="translate(210,0)">
+      <path fill="#FF9933" d="M0,-96 L96,96 H52 L38,64 H-38 L-52,96 H-96 Z
+        M0,-28 L-24,36 H24 Z"/>
+      <use href="#chakra" transform="translate(0,8) scale(1.05)"/>
+    </g>
+  </g>
+</svg>

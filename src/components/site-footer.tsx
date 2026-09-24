@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { footerLinks, footerSocialLinks, siteConfig } from "@/lib/site-config";
 
@@ -40,7 +41,16 @@ export function SiteFooter() {
     <footer className="site-footer">
       <div className="site-footer-inner">
         <div>
-          <p className="footer-brand">{siteConfig.name}</p>
+          <Link href="/" className="footer-brand-link">
+            <Image
+              src="/images/brand/CJA_Logo_Full_Transparent_WhiteText.png"
+              alt={siteConfig.name}
+              width={220}
+              height={150}
+              className="footer-logo"
+              unoptimized
+            />
+          </Link>
           <p className="footer-tagline">
             Connecting Jat families across Canada.
           </p>

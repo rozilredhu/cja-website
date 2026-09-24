@@ -10,7 +10,7 @@ export function OrganizationJsonLd() {
     description: siteConfig.description,
     email: siteConfig.email,
     areaServed: "CA",
-    logo: `${siteConfig.url}/icons/icon-512x512.png`,
+    logo: `${siteConfig.url}/images/brand/CJA_Logo_Full_Transparent.png`,
   };
 
   return (

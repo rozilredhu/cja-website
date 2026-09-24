@@ -105,17 +105,24 @@ img {
   color: #fff;
 }
 
-.brand-mark {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 0.5rem;
-  background: var(--cja-saffron);
-  font-weight: 700;
-  font-size: 0.85rem;
-  letter-spacing: 0.04em;
+.brand-logo {
+  display: block;
+  width: auto;
+  height: 2.6rem;
+  object-fit: contain;
+}
+
+.footer-brand-link {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.footer-logo {
+  display: block;
+  width: auto;
+  height: 4.5rem;
+  max-width: 14rem;
+  object-fit: contain;
 }
 
 .brand-text {
