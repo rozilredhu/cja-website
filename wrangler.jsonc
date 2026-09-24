@@ -56,7 +56,6 @@
         {
           "binding": "DB",
           "database_name": "cja-website-db-production",
-          // Placeholder — create before any production deploy (requires human approval)
           "database_id": "cd650b4c-e85b-4402-8964-755128d4c608",
           "migrations_dir": "migrations"
         }
