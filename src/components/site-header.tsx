@@ -178,6 +178,7 @@ export function SiteHeader() {
   }, [open, openSub]);
 
   return (
+    <>
     <header className={`site-header${scrolled ? " is-scrolled" : ""}`}>
       <div className="site-header-inner">
         <Link
@@ -231,5 +232,10 @@ export function SiteHeader() {
         </nav>
       </div>
     </header>
+    <div
+      className={`site-header-spacer${scrolled ? " is-scrolled" : ""}`}
+      aria-hidden
+    />
+    </>
   );
 }
