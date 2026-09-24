@@ -64,8 +64,28 @@ export default async function HomePage() {
       </section>
 
       {upcoming ? (
-        <section className="event-banner" aria-label="Upcoming event">
-          <div>
+        <section
+          className={
+            upcoming.coverImage
+              ? "event-banner event-banner--with-photo"
+              : "event-banner"
+          }
+          aria-label="Upcoming event"
+        >
+          {upcoming.coverImage ? (
+            <div className="event-banner-media">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={upcoming.coverImage}
+                alt={
+                  upcoming.coverImageAlt ??
+                  upcoming.coverLabel ??
+                  upcoming.title
+                }
+              />
+            </div>
+          ) : null}
+          <div className="event-banner-body">
             <p className="eyebrow">Upcoming event</p>
             <h2>{upcoming.title}</h2>
             <p className="muted">

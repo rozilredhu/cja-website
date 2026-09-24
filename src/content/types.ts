@@ -49,6 +49,9 @@ export type CommunityEvent = {
   googleDriveUrl?: string;
   upcoming?: boolean;
   coverLabel?: string;
+  /** Optional cover image under /public (e.g. Instagram event flyer). */
+  coverImage?: string;
+  coverImageAlt?: string;
 };
 
 export type GalleryItem = {

@@ -6,8 +6,20 @@ type Props = { event: CommunityEvent };
 export function EventCard({ event }: Props) {
   return (
     <article className="card content-card">
-      <div className="event-cover" aria-hidden>
-        <span>{event.coverLabel ?? "Event"}</span>
+      <div
+        className={
+          event.coverImage ? "event-cover event-cover--photo" : "event-cover"
+        }
+      >
+        {event.coverImage ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={event.coverImage}
+            alt={event.coverImageAlt ?? event.coverLabel ?? event.title}
+          />
+        ) : (
+          <span aria-hidden>{event.coverLabel ?? "Event"}</span>
+        )}
       </div>
       <p className="eyebrow">{formatDate(event.dateStart)}</p>
       <h2>

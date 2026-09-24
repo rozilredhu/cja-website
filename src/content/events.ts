@@ -17,6 +17,12 @@ export const events: CommunityEvent[] = [
       "Likely venue: Chandni Banquet Hall, Brampton — to be confirmed",
     upcoming: true,
     coverLabel: "Diwali Mahotsav 2026",
+    // Cover from official CJA Instagram @cjacanadaofficial
+    // Post: https://www.instagram.com/cjacanadaofficial/p/DdZjuW6n9i3/
+    // Caption hint (17 Sep 2026): Super Early Bird pricing for Diwali Mahotsav 2026
+    coverImage: "/images/cja-diwali-ig-mahotsav-2026-banner.jpg",
+    coverImageAlt:
+      "CJA Diwali Mahotsav 2026 festive flyer from @cjacanadaofficial — gold Diwali script on a deep red lantern background",
     googleDriveUrl:
       "https://drive.google.com/drive/folders/1Lqqov40YI1fn5edZ6iMyYbHglBmWUUFh",
     body: [
