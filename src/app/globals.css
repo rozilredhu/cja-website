@@ -2118,13 +2118,32 @@ img {
   animation-delay: 200ms;
 }
 
+/* Member features: three equal square cards in a row */
 .home-preview-grid {
-  grid-template-columns: 1fr;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  align-items: stretch;
 }
 
-@media (min-width: 720px) {
+.home-preview-grid > .card {
+  margin-top: 0; /* override .card + .card stacking margin */
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  box-sizing: border-box;
+  overflow: auto;
+}
+
+@media (max-width: 719px) {
   .home-preview-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
+  }
+
+  .home-preview-grid > .card {
+    aspect-ratio: auto;
+    min-height: 0;
   }
 }
 
