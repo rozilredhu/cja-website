@@ -13,13 +13,42 @@ function mapRow(row: OfficialRow): Official {
     status: row.status,
     photoUrl: row.photo_url,
     shortBio: row.short_bio ?? undefined,
-    // occupation / appointedAs live in file content until Admin CMS columns exist
     joinedAt: row.join_date ?? undefined,
     termStart: row.term_start ?? undefined,
     termEnd: row.term_end ?? undefined,
     socialUrl: row.social_url ?? undefined,
     tenureLabel: row.tenure_label ?? undefined,
   };
+}
+
+/** Match key for merging file-based bio enrichment onto DB rows. */
+function enrichmentKey(o: Pick<Official, "fullName" | "category" | "displayOrder">) {
+  return `${o.category}::${o.displayOrder}::${o.fullName}`.toLowerCase();
+}
+
+/**
+ * Overlay occupation / appointedAs / placeholder bio+term fields from
+ * src/content/officials.ts onto DB rows until Admin CMS stores them.
+ * DB values win when already set.
+ */
+function mergeFileEnrichment(list: Official[]): Official[] {
+  const byKey = new Map(
+    fileOfficials.map((o) => [enrichmentKey(o), o] as const),
+  );
+  return list.map((row) => {
+    const file = byKey.get(enrichmentKey(row));
+    if (!file) return row;
+    return {
+      ...row,
+      shortBio: row.shortBio || file.shortBio,
+      occupation: row.occupation ?? file.occupation,
+      appointedAs: row.appointedAs ?? file.appointedAs,
+      termStart: row.termStart || file.termStart,
+      termEnd: row.termEnd || file.termEnd,
+      photoUrl: row.photoUrl ?? file.photoUrl,
+      socialUrl: row.socialUrl ?? file.socialUrl,
+    };
+  });
 }
 
 async function loadFromDb(): Promise<Official[] | null> {
@@ -38,7 +67,8 @@ async function loadFromDb(): Promise<Official[] | null> {
 
 async function allOfficials(): Promise<Official[]> {
   const fromDb = await loadFromDb();
-  return fromDb ?? fileOfficials;
+  if (!fromDb) return fileOfficials;
+  return mergeFileEnrichment(fromDb);
 }
 
 export async function getActiveOfficials(): Promise<Official[]> {
