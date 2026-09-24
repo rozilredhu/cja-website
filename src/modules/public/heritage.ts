@@ -2,11 +2,16 @@ import {
   heritageArticles,
   heritageGallery,
   heritageIntro,
+  heritageSections,
   heritageTimeline,
 } from "@/content/heritage";
 
 export function getHeritageIntro() {
   return heritageIntro;
+}
+
+export function getHeritageSections() {
+  return heritageSections;
 }
 
 export function getHeritageArticles() {

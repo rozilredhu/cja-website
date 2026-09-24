@@ -5,10 +5,11 @@ import { getHeritageTimeline } from "@/modules/public/heritage";
 
 export const metadata: Metadata = {
   title: "Heritage Timeline",
-  description: "Sample timeline of Jat community milestones in Canada.",
+  description:
+    "High-level milestones in Jat community history and CJA in Canada.",
   openGraph: {
     title: "Heritage Timeline",
-    description: "Sample Jat heritage timeline.",
+    description: "Jat heritage and CJA milestones at a glance.",
     url: "/heritage/timeline",
   },
 };
@@ -19,9 +20,9 @@ export default function HeritageTimelinePage() {
   return (
     <>
       <PageHero
-        eyebrow="Heritage"
+        eyebrow="Heritage · विरासत"
         title="Timeline"
-        description="Sample milestones — replace with researched dates and stories."
+        description="A short, carefully phrased arc — from community traditions to CJA in Canada. Origins are presented as accounts, not absolute claims."
       />
       <ol className="timeline">
         {entries.map((entry) => (
