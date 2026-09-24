@@ -27,7 +27,7 @@ export type NavLink = {
   children?: readonly { href: string; label: string }[];
 };
 
-/** Primary top nav — Events / Volunteer removed from header (pages remain reachable). About CJA includes Document centre. */
+/** Primary top nav — Events / Volunteer removed from header (pages remain reachable). About CJA dropdown includes Our Socials. */
 export const navLinks: readonly NavLink[] = [
   { href: "/", label: "Home" },
   { href: "/officials", label: "Officials" },
@@ -35,8 +35,14 @@ export const navLinks: readonly NavLink[] = [
   { href: "/hindu-calendar", label: "Calendar" },
   { href: "/gallery", label: "Gallery" },
   { href: "/heritage", label: "Heritage" },
-  { href: "/about", label: "About CJA" },
-  { href: "/social", label: "Social" },
+  {
+    href: "/about",
+    label: "About CJA",
+    children: [
+      { href: "/about", label: "About CJA" },
+      { href: "/social", label: "Our Socials" },
+    ],
+  },
   { href: "/contact", label: "Contact" },
   { href: "/members/login", label: "Login" },
 ] as const;
