@@ -26,13 +26,11 @@ export type NavLink = {
   children?: readonly { href: string; label: string }[];
 };
 
-/** Primary top nav — Services via homepage; Volunteer form lives on Contact (no submenu). */
+/** Primary top nav — Events / Volunteer / About removed from header (pages remain reachable). */
 export const navLinks: readonly NavLink[] = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
   { href: "/officials", label: "Officials" },
   { href: "/news", label: "News" },
-  { href: "/events", label: "Events" },
   { href: "/gallery", label: "Gallery" },
   { href: "/heritage", label: "Heritage" },
   { href: "/documents", label: "Documents" },

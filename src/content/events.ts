@@ -8,13 +8,13 @@ import type { CommunityEvent } from "./types";
 export const events: CommunityEvent[] = [
   {
     slug: "diwali-2026",
-    title: "CJA Annual Diwali Mahotsav 2026",
+    title: "Diwali Function 2026",
     summary:
       "Spectacular Diwali celebration — snacks & dinner, live music and dance, games for all ages. Venue details TBA.",
     dateStart: "2026-10-24",
     location: "Venue details TBA",
     upcoming: true,
-    coverLabel: "Diwali 2026",
+    coverLabel: "Diwali Function 2026",
     googleDriveUrl:
       "https://drive.google.com/drive/folders/1Lqqov40YI1fn5edZ6iMyYbHglBmWUUFh",
     body: [

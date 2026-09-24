@@ -22,5 +22,9 @@ export function getEventSlugs(): string[] {
 }
 
 export function getPrimaryUpcoming(): CommunityEvent | undefined {
-  return getUpcomingEvents()[0];
+  // Soonest upcoming first (getUpcomingEvents is date-desc from getAllEvents).
+  const upcoming = getUpcomingEvents().sort((a, b) =>
+    a.dateStart.localeCompare(b.dateStart),
+  );
+  return upcoming[0];
 }
