@@ -8,6 +8,7 @@ import {
   sendVerificationEmailStub,
 } from "./email";
 import { hashPassword, randomToken, verifyPassword } from "./password";
+import { isAdminRole } from "./roles";
 import {
   clearMfaPendingCookie,
   createSession,
@@ -16,6 +17,7 @@ import {
   setMfaPendingCookie,
   setSessionCookie,
   sqlExpiresInHours,
+  touchLastLogin,
 } from "./session";
 import { generateTotpSecret, totpOtpauthUri, verifyTotp } from "./totp";
 
@@ -114,7 +116,7 @@ export async function adminLoginAction(
     return { error: "Invalid email or password." };
   }
 
-  if (row.role !== "admin") {
+  if (!isAdminRole(row.role)) {
     return { error: "This account is not an admin. Use the Regular users section." };
   }
 
@@ -130,6 +132,7 @@ export async function adminLoginAction(
 
   const token = await createSession(row.id);
   await setSessionCookie(token);
+  await touchLastLogin(row.id);
   redirect("/admin");
 }
 
@@ -175,7 +178,7 @@ export async function adminMfaChallengeAction(
   if (
     !row ||
     row.disabled ||
-    row.role !== "admin" ||
+    !isAdminRole(row.role) ||
     !row.totp_secret ||
     !row.totp_enabled_at
   ) {
@@ -191,6 +194,7 @@ export async function adminMfaChallengeAction(
   await clearMfaPendingCookie();
   const session = await createSession(row.id);
   await setSessionCookie(session);
+  await touchLastLogin(row.id);
   redirect("/admin");
 }
 
@@ -409,7 +413,7 @@ export async function memberLoginAction(
     return { error: "Invalid email or password." };
   }
 
-  if (row.role === "admin") {
+  if (isAdminRole(row.role)) {
     return {
       error: "Admin accounts use the Admin login section on this page.",
     };
@@ -490,7 +494,7 @@ export async function resendVerificationAction(
 ): Promise<AuthFormState> {
   const { getCurrentUser } = await import("./session");
   const user = await getCurrentUser();
-  if (!user || user.role === "admin") {
+  if (!user || isAdminRole(user.role)) {
     return { error: "Sign in as a member to resend verification." };
   }
   if (user.emailVerified) {

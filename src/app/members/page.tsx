@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHero } from "@/components/page-hero";
 import { memberLogoutAction } from "@/modules/auth/actions";
+import { isAdmin } from "@/modules/auth/roles";
 import { requireMemberUser } from "@/modules/auth/session";
 import { ResendVerificationForm } from "@/modules/members/components/resend-verification-form";
 
@@ -56,7 +57,7 @@ export default async function MembersDashboardPage() {
           <li>
             <Link href="/services">Browse Services (public)</Link>
           </li>
-          {user.role === "admin" ? (
+          {isAdmin(user) ? (
             <li>
               <Link href="/admin">Admin dashboard</Link>
             </li>

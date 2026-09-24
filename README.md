@@ -73,12 +73,17 @@ npm run db:migrate:local
 npm run db:migrate:staging
 ```
 
-## Sample accounts (unchanged)
+## Sample / staging accounts
 
-| Role | Email | Password |
-|------|-------|----------|
-| Admin | `admin@example.com` | `SampleAdmin123!` |
-| Member | `member@example.com` | `SampleMember123!` |
+| Role | Email | Notes |
+|------|-------|-------|
+| Super Admin (legacy sample) | `admin@example.com` | Promoted to `super_admin` by migration `0008`; password `SampleAdmin123!` until rotated |
+| Super Admin (staging seed) | `superadmin@cjacanada.ca` | Strong password set at seed time (operators only) |
+| Limited Admin | `admin1@` / `admin2@` / `admin3@cjacanada.ca` | Content moderation only |
+| Member | `member@example.com` | Password `SampleMember123!` |
+
+Roles: `super_admin` (full + manage admins) · `admin` (moderation/CMS) · `member`.
+Admin account management UI: `/admin/admins` (super_admin only).
 
 ## Prerequisites / install / local
 

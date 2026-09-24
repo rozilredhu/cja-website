@@ -5,6 +5,7 @@ import Link from "next/link";
 import { PageHero } from "@/components/page-hero";
 import { adminSetUserDisabledAction } from "@/modules/admin/actions";
 import { adminSearchUsers } from "@/modules/admin/queries";
+import { isAdminRole, roleLabel } from "@/modules/auth/roles";
 import { requireAdminUser } from "@/modules/auth/session";
 
 export const metadata: Metadata = {
@@ -23,7 +24,7 @@ export default async function AdminMembersPage({ searchParams }: Props) {
     <>
       <PageHero
         title="Members manager"
-        description="List users, view roles, and disable/enable accounts."
+        description="List users, view roles, and disable/enable member accounts. Admin accounts are managed under Admin accounts (Super Admin)."
         eyebrow="Admin"
       />
 
@@ -57,33 +58,38 @@ export default async function AdminMembersPage({ searchParams }: Props) {
               </tr>
             </thead>
             <tbody>
-              {users.map((u) => (
-                <tr key={u.id}>
-                  <td>{u.id}</td>
-                  <td>{u.email}</td>
-                  <td>{u.name}</td>
-                  <td>{u.role}</td>
-                  <td>{u.email_verified_at ? "yes" : "no"}</td>
-                  <td>{u.disabled ? "yes" : "no"}</td>
-                  <td>
-                    {u.id === admin.id ? (
-                      <span className="muted">you</span>
-                    ) : (
-                      <form action={adminSetUserDisabledAction}>
-                        <input type="hidden" name="id" value={u.id} />
-                        <input
-                          type="hidden"
-                          name="disabled"
-                          value={u.disabled ? "0" : "1"}
-                        />
-                        <button type="submit" className="btn-secondary btn-small">
-                          {u.disabled ? "Enable" : "Disable"}
-                        </button>
-                      </form>
-                    )}
-                  </td>
-                </tr>
-              ))}
+              {users.map((u) => {
+                const isAdminAccount = isAdminRole(u.role);
+                return (
+                  <tr key={u.id}>
+                    <td>{u.id}</td>
+                    <td>{u.email}</td>
+                    <td>{u.name}</td>
+                    <td>{roleLabel(u.role)}</td>
+                    <td>{u.email_verified_at ? "yes" : "no"}</td>
+                    <td>{u.disabled ? "yes" : "no"}</td>
+                    <td>
+                      {u.id === admin.id ? (
+                        <span className="muted">you</span>
+                      ) : isAdminAccount ? (
+                        <span className="muted">admin account</span>
+                      ) : (
+                        <form action={adminSetUserDisabledAction}>
+                          <input type="hidden" name="id" value={u.id} />
+                          <input
+                            type="hidden"
+                            name="disabled"
+                            value={u.disabled ? "0" : "1"}
+                          />
+                          <button type="submit" className="btn-secondary btn-small">
+                            {u.disabled ? "Enable" : "Disable"}
+                          </button>
+                        </form>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>

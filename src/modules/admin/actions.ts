@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getDb, getMediaBucket } from "@/lib/db";
+import { isAdminRole, isSuperAdmin } from "@/modules/auth/roles";
 import { requireAdminUser } from "@/modules/auth/session";
 import { writeAuditLog } from "./audit";
 import { setSetting } from "./site-settings";
@@ -361,6 +362,16 @@ export async function adminSetUserDisabledAction(
     .first<{ id: number; role: string; email: string }>();
   if (!target) return;
 
+  // Limited admins may only enable/disable members — never other admins.
+  if (isAdminRole(target.role) && !isSuperAdmin(admin)) {
+    return;
+  }
+
+  // Super admins manage other admins via /admin/admins; members page is for members.
+  if (isAdminRole(target.role) && isSuperAdmin(admin)) {
+    return;
+  }
+
   await db
     .prepare(
       `UPDATE users SET disabled = ?, updated_at = datetime('now') WHERE id = ?`,
@@ -523,7 +534,8 @@ export async function deleteNewsArticleAction(
 export async function toggleFeatureFlagAction(
   formData: FormData,
 ): Promise<void> {
-  const admin = await requireAdminUser();
+  const { requireSuperAdminUser } = await import("@/modules/auth/session");
+  const admin = await requireSuperAdminUser();
   const key = str(formData, "key") as FeatureFlagKey;
   const enabled = str(formData, "enabled") === "1" ? 1 : 0;
   const allowed: FeatureFlagKey[] = [
@@ -560,7 +572,8 @@ export async function toggleFeatureFlagAction(
 export async function setMaintenanceModeAction(
   formData: FormData,
 ): Promise<void> {
-  const admin = await requireAdminUser();
+  const { requireSuperAdminUser } = await import("@/modules/auth/session");
+  const admin = await requireSuperAdminUser();
   const enabled = str(formData, "enabled") === "1" ? "1" : "0";
   await setSetting("maintenance_mode", enabled);
 

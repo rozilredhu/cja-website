@@ -242,7 +242,8 @@ export async function adminSearchUsers(opts?: {
   }
   const res = await db
     .prepare(
-      `SELECT id, email, name, role, disabled, email_verified_at, created_at
+      `SELECT id, email, name, role, disabled, email_verified_at, created_at,
+              last_login_at
        FROM users
        ORDER BY created_at DESC
        LIMIT ?`,

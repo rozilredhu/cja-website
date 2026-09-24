@@ -1329,6 +1329,52 @@ img {
   color: #b71c1c;
 }
 
+.admin-role-line {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+}
+
+.admin-role-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  background: #e3f2fd;
+  color: #0d47a1;
+  letter-spacing: 0.02em;
+}
+
+.admin-role-badge-super {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.admin-actions-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  align-items: flex-start;
+}
+
+.form-success {
+  color: #1b5e20;
+  background: #e8f5e9;
+  border: 1px solid #a5d6a7;
+  border-radius: 0.35rem;
+  padding: 0.55rem 0.7rem;
+  font-size: 0.9rem;
+}
+
+.admin-code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.85em;
+  background: #f3f0ea;
+  padding: 0.1rem 0.35rem;
+  border-radius: 0.25rem;
+}
+
+
 .maintenance-banner {
   background: #fff3e0;
   border-bottom: 2px solid #ef6c00;

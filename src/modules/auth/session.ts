@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { getDb } from "@/lib/db";
 import { randomToken } from "./password";
-import type { AuthUser, UserRole } from "./roles";
+import { isAdminRole, isMember, type AuthUser, type UserRole } from "./roles";
 
 export const SESSION_COOKIE = "cja_session";
 export const SESSION_DAYS = 14;
@@ -137,25 +137,50 @@ export async function getCurrentUser(): Promise<AuthUser | null> {
   }
 }
 
+export async function touchLastLogin(userId: number): Promise<void> {
+  try {
+    const db = await getDb();
+    await db
+      .prepare(
+        `UPDATE users SET last_login_at = datetime('now'), updated_at = datetime('now')
+         WHERE id = ?`,
+      )
+      .bind(userId)
+      .run();
+  } catch {
+    // Column may be missing before migration; ignore
+  }
+}
+
 export async function requireAdmin(): Promise<AuthUser | null> {
   const user = await getCurrentUser();
-  if (!user || user.role !== "admin") return null;
+  if (!user || !isAdminRole(user.role)) return null;
   return user;
 }
 
 /** Redirect to member login if not a logged-in member or admin. */
 export async function requireMemberUser(): Promise<AuthUser> {
   const user = await getCurrentUser();
-  if (!user || (user.role !== "member" && user.role !== "admin")) {
+  if (!user || !isMember(user)) {
     redirect("/members/login");
   }
   return user;
 }
 
+/** Limited admin or super admin. */
 export async function requireAdminUser(): Promise<AuthUser> {
   const user = await getCurrentUser();
-  if (!user || user.role !== "admin") {
+  if (!user || !isAdminRole(user.role)) {
     redirect("/members/login#admin");
+  }
+  return user;
+}
+
+/** Super admin only — admin management / dangerous settings. */
+export async function requireSuperAdminUser(): Promise<AuthUser> {
+  const user = await getCurrentUser();
+  if (!user || user.role !== "super_admin") {
+    redirect("/admin");
   }
   return user;
 }

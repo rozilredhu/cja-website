@@ -2,6 +2,7 @@ export const dynamic = "force-dynamic";
 
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
+import { isAdmin } from "@/modules/auth/roles";
 import { getCurrentUser } from "@/modules/auth/session";
 
 export const metadata: Metadata = {
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
 /** Old /admin/login URL — redirect to unified login (admin section). */
 export default async function AdminLoginRedirectPage() {
   const user = await getCurrentUser();
-  if (user?.role === "admin") {
+  if (isAdmin(user)) {
     redirect("/admin");
   }
   redirect("/members/login#admin");

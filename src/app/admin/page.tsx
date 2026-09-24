@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHero } from "@/components/page-hero";
 import { adminLogoutAction } from "@/modules/auth/actions";
+import { isSuperAdmin, roleLabel } from "@/modules/auth/roles";
 import { requireAdminUser } from "@/modules/auth/session";
 import { listFeatureFlags } from "@/modules/admin/feature-flags";
 import { getDashboardCounts } from "@/modules/admin/queries";
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
 
 export default async function AdminDashboardPage() {
   const user = await requireAdminUser();
+  const superAdmin = isSuperAdmin(user);
   const [counts, flags] = await Promise.all([
     getDashboardCounts(),
     listFeatureFlags(),
@@ -26,6 +28,7 @@ export default async function AdminDashboardPage() {
     description: string;
     badge?: string | null;
     badgeTone?: "warn" | "ok" | "muted";
+    superOnly?: boolean;
   }[] = [
     {
       href: "/admin/officials",
@@ -37,7 +40,7 @@ export default async function AdminDashboardPage() {
     {
       href: "/admin/members",
       title: "Members",
-      description: "Search users, view roles, enable/disable accounts.",
+      description: "Search users, view roles, enable/disable member accounts.",
       badge:
         counts.membersDisabled > 0
           ? `${counts.membersDisabled} disabled`
@@ -93,11 +96,18 @@ export default async function AdminDashboardPage() {
       description: "Review paid promotion stub orders.",
     },
     {
+      href: "/admin/admins",
+      title: "Admin accounts",
+      description: "Create, disable, and reset passwords for volunteer admins.",
+      superOnly: true,
+    },
+    {
       href: "/admin/features",
       title: "Feature switches",
       description: "Toggle directory, matrimonial, promotions, volunteer.",
       badge: `${flags.filter((f) => f.enabled).length}/${flags.length} on`,
       badgeTone: "ok",
+      superOnly: true,
     },
     {
       href: "/admin/settings",
@@ -105,6 +115,7 @@ export default async function AdminDashboardPage() {
       description: "Maintenance mode and site-wide flags.",
       badge: counts.maintenanceMode ? "Maintenance ON" : "Live",
       badgeTone: counts.maintenanceMode ? "warn" : "ok",
+      superOnly: true,
     },
     {
       href: "/admin/mfa",
@@ -117,6 +128,8 @@ export default async function AdminDashboardPage() {
     },
   ];
 
+  const visibleCards = cards.filter((c) => !c.superOnly || superAdmin);
+
   return (
     <>
       <PageHero
@@ -125,8 +138,28 @@ export default async function AdminDashboardPage() {
         eyebrow="Administration"
       />
 
+      <p className="admin-role-line">
+        Role:{" "}
+        <span
+          className={
+            superAdmin
+              ? "admin-role-badge admin-role-badge-super"
+              : "admin-role-badge"
+          }
+        >
+          {roleLabel(user.role)}
+        </span>
+        {!superAdmin ? (
+          <span className="muted">
+            {" "}
+            — content moderation only; Admin accounts / feature switches /
+            maintenance require Super Admin.
+          </span>
+        ) : null}
+      </p>
+
       <section className="admin-hub-grid" aria-label="Admin tools">
-        {cards.map((c) => (
+        {visibleCards.map((c) => (
           <Link key={c.href} href={c.href} className="admin-hub-card">
             <h2>{c.title}</h2>
             <p className="muted">{c.description}</p>

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { PageHero } from "@/components/page-hero";
 import { toggleFeatureFlagAction } from "@/modules/admin/actions";
 import { listFeatureFlags } from "@/modules/admin/feature-flags";
-import { requireAdminUser } from "@/modules/auth/session";
+import { requireSuperAdminUser } from "@/modules/auth/session";
 
 export const metadata: Metadata = {
   title: "Admin — Feature switches",
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default async function AdminFeaturesPage() {
-  await requireAdminUser();
+  await requireSuperAdminUser();
   const flags = await listFeatureFlags();
 
   return (

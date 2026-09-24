@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { AdminLoginForm } from "@/components/admin-login-form";
 import { PageHero } from "@/components/page-hero";
+import { isAdmin } from "@/modules/auth/roles";
 import { getCurrentUser } from "@/modules/auth/session";
 import { MemberLoginForm } from "@/modules/members/components/member-login-form";
 
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
 
 export default async function UnifiedLoginPage() {
   const user = await getCurrentUser();
-  if (user?.role === "admin") {
+  if (isAdmin(user)) {
     redirect("/admin");
   }
   if (user?.role === "member") {

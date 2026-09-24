@@ -58,10 +58,11 @@ export type UserAdminRow = {
   id: number;
   email: string;
   name: string;
-  role: "admin" | "member";
+  role: "super_admin" | "admin" | "member";
   disabled: number;
   email_verified_at: string | null;
   created_at: string;
+  last_login_at?: string | null;
 };
 
 export type AdminFormState = {

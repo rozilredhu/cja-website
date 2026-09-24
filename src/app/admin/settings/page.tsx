@@ -5,7 +5,7 @@ import Link from "next/link";
 import { PageHero } from "@/components/page-hero";
 import { setMaintenanceModeAction } from "@/modules/admin/actions";
 import { isMaintenanceMode } from "@/modules/admin/site-settings";
-import { requireAdminUser } from "@/modules/auth/session";
+import { requireSuperAdminUser } from "@/modules/auth/session";
 
 export const metadata: Metadata = {
   title: "Admin — Site settings",
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default async function AdminSettingsPage() {
-  await requireAdminUser();
+  await requireSuperAdminUser();
   const maintenance = await isMaintenanceMode();
 
   return (

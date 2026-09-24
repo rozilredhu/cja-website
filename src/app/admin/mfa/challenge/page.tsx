@@ -5,6 +5,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { PageHero } from "@/components/page-hero";
 import { AdminMfaChallengeForm } from "@/components/admin-mfa-forms";
+import { isAdmin } from "@/modules/auth/roles";
 import {
   getCurrentUser,
   getMfaPendingUserId,
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
 
 export default async function AdminMfaChallengePage() {
   const user = await getCurrentUser();
-  if (user?.role === "admin") {
+  if (isAdmin(user)) {
     redirect("/admin");
   }
   const pending = await getMfaPendingUserId();
