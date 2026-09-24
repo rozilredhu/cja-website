@@ -3,14 +3,16 @@ export const dynamic = "force-dynamic";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ContactForm } from "@/components/contact-form";
+import { VolunteerForm } from "@/components/volunteer-form";
 import { PageHero } from "@/components/page-hero";
 import { getTurnstilePublicConfig } from "@/lib/env";
 import { siteConfig } from "@/lib/site-config";
+import { isFeatureEnabled } from "@/modules/admin/feature-flags";
 
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Contact the Canadian Jats Association. Forms are protected by Cloudflare Turnstile when configured.",
+    "Contact the Canadian Jats Association or share volunteer interest. Forms are protected by Cloudflare Turnstile when configured.",
   openGraph: {
     title: "Contact",
     description: "Contact the Canadian Jats Association.",
@@ -19,7 +21,10 @@ export const metadata: Metadata = {
 };
 
 export default async function ContactPage() {
-  const turnstile = await getTurnstilePublicConfig();
+  const [turnstile, volunteerEnabled] = await Promise.all([
+    getTurnstilePublicConfig(),
+    isFeatureEnabled("volunteer_form"),
+  ]);
 
   return (
     <>
@@ -54,16 +59,27 @@ export default async function ContactPage() {
       </div>
 
       <section className="card" style={{ marginTop: "1.25rem" }} id="volunteer">
-        <h2>Volunteer</h2>
+        <h2>Volunteer with CJA</h2>
         <p className="muted">
           Prefer to help on the ground at festivals, sports, youth programs, or
-          communications? Share your interest and the team will follow up.
+          communications? Tell us how you can help and the team will follow up.
         </p>
-        <p style={{ marginTop: "0.85rem" }}>
-          <Link className="btn-saffron" href="/contact/volunteer">
-            Volunteer interest form
-          </Link>
-        </p>
+        {volunteerEnabled ? (
+          <>
+            <VolunteerForm
+              siteKey={turnstile.turnstileSiteKey}
+              bypass={turnstile.turnstileBypass}
+            />
+            <p className="stub-note">
+              Sample flow only — submissions are verified for bots but not yet
+              emailed to officials.
+            </p>
+          </>
+        ) : (
+          <p className="form-error">
+            Volunteer interest form is temporarily unavailable.
+          </p>
+        )}
       </section>
     </>
   );

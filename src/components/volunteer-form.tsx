@@ -23,7 +23,7 @@ export function VolunteerForm({ siteKey, bypass }: Props) {
   return (
     <form action={action} className="stack-form">
       <label>
-        Name
+        Full name
         <input name="name" type="text" required autoComplete="name" />
       </label>
       <label>
@@ -31,8 +31,8 @@ export function VolunteerForm({ siteKey, bypass }: Props) {
         <input name="email" type="email" required autoComplete="email" />
       </label>
       <label>
-        How would you like to help?
-        <textarea name="interest" rows={4} required />
+        How can you help CJA? (what kind of volunteering can you provide)
+        <textarea name="interest" rows={5} required />
       </label>
       <TurnstileWidget siteKey={siteKey} bypass={bypass} />
       {state.error ? <p className="form-error">{state.error}</p> : null}

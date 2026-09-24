@@ -64,7 +64,7 @@ export default function AboutPage() {
         <p style={{ marginTop: "1rem" }}>
           <Link href="/contact">Contact CJA</Link>
           {" · "}
-          <Link href="/contact/volunteer">Volunteer</Link>
+          <Link href="/contact#volunteer">Volunteer</Link>
           {" · "}
           <Link href="/officials">Leadership</Link>
         </p>

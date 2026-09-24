@@ -26,7 +26,7 @@ export type NavLink = {
   children?: readonly { href: string; label: string }[];
 };
 
-/** Primary top nav — Services removed (reachable from homepage); Volunteer nested under Contact. */
+/** Primary top nav — Services via homepage; Volunteer form lives on Contact (no submenu). */
 export const navLinks: readonly NavLink[] = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
@@ -37,11 +37,7 @@ export const navLinks: readonly NavLink[] = [
   { href: "/heritage", label: "Heritage" },
   { href: "/documents", label: "Documents" },
   { href: "/social", label: "Social" },
-  {
-    href: "/contact",
-    label: "Contact",
-    children: [{ href: "/contact/volunteer", label: "Volunteer" }],
-  },
+  { href: "/contact", label: "Contact" },
   { href: "/members/login", label: "Login" },
 ] as const;
 

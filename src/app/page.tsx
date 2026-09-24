@@ -47,7 +47,7 @@ export default async function HomePage() {
               key={cta.href}
               href={cta.href}
               className={
-                cta.href === "/contact/volunteer" ? "btn-saffron" : "btn-on-dark"
+                cta.href.startsWith("/contact") && cta.label === "Volunteer" ? "btn-saffron" : "btn-on-dark"
               }
             >
               {cta.label}

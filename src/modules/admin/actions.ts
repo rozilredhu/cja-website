@@ -564,7 +564,7 @@ export async function toggleFeatureFlagAction(
   revalidatePath("/admin/features");
   revalidatePath("/admin");
   revalidatePath("/members");
-  revalidatePath("/contact/volunteer");
+  revalidatePath("/contact");
 }
 
 /* ── Maintenance ───────────────────────────────────────── */

@@ -18,7 +18,6 @@ const staticPaths = [
   "/heritage/gallery",
   "/documents",
   "/social",
-  "/contact/volunteer",
   "/services",
   "/privacy",
   "/terms",
