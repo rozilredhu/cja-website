@@ -17,7 +17,6 @@ const staticPaths = [
   "/heritage",
   "/heritage/timeline",
   "/heritage/gallery",
-  "/documents",
   "/social",
   "/services",
   "/privacy",

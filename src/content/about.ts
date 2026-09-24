@@ -1,14 +1,80 @@
+/**
+ * About CJA — factual copy only.
+ * Sources: cjacanada.com (About / Vision / Mission), Corporations Canada
+ * corporation #4385632 via federalcorporation.ca. Do not invent dates.
+ */
+
 export const aboutContent = {
-  /** Long-form About text from cjacanada.com (public). Shown as primary About body. */
+  /** Short lede for the page hero (Canadian English, from mission). */
+  lede:
+    "The Canadian Jats Association (CJA) brings Jat families together across Canada — welcoming newcomers, celebrating culture, and keeping the next generation connected to their roots.",
+
+  /**
+   * Polished Canadian-English About body drawn from cjacanada.com.
+   * Grammar and wording cleaned; facts unchanged.
+   */
+  introParagraphs: [
+    "The Canadian Jats Association (CJA) is a not-for-profit organization for the Jat community in Canada. Based in the Greater Toronto Area (Mississauga / Toronto, Ontario), its primary aim is to provide networking and support to newcomers while offering members and their families a common forum to meet, exchange views, and take part in community life.",
+    "CJA was formed in 2006 so that members could interact personally and build lasting connections. The association hosts social gatherings and annual gala events, and celebrates festivals including Holi and Diwali. Since its inception, CJA has been a platform to share knowledge among members and to represent the Jat community in Canada.",
+    "CJA also creates space for Indo-Canadians with roots in India to share cultural experiences, and works with community partners to foster goodwill between India and Canada. The public website has described an association with the Consulate General of India in Toronto, Panorama, and various Indo-Canadian community organizations.",
+  ],
+
+  /**
+   * Single-string intro for homepage teasers and other importers
+   * (same facts as introParagraphs).
+   */
   intro:
-    "The Canadian Jats Association (CJA) is a non-for-profit organization for the Jat community residing in Canada. Located in Toronto, Ontario, with the primary objective of providing networking and support to new immigrants. The CJA strives to offer networking opportunities through social gathering and annual Gala events to its members. CJA was formed in 2006, with the idea of having a common forum where the members could meet, exchange views and interact personally with the other community members. This organization also provides an ideal opportunity to the members and their respective families to participate in social celebrations including but not limited to Holi and Diwali festivals. Since its inception, the association has provided a platform to share and disseminate knowledge amongst our members as well as project the image of Jat community in Canada. CJA provides opportunities for the Indo- Canadians whose roots are from India, to share their unique cultural experiences. The association continue to maintain the enthusiasm and commitment amongst the members through networking and social events. The CJA is associated with Consulate General Office;Toronto, Panorama, and various Indo-Canada community organizations. We serve as a platform to foster goodwill between India and Canada. With currently over 400 members, the CJA is striving to enroll new members regularly.",
-  /** Mission statement from cjacanada.com. */
+    "The Canadian Jats Association (CJA) is a not-for-profit organization for the Jat community in Canada. Based in the Greater Toronto Area (Mississauga / Toronto, Ontario), its primary aim is to provide networking and support to newcomers while offering members and their families a common forum to meet, exchange views, and take part in community life. CJA was formed in 2006 so that members could interact personally and build lasting connections. The association hosts social gatherings and annual gala events, and celebrates festivals including Holi and Diwali. Since its inception, CJA has been a platform to share knowledge among members and to represent the Jat community in Canada. CJA also creates space for Indo-Canadians with roots in India to share cultural experiences, and works with community partners to foster goodwill between India and Canada. The public website has described an association with the Consulate General of India in Toronto, Panorama, and various Indo-Canadian community organizations.",
+
+  /** Mission — from cjacanada.com; lightly edited for Canadian English. */
   mission:
-    "The mission of CJA is to unite JAT community living in Canada and worldwide while preserving our culture and traditions and passing them on to the next generation. Keeping our younger generation connected with our roots.",
-  /** Vision statement from cjacanada.com. */
+    "The mission of CJA is to unite the Jat community living in Canada and worldwide, while preserving our culture and traditions and passing them on to the next generation — keeping our younger generation connected with our roots.",
+
+  /** Vision — from cjacanada.com; lightly edited for Canadian English. */
   vision:
-    "CJA serves the community by sharing knowledge and resources with newcomers who come from India and other countries to Canada, to help them to adapt and get accustomed to the lifestyle in Canada as well as to make them comfortable by engaging them into the already existing Jat community. With the help of existing members, the association also provides counseling to get visa (Student or Permanent Resident etc.) to community members living outside Canada and who are interested to settle in Canada in near future.",
-  /** Themes drawn only from public About / Vision / Mission copy (not invented values). */
+    "CJA serves the community by sharing knowledge and resources with newcomers from India and other countries, helping them adapt to life in Canada and feel at home within the existing Jat community. With the help of existing members, the association also offers guidance to community members outside Canada who are interested in settling here (for example, student or permanent resident pathways).",
+
+  /**
+   * Verified history facts only. LinkedIn lists “founded 2004”; that is not used
+   * because it conflicts with the official site and federal incorporation records.
+   */
+  history: {
+    heading: "History & legal status",
+    facts: [
+      {
+        label: "Formed",
+        value: "2006",
+        detail:
+          "CJA was formed in 2006 as a common forum for Jat community members in Canada.",
+        source: "cjacanada.com — About CJA",
+      },
+      {
+        label: "Federal incorporation",
+        value: "26 September 2006",
+        detail:
+          "Canadian Jats Association was incorporated federally under the Canada Corporations Act — Part II as corporation number 4385632 (business number 831290325).",
+        source: "Corporations Canada / federalcorporation.ca",
+      },
+      {
+        label: "Registered office",
+        value: "Mississauga, Ontario",
+        detail:
+          "2980 Drew Road #230, Mississauga, ON L4T 0A7 (also published as 230-2980 Drew Rd on cjacanada.com).",
+        source: "Corporations Canada; cjacanada.com contact panel",
+      },
+      {
+        label: "Membership (as published)",
+        value: "Over 400 members",
+        detail:
+          "The public About copy on cjacanada.com states that CJA has over 400 members and continues to enrol new members. Current live membership figures are not independently verified here.",
+        source: "cjacanada.com — About CJA",
+      },
+    ],
+    omittedNote:
+      "Exact founding day within 2006 (beyond the federal incorporation date of 26 September 2006), original founding directors, and earlier informal organizing dates are not stated clearly on the public sources reviewed for this page, so they are omitted rather than guessed.",
+  },
+
+  /** Themes drawn only from public About / Vision / Mission copy. */
   values: [
     {
       title: "Newcomer support",
@@ -19,20 +85,23 @@ export const aboutContent = {
       body: "Preserving culture and traditions and passing them on to the next generation, including celebrations such as Holi and Diwali.",
     },
     {
-      title: "Knowledge & image",
+      title: "Knowledge & community image",
       body: "A forum to meet, exchange views, share knowledge, and project the image of the Jat community in Canada.",
     },
     {
       title: "India–Canada goodwill",
-      body: "Association with the Consulate General Office (Toronto), Panorama, and Indo-Canada community organizations to foster goodwill between India and Canada.",
+      body: "Working with partners such as the Consulate General of India (Toronto), Panorama, and Indo-Canadian community organizations to foster goodwill between India and Canada.",
     },
   ],
+
   whatWeDo: [
-    "Provide networking and support to new immigrants in Canada.",
-    "Offer networking through social gatherings and annual Gala events.",
+    "Provide networking and support to newcomers in Canada.",
+    "Offer networking through social gatherings and annual gala events.",
     "Host social celebrations including Holi and Diwali festivals.",
-    "Share and disseminate knowledge among members (400+ members).",
-    "Counsel community members abroad interested in settling in Canada (e.g. student or permanent resident pathways), via existing members.",
+    "Share knowledge among members and welcome new members.",
+    "Offer peer guidance, via existing members, to community members abroad who are interested in settling in Canada.",
   ],
-  note: "About / Vision / Mission match draft.cjacanada.ca and cjacanada.com. Leadership list prefers draft.cjacanada.ca (3 named members; additional TBA seats pending). Officer titles are not published on either public site.",
+
+  /** Contact / next steps (not history claims). */
+  note: "About, vision, and mission are based on the public copy on cjacanada.com, lightly edited for Canadian English. Leadership details are listed on the Officials page.",
 };

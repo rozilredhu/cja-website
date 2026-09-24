@@ -4,7 +4,7 @@ export const siteConfig = {
   name: "Canadian Jats Association",
   shortName: "CJA",
   description:
-    "Official community website of the Canadian Jats Association (CJA) — connecting Jat families across Canada. Non-for-profit founded in 2006.",
+    "Official community website of the Canadian Jats Association (CJA) — connecting Jat families across Canada. Not-for-profit founded in 2006.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://draft.cjacanada.ca",
   locale: "en_CA",
   /** Public contact email from cjacanada.com */
@@ -27,7 +27,7 @@ export type NavLink = {
   children?: readonly { href: string; label: string }[];
 };
 
-/** Primary top nav — Events / Volunteer / About removed from header (pages remain reachable). */
+/** Primary top nav — Events / Volunteer removed from header (pages remain reachable). About CJA includes Document centre. */
 export const navLinks: readonly NavLink[] = [
   { href: "/", label: "Home" },
   { href: "/officials", label: "Officials" },
@@ -35,13 +35,14 @@ export const navLinks: readonly NavLink[] = [
   { href: "/hindu-calendar", label: "Calendar" },
   { href: "/gallery", label: "Gallery" },
   { href: "/heritage", label: "Heritage" },
-  { href: "/documents", label: "Documents" },
+  { href: "/about", label: "About CJA" },
   { href: "/social", label: "Social" },
   { href: "/contact", label: "Contact" },
   { href: "/members/login", label: "Login" },
 ] as const;
 
 export const footerLinks = [
+  { href: "/about", label: "About CJA" },
   { href: "/hindu-calendar", label: "Hindu Calendar" },
   { href: "/privacy", label: "Privacy Policy" },
   { href: "/terms", label: "Terms of Use" },
