@@ -28,8 +28,9 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.3.5",
+    "panchanga": "^0.1.1",
     "typescript": "^5",
     "wrangler": "^4.135.0"
   },
-  "description": "Canadian Jats Association website \u2014 Phase 1 Admin tools module (Next.js on Cloudflare Workers)"
+  "description": "Canadian Jats Association website — Phase 1 Admin tools module (Next.js on Cloudflare Workers)"
 }
